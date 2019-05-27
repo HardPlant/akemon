@@ -1,0 +1,20 @@
+module.exports = {
+    Idol : function(param) {
+        if (typeof(param) === "undefined") return new NullIdol;
+        return {
+            idx: param.idx,
+            nickname: "mirai",
+            HP: 1,
+            ATK: 1,
+            SPE: 1,
+            DEF: 1,
+            SDF: 1,
+            SPD: 1,
+            Skill: [0, 1, 2, 3]
+        }
+    }
+}
+
+const NullIdol = {
+    idx: 0
+}
