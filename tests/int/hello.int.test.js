@@ -1,5 +1,5 @@
-const hello = require("../../hello");
-const reverse = require("../../helloreverser");
+const hello = require("../../hello/hello");
+const reverse = require("../../hello/helloreverser");
 
 test("reverse hello", ()=> {
     var hi = hello.getHelloWorld();
