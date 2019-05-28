@@ -3,18 +3,19 @@ module.exports = {
     IdolBattle: function() {
         this.dolls = [];
 
-        function setPlayer() {
-
+        function setPlayer(dollSet) {
+            dollSet.forEach(doll => {
+                this.dolls.push(doll);
+            });
         }
+        
+        function setEnemy(dollSet) {
+            this.dolls.push(dollSet);
+        }
+
         this.setPlayer = setPlayer;
-
-        function setEnemy() {
-    
-        }
         this.setEnemy = setEnemy;
     },
-
-
 
     act: function() {
 

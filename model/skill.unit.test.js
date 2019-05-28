@@ -23,18 +23,20 @@ describe("interact with self", ()=> {
 });
 
 describe("interact with other idol", ()=> {
-    var srcIdol = Idol.Idol();
+    var srcIdol = new Idol.Idol();
     srcIdol.HP = 10;
 
-    var destIdol = Idol.Idol();
+    var destIdol = new Idol.Idol();
     destIdol.HP = 10;
 
     test("dealing damage test", ()=> {
         var skill = new Skill.Skill();
 
-        skill.effects.push(new Skill.effect.Damage(Skill.Type.Physical,120));
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.Type.Physical,120));
         Skill.apply(skill, srcIdol, destIdol);
         expect(destIdol.HP).not.toBe(10);
+        expect(destIdol.HP).toBe(-110);
     });
     
     test("dealing status test", ()=> {

@@ -10,10 +10,23 @@ describe("init flow", ()=> {
         destDoll: {},
         skill: {}
     };
+    
+    var playerIdol1 = new Idol.Idol();
+    playerIdol1.HP = 10;
+    playerIdol1.SPD = 1;
+    var enemyIdol1 = new Idol.Idol();
+    enemyIdol1.HP = 10;
+    enemyIdol1.SPD = 2;
 
     test("Init", () => {
-        battle.setPlayer();
-        battle.setEnemy();
+        var playerSet = [playerIdol1];
+        var enemySet = [enemyIdol1];
+
+        battle.setPlayer(playerSet);
+        battle.setEnemy(enemySet);
+
+        expect(battle.dolls).toContain(playerSet);
+        expect(battle.dolls).toContain(enemySet);
     });
     
     test("get Doll priority", ()=> {
