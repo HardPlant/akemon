@@ -1,4 +1,5 @@
 const Idol = require('./idol');
+const skill_idx = require("./skill_idx");
 
 describe("creation test", ()=>{
     test("create a idol", ()=> {
@@ -66,6 +67,26 @@ describe("status test", ()=>{
     });
 });
 
+describe("action test", ()=> {
+    var unit = new Idol.Idol({
+        idx: 1,
+        nickname: "mirai",
+        HP: 1,
+        ATK: 1,
+        SPE: 1,
+        DEF: 1,
+        SDF: 1,
+        SPD: 1,
+        Skill: []
+    });
+    unit.Skill.push(skill_idx.getBaseByIdx(0));
+    unit.Skill.push(skill_idx.getBaseByIdx(1));
 
+    test("choose a skill", ()=> {
+        var skill = Idol.chooseSkill(unit);
+
+        expect(skill).not.toBeUndefined();
+    });
+});
 
 
