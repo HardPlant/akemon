@@ -1,4 +1,4 @@
-const skill_idx = jest.genMockFromModule('skill_idx');
+const skill_idx = jest.genMockFromModule('../skill_idx.js');
 const Skill = require("../skill");
 
 const idxTable = {
@@ -9,6 +9,8 @@ const idxTable = {
         });
         skill.effects.push(
             new Skill.effect.Damage(Skill.Type.Physical, 20));
+
+        return skill;
     },
     1: function() {
         var skill =  new Skill.Skill({
@@ -17,11 +19,13 @@ const idxTable = {
         });
         skill.effects.push(
             new Skill.effect.Damage(Skill.Type.Physical, 20));
+        
+        return skill;
     }
 }
 
 function getBaseByIdx(idx) {
-    return Object.clone(idxTable[idx]);
+    return Object.assign({}, idxTable[idx]);
 }
 
 skill_idx.getBaseByIdx = getBaseByIdx;

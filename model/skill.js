@@ -1,5 +1,3 @@
-const skill_idx = require("./skill_idx");
-
 const Type = {
     Physical: 1,
     Special: 2,

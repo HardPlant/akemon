@@ -1,5 +1,7 @@
 const Idol = require('./idol');
 const Skill = require("./skill");
+const skill_idx = require("./skill_idx");
+
 jest.mock("skill_idx");
 
 describe("creation test", ()=> {
@@ -8,9 +10,11 @@ describe("creation test", ()=> {
         skill.effects.push(new Skill.effect.Damage(Skill.Type.Physical, 120));
     });
     test("init from idx", ()=> {
-        var skill = new Skill.Skill({idx: 0});
-        expect(skill.name).toBe("0번 스킬");
+        var skill = skill_idx.getBaseByIdx(0);
 
+        expect(skill).not.toBeUndefined();
+        expect(skill.name).not.toBeUndefined();
+        expect(skill.name).toBe("0번 스킬");
     });
 })
 
