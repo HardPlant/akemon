@@ -1,37 +1,27 @@
 const Type = {
     Physical: 1,
     Special: 2,
-    Alter: 3
-}
+    Alter: 3,
+    Pure: 4
+};
+
 const DamageDealer = {
     pure : function(srcDoll, destDoll) {
-        if (this.type === Type.Physical) {
-            destDoll.HP -= this.amount;
-        } else if (this.type === Type.Special) {
-            destDoll.HP -= this.amount;
-        }
+        destDoll.HP -= this.amount;
     },
     physical : function(srcDoll, destDoll) {
-        if (this.type === Type.Physical) {
-            destDoll.HP -= this.amount;
-        } else if (this.type === Type.Special) {
-            destDoll.HP -= this.amount;
-        }
+        destDoll.HP -= this.amount;
     },
     special : function(srcDoll, destDoll) {
-        if (this.type === Type.Physical) {
-            destDoll.HP -= this.amount;
-        } else if (this.type === Type.Special) {
-            destDoll.HP -= this.amount;
-        }
+        destDoll.HP -= this.amount;
     },
     selectAuto: function(type) {
         if (type === Type.Physical) return DamageDealer.physical;
         if (type === Type.Special) return DamageDealer.special;
-        return DamageDealer.pure
-
+        return DamageDealer.pure;
     }
-}
+};
+
 const Skill = {
     Skill: function(param) {
         param = param || {};
@@ -41,10 +31,10 @@ const Skill = {
     },
     effect: {
         Damage: function(type, amount, dealer) {
-            this.type = type || Type.Physical; // Physical, Special, Alter
+            this.type = type || Type.Pure; // Physical, Special, Alter
             this.amount = amount || 0;
-
-            this.apply = dealer || DamageDealer.selectAuto(this.type);
+            var defaultDealer = DamageDealer.selectAuto(this.type);
+            this.apply = dealer || defaultDealer;
         },
         Status: function() {
             
@@ -58,6 +48,7 @@ const Skill = {
     },
     
 };
+
 module.exports = Skill;
 module.exports.Type = Type;
 module.exports.DamageDealer = DamageDealer;
