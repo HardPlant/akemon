@@ -22,11 +22,18 @@ describe("init flow", ()=> {
     test("is selects target", ()=> {
         currentDoll = priority[0];
 
-        plan = IdolBattle.selectSkillAndTarget(battle, currentDoll);
+        plan = Idol.selectSkillAndTarget(battle, currentDoll);
     });
     
     test("is act applied", ()=> {
         IdolBattle.act(battle, plan);
     });
     
+    test("apply status on turn start", ()=> {
+
+    });
+
+    test("apply status on turn end", ()=> {
+
+    });
 });

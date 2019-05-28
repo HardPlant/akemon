@@ -2,10 +2,10 @@ module.exports = {
     Skill: function(idx) {
         
     },
-    Damage: function() {
+    Damage: function(skill, srcDoll, destDoll) {
         
     },
-    Status: function() {
+    Status: function(skill, srcDoll, destDoll) {
         
     },
     Apply: function(skill, srcDoll, destDoll) {
