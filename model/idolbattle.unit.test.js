@@ -36,13 +36,14 @@ describe("init flow", ()=> {
     
     test("get Doll priority", ()=> {
         priority = IdolBattle.getDollPriorityBySpeed(battle);
-
+        battle.priority = priority;
+        
         expect(priority[0]).toBe(enemyIdol1);
         expect(priority[1]).toBe(playerIdol1);
     });
 
     test("turn progress", ()=> {
-        
+        IdolBattle.progress(battle);
     });
     
     test("apply status on turn start", ()=> {

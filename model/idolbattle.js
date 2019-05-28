@@ -1,4 +1,7 @@
 
+const Idol = require("./idol");
+const Skill = require("./skill");
+
 const IdolBattle = {
     IdolBattle: function() {
         this.playerSet = [];
@@ -23,18 +26,14 @@ const IdolBattle = {
         this.setEnemy = setEnemy;
     },
 
-    act: function() {
-        priority.forEach((doll)=> {
+    progress: function(battle) {
+        battle.priority.forEach((doll)=> {
             var skillList = Idol.getAvailableSkill(doll);
+
             var skill = IdolBattle.selectAvailableSkill(battle, skillList);
-
-            expect(skill.effects).not.toBeUndefined();
-
             var target = IdolBattle.selectTargetForDoll(battle, doll);
 
             Skill.apply(skill,doll,target);
-
-            
         });
     },
 
