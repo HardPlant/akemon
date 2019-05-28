@@ -31,7 +31,10 @@ module.exports = {
         if (availableSkill.length === 0)
             return null;
         else
-            return doll.Skill[0];
+            return availableSkill;
+    },
+    selectAvailableSkill(skillList) {
+        return skillList[0];
     },
     isFaint: function(idol) {
         return idol.HP <= 0;

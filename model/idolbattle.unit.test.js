@@ -44,8 +44,8 @@ describe("init flow", ()=> {
     test("is act applied", ()=> {
         priority.forEach((doll)=> {
             var skillList = Idol.getAvailableSkill(doll);
-            var skill = Idol.SelectAvailableSkill(skillList);
-            
+            var skill = Idol.selectAvailableSkill(skillList);
+
             expect(skill.effects).not.toBeUndefined();
 
             var target = IdolBattle.selectTargetForDoll(battle, doll);
