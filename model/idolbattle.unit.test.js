@@ -43,13 +43,16 @@ describe("init flow", ()=> {
 
     test("is act applied", ()=> {
         priority.forEach((doll)=> {
-            var skill = Idol.getAvailableSkill(doll);
+            var skillList = Idol.getAvailableSkill(doll);
+            var skill = Idol.SelectAvailableSkill(skillList);
+            
             expect(skill.effects).not.toBeUndefined();
 
             var target = IdolBattle.selectTargetForDoll(battle, doll);
 
             Skill.apply(skill,doll,target);
         });
+
     });
     
     test("apply status on turn start", ()=> {
