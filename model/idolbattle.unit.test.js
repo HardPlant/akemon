@@ -1,6 +1,7 @@
 const IdolBattle = require("./idolbattle");
 const Idol = require("./idol");
 const Skill = require("./skill");
+const skill_idx = require("./skill_idx");
 
 describe("init flow", ()=> {
     const battle = new IdolBattle.IdolBattle();
@@ -15,9 +16,12 @@ describe("init flow", ()=> {
     var playerIdol1 = new Idol.Idol();
     playerIdol1.HP = 10;
     playerIdol1.SPD = 1;
+    playerIdol1.Skill = [skill_idx.getBaseByIdx(0)];
+
     var enemyIdol1 = new Idol.Idol();
     enemyIdol1.HP = 10;
     enemyIdol1.SPD = 2;
+    enemyIdol1.Skill = [skill_idx.getBaseByIdx(1)];
 
     test("Init", () => {
         var playerSet = [playerIdol1];
@@ -40,6 +44,8 @@ describe("init flow", ()=> {
     test("is act applied", ()=> {
         priority.forEach((doll)=> {
             var skill = Idol.getAvailableSkill(doll);
+            expect(skill.effects).not.toBeUndefined();
+
             var target = IdolBattle.selectTargetForDoll(battle, doll);
 
             Skill.apply(skill,doll,target);
