@@ -46,11 +46,11 @@ describe("init flow", ()=> {
         IdolBattle.progress(battle);
 
         expect(IdolBattle.isGameEnded(battle)).toBe(false);
+        expect(IdolBattle.isPlayerWon(battle)).toBe(false);
 
         IdolBattle.progress(battle);
 
         expect(IdolBattle.isGameEnded(battle)).toBe(true);
-
         expect(IdolBattle.isPlayerWon(battle)).toBe(false);
     });
     

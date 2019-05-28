@@ -72,7 +72,11 @@ const IdolBattle = {
             return true;
     },
     isPlayerWon(battle) {
+        if (!IdolBattle.isGameEnded(battle)) return false;
         
+        return battle.enemySet.filter(
+            (doll) => { return Idol.isFaint(doll) }
+        ).length === 0;
     }
 }
 
