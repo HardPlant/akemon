@@ -14,12 +14,12 @@ describe("init flow", ()=> {
     };
     
     var playerIdol1 = new Idol.Idol();
-    playerIdol1.HP = 10;
+    playerIdol1.HP = 30;
     playerIdol1.SPD = 1;
     playerIdol1.Skill = [skill_idx.getBaseByIdx(0)];
 
     var enemyIdol1 = new Idol.Idol();
-    enemyIdol1.HP = 10;
+    enemyIdol1.HP = 30;
     enemyIdol1.SPD = 2;
     enemyIdol1.Skill = [skill_idx.getBaseByIdx(1)];
 
@@ -41,17 +41,8 @@ describe("init flow", ()=> {
         expect(priority[1]).toBe(playerIdol1);
     });
 
-    test("is act applied", ()=> {
-        priority.forEach((doll)=> {
-            var skillList = Idol.getAvailableSkill(doll);
-            var skill = IdolBattle.selectAvailableSkill(battle, skillList);
-
-            expect(skill.effects).not.toBeUndefined();
-
-            var target = IdolBattle.selectTargetForDoll(battle, doll);
-
-            Skill.apply(skill,doll,target);
-        });
+    test("turn progress", ()=> {
+        
     });
     
     test("apply status on turn start", ()=> {

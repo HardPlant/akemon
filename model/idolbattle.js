@@ -1,5 +1,5 @@
 
-module.exports = {
+const IdolBattle = {
     IdolBattle: function() {
         this.playerSet = [];
         this.enemySet = [];
@@ -24,7 +24,18 @@ module.exports = {
     },
 
     act: function() {
+        priority.forEach((doll)=> {
+            var skillList = Idol.getAvailableSkill(doll);
+            var skill = IdolBattle.selectAvailableSkill(battle, skillList);
 
+            expect(skill.effects).not.toBeUndefined();
+
+            var target = IdolBattle.selectTargetForDoll(battle, doll);
+
+            Skill.apply(skill,doll,target);
+
+            
+        });
     },
 
     getDollPriorityBySpeed(battle) {
@@ -44,3 +55,5 @@ module.exports = {
         return skillList[0];
     },
 }
+
+module.exports = IdolBattle;
