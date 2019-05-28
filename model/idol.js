@@ -33,9 +33,6 @@ module.exports = {
         else
             return availableSkill;
     },
-    selectAvailableSkill(skillList) {
-        return skillList[0];
-    },
     isFaint: function(idol) {
         return idol.HP <= 0;
     },

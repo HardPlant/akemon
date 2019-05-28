@@ -38,5 +38,9 @@ module.exports = {
         } else {
             return battle.playerSet[0];
         }
-    }
+    },
+    
+    selectAvailableSkill(skillList) {
+        return skillList[0];
+    },
 }
