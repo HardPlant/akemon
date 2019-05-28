@@ -1,6 +1,6 @@
 module.exports = {
     Idol : function(param) {
-        if (typeof(param) === "undefined") return new NullIdol;
+        if (typeof(param) === "undefined") return NullIdol();
         return {
             idx: param.idx,
             nickname: "mirai",
@@ -15,6 +15,9 @@ module.exports = {
     }
 }
 
-const NullIdol = {
-    idx: 0
+const NullIdol = function() {
+    return 
+    {
+        idx: 0
+    };
 }
