@@ -25,8 +25,8 @@ describe("init flow", ()=> {
         battle.setPlayer(playerSet);
         battle.setEnemy(enemySet);
 
-        expect(battle.dolls).toContain(playerSet);
-        expect(battle.dolls).toContain(enemySet);
+        expect(battle.dolls).toContain(playerIdol1);
+        expect(battle.dolls).toContain(enemyIdol1);
     });
     
     test("get Doll priority", ()=> {

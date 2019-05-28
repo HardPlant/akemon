@@ -10,7 +10,9 @@ module.exports = {
         }
         
         function setEnemy(dollSet) {
-            this.dolls.push(dollSet);
+            dollSet.forEach(doll => {
+                this.dolls.push(doll);
+            });
         }
 
         this.setPlayer = setPlayer;
