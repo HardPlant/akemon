@@ -89,8 +89,11 @@ describe("action test", ()=> {
     });
 
     test("cannot choose skill because all skill pp is 0", ()=> {
+        unit.Skill.forEach((skill)=>{
+            skill.PP = 0;
+        });
+        
         var skill = Idol.chooseSkill(unit);
-
         expect(skill).toBeNull();
     });
 });
