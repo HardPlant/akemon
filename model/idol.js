@@ -30,7 +30,7 @@ module.exports = {
         
     },
     isFaint: function(idol) {
-        return idol.HP < 0;
+        return idol.HP <= 0;
     },
     applyStatus: function() {
         throw Error("Not Implemented");

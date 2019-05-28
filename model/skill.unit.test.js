@@ -1,3 +1,4 @@
+const Idol = require('./idol');
 
 describe("interact with self", ()=> {
 

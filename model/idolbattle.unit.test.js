@@ -1,4 +1,5 @@
 const IdolBattle = require("./idolbattle");
+const Idol = require("./idol");
 
 describe("init flow", ()=> {
     const battle = new IdolBattle.IdolBattle();

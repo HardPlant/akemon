@@ -1,4 +1,5 @@
 const Idol = require('./idol');
+
 describe("creation test", ()=>{
     test("create a idol", ()=> {
         var unit = new Idol.Idol({
@@ -53,11 +54,11 @@ describe("status test", ()=>{
             Skill: [0, 1, 2, 3]
         });
 
-        expect(Idol.isFaint(unit)).toFalsy();
+        expect(Idol.isFaint(unit)).toBe(false);
 
         unit.HP = 0;
 
-        expect(Idol.isFaint(unit)).toTruth();
+        expect(Idol.isFaint(unit)).toBe(true);
     });
 });
 
