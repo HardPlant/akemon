@@ -1,7 +1,7 @@
 const idol = require('./idol');
 
 test("create a idol", ()=> {
-    var idol = new idol.Idol({
+    var unit = new idol.Idol({
         idx: 1,
         nickname: "mirai",
         HP: 1,
@@ -13,27 +13,27 @@ test("create a idol", ()=> {
         Skill: [0, 1, 2, 3]
     });
 
-    expect(idol.name).toBe("mirai");
-    expect(idol.idx).toBe(1);
-    expect(idol.HP).toBe(1);
-    expect(idol.ATK).toBe(1);
-    expect(idol.SPE).toBe(1);
-    expect(idol.DEF).toBe(1);
-    expect(idol.SDF).toBe(1);
-    expect(idol.SPD).toBe(1);
-    expect(idol.Skill).toBe(0,1,2,3);
+    expect(unit.nickname).toBe("mirai");
+    expect(unit.idx).toBe(1);
+    expect(unit.HP).toBe(1);
+    expect(unit.ATK).toBe(1);
+    expect(unit.SPE).toBe(1);
+    expect(unit.DEF).toBe(1);
+    expect(unit.SDF).toBe(1);
+    expect(unit.SPD).toBe(1);
+    expect(unit.Skill).toStrictEqual([0,1,2,3]);
 });
 
 test("create a null idol", ()=> {
-    var idol = new idol.Idol();
+    var unit = new idol.Idol();
 
-    expect(idol.name).toBe("missingno");
-    expect(idol.idx).toBe(0);
-    expect(idol.HP).toBe(1);
-    expect(idol.ATK).toBe(1);
-    expect(idol.SPE).toBe(1);
-    expect(idol.DEF).toBe(1);
-    expect(idol.SDF).toBe(1);
-    expect(idol.SPD).toBe(1);
-    expect(idol.Skill).toBe(0);
+    expect(unit.nickname).toBe("missingno");
+    expect(unit.idx).toBe(0);
+    expect(unit.HP).toBe(1);
+    expect(unit.ATK).toBe(1);
+    expect(unit.SPE).toBe(1);
+    expect(unit.DEF).toBe(1);
+    expect(unit.SDF).toBe(1);
+    expect(unit.SPD).toBe(1);
+    expect(unit.Skill).toStrictEqual([0]);
 });
