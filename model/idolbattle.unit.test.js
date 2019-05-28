@@ -42,10 +42,16 @@ describe("init flow", ()=> {
         expect(priority[1]).toBe(playerIdol1);
     });
 
-    test("turn progress, on not game overed", ()=> {
+    test("turn progress", ()=> {
         IdolBattle.progress(battle);
 
         expect(IdolBattle.isGameEnded(battle)).toBe(false);
+
+        IdolBattle.progress(battle);
+
+        expect(IdolBattle.isGameEnded(battle)).toBe(true);
+
+        expect(IdolBattle.isPlayerWon(battle)).toBe(false);
     });
     
     test("apply status on turn start", ()=> {

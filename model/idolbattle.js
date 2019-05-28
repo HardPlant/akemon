@@ -3,7 +3,7 @@ const Idol = require("./idol");
 const Skill = require("./skill");
 
 const IdolBattle = {
-    IdolBattle: function() {
+    IdolBattle: function () {
         this.playerSet = [];
         this.enemySet = [];
         this.dolls = [];
@@ -14,7 +14,7 @@ const IdolBattle = {
                 this.dolls.push(doll);
             });
         }
-        
+
         function setEnemy(dollSet) {
             this.enemySet = dollSet;
             dollSet.forEach(doll => {
@@ -26,8 +26,8 @@ const IdolBattle = {
         this.setEnemy = setEnemy;
     },
 
-    progress: function(battle) {
-        battle.priority.forEach((doll)=> {
+    progress: function (battle) {
+        battle.priority.forEach((doll) => {
             if (Idol.isFaint(doll)) {
                 return;
             }
@@ -37,13 +37,13 @@ const IdolBattle = {
             var skill = IdolBattle.selectAvailableSkill(battle, skillList);
             var target = IdolBattle.selectTargetForDoll(battle, doll);
 
-            Skill.apply(skill,doll,target);
+            Skill.apply(skill, doll, target);
         });
     },
 
     getDollPriorityBySpeed(battle) {
         return battle.dolls.sort(
-            (doll1, doll2)=>{return doll1.SPD < doll2.SPD ? 1 : -1});
+            (doll1, doll2) => { return doll1.SPD < doll2.SPD ? 1 : -1 });
     },
 
     selectTargetForDoll(battle, doll) {
@@ -53,10 +53,27 @@ const IdolBattle = {
             return battle.playerSet[0];
         }
     },
-    
+
     selectAvailableSkill(battle, skillList) {
         return skillList[0];
     },
+
+    isGameEnded(battle) {
+        if (battle.playerSet.filter(
+            (doll) => { return Idol.isFaint(doll) }
+        ).length === 0
+            ||
+        battle.enemySet.filter(
+            (doll) => { return Idol.isFaint(doll) }
+        ).length === 0) {
+            return false;
+        }
+        else
+            return true;
+    },
+    isPlayerWon(battle) {
+        
+    }
 }
 
 module.exports = IdolBattle;
