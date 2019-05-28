@@ -1,6 +1,7 @@
 
 module.exports = {
     IdolBattle: function() {
+        this.dolls = [];
 
         function setPlayer() {
 
@@ -20,6 +21,7 @@ module.exports = {
     },
 
     getDollPriorityBySpeed(battle) {
-
+        return battle.dolls.sort(
+            (doll1, doll2)=>{return doll1.SPD < doll2.SPD ? 1 : -1});
     }
 }

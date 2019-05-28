@@ -38,6 +38,10 @@ describe("creation test", ()=>{
         expect(unit.SPD).toBe(1);
         expect(unit.Skill).toStrictEqual([0]);
     });
+
+    test("create a idol by idx", () => {
+
+    });
 });
 
 describe("status test", ()=>{
