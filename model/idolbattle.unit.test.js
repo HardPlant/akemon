@@ -1,5 +1,6 @@
 const IdolBattle = require("./idolbattle");
 const Idol = require("./idol");
+const Skill = require("./skill");
 
 describe("init flow", ()=> {
     const battle = new IdolBattle.IdolBattle();
@@ -36,12 +37,13 @@ describe("init flow", ()=> {
         expect(priority[1]).toBe(playerIdol1);
     });
 
-    test("is selects target", ()=> {
-        currentDoll = priority[0];
-    });
-    
     test("is act applied", ()=> {
-        IdolBattle.act(battle, plan);
+        priority.forEach((doll)=> {
+            var skill = Idol.getAvailableSkill(doll);
+            var target = IdolBattle.selectTargetForDoll(doll);
+            
+            Skill.apply(skill,doll,target);
+        });
     });
     
     test("apply status on turn start", ()=> {
