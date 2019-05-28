@@ -1,19 +1,19 @@
 const idol_idx = jest.genMockFromModule('idol_idx');
 
 const idxTable = {
-    1: {
-        name: "missingno",
-        HP: 1,
-        ATK: 1,
-        SPE: 1,
-        DEF: 1,
-        SDF: 1,
-        SPD: 1,
+    0: {
+        BaseName: "missingno",
+        BaseHP: 1,
+        BaseATK: 1,
+        BaseSPE: 1,
+        BaseDEF: 1,
+        BaseSDF: 1,
+        BaseSPD: 1,
     }
 }
 
 function getBaseByIdx(idx) {
-    return idxTable[idx];
+    return Object.clone(idxTable[idx]);
 }
 
 idol_idx.getBaseByIdx = getBaseByIdx;
