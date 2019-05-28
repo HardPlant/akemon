@@ -1,10 +1,16 @@
 const Idol = require('./idol');
 const Skill = require("./skill");
+jest.mock("skill_idx");
 
 describe("creation test", ()=> {
     test("init", ()=> {
         var skill = new Skill.Skill();
         skill.effects.push(new Skill.effect.Damage(Skill.Type.Physical, 120));
+    });
+    test("init from idx", ()=> {
+        var skill = new Skill.Skill({idx: 0});
+        expect(skill.name).toBe("0번 스킬");
+
     });
 })
 

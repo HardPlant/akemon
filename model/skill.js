@@ -1,3 +1,5 @@
+const skill_idx = require("./skill_idx");
+
 const Type = {
     Physical: 1,
     Special: 2,
@@ -8,8 +10,6 @@ const Skill = {
     Skill: function(param) {
         param = param || {};
         this.name = param.name || "발버둥";
-        this.srcDoll = param.srcDoll;
-        this.destDoll = param.destDoll;
         this.effects = param.effects || [];
     },
     effect: {
