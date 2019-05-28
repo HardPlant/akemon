@@ -40,8 +40,8 @@ describe("init flow", ()=> {
     test("is act applied", ()=> {
         priority.forEach((doll)=> {
             var skill = Idol.getAvailableSkill(doll);
-            var target = IdolBattle.selectTargetForDoll(doll);
-            
+            var target = IdolBattle.selectTargetForDoll(battle, doll);
+
             Skill.apply(skill,doll,target);
         });
     });
