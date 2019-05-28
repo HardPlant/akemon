@@ -87,6 +87,12 @@ describe("action test", ()=> {
 
         expect(skill).not.toBeUndefined();
     });
+
+    test("cannot choose skill because all skill pp is 0", ()=> {
+        var skill = Idol.chooseSkill(unit);
+
+        expect(skill).toBeNull();
+    });
 });
 
 

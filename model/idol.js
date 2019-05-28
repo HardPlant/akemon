@@ -27,7 +27,11 @@ module.exports = {
         this.Skill = param.Skill || [0, 1, 2, 3];
     },
     chooseSkill: function(doll) {
-        return doll.Skill[0];
+        var availableSkill = doll.Skill.filter((skill)=>(skill.PP !== 0));
+        if (availableSkill.length === 0)
+            return null;
+        else
+            return doll.Skill[0];
     },
     isFaint: function(idol) {
         return idol.HP <= 0;
