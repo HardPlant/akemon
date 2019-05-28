@@ -31,12 +31,13 @@ describe("init flow", ()=> {
     
     test("get Doll priority", ()=> {
         priority = IdolBattle.getDollPriorityBySpeed(battle);
+
+        expect(priority[0]).toBe(enemyIdol1);
+        expect(priority[1]).toBe(playerIdol1);
     });
 
     test("is selects target", ()=> {
         currentDoll = priority[0];
-
-        plan = Idol.selectSkillAndTarget(battle, currentDoll);
     });
     
     test("is act applied", ()=> {
