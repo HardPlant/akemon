@@ -28,6 +28,10 @@ const IdolBattle = {
 
     progress: function(battle) {
         battle.priority.forEach((doll)=> {
+            if (Idol.isFaint(doll)) {
+                return;
+            }
+
             var skillList = Idol.getAvailableSkill(doll);
 
             var skill = IdolBattle.selectAvailableSkill(battle, skillList);
