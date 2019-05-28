@@ -83,7 +83,7 @@ describe("action test", ()=> {
     unit.Skill.push(skill_idx.getBaseByIdx(1));
 
     test("choose a skill", ()=> {
-        var skill = Idol.chooseSkill(unit);
+        var skill = Idol.getAvailableSkill(unit);
 
         expect(skill).not.toBeUndefined();
     });
@@ -92,8 +92,8 @@ describe("action test", ()=> {
         unit.Skill.forEach((skill)=>{
             skill.PP = 0;
         });
-        
-        var skill = Idol.chooseSkill(unit);
+
+        var skill = Idol.getAvailableSkill(unit);
         expect(skill).toBeNull();
     });
 });

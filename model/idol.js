@@ -24,9 +24,9 @@ module.exports = {
         this.DEF = param.DEF || 1,
         this.SDF = param.SDF || 1,
         this.SPD = param.SPD || 1,
-        this.Skill = param.Skill || [0, 1, 2, 3];
+        this.Skill = param.Skill || [];
     },
-    chooseSkill: function(doll) {
+    getAvailableSkill: function(doll) {
         var availableSkill = doll.Skill.filter((skill)=>(skill.PP !== 0));
         if (availableSkill.length === 0)
             return null;
