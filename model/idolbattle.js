@@ -1,3 +1,5 @@
-module.exports = {
-    
+function IdolBattle() {
+
 }
+
+module.exports.IdolBattle = IdolBattle;
