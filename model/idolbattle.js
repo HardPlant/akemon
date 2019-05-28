@@ -40,7 +40,7 @@ module.exports = {
         }
     },
     
-    selectAvailableSkill(skillList) {
+    selectAvailableSkill(battle, skillList) {
         return skillList[0];
     },
 }
