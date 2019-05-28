@@ -26,8 +26,8 @@ module.exports = {
         this.SPD = param.SPD || 1,
         this.Skill = param.Skill || [0, 1, 2, 3];
     },
-    selectSkillAndTarget: function(battle, currentDoll) {
-        
+    chooseSkill: function(doll) {
+        return doll.Skill[0];
     },
     isFaint: function(idol) {
         return idol.HP <= 0;

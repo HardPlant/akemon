@@ -9,6 +9,7 @@ const Skill = {
         param = param || {};
         this.name = param.name || "발버둥";
         this.effects = param.effects || [];
+        this.PP = 35;
     },
     effect: {
         Damage: function(type, amount) {
