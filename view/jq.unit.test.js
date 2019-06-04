@@ -1,7 +1,7 @@
-var $ = require("jquery");
-var html = require("fs").readFileSync("./index.html").toString();
+//var $ = require("jquery");
+//var html = require("fs").readFileSync("./index.html").toString();
 
-document.documentElement.innerHTML = html;
+//document.documentElement.innerHTML = html;
 
 // and you can test like..
 // $("#").hasClass();
