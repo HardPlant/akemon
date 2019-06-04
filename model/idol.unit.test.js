@@ -23,7 +23,7 @@ describe("creation test", ()=>{
         expect(unit.DEF).toBe(1);
         expect(unit.SDF).toBe(1);
         expect(unit.SPD).toBe(1);
-        expect(unit.Skill).toStrictEqual([0,1,2,3]);
+        expect(unit.SkillList).toStrictEqual([0,1,2,3]);
     });
 
     test("create a null idol", ()=> {
@@ -37,7 +37,7 @@ describe("creation test", ()=>{
         expect(unit.DEF).toBe(1);
         expect(unit.SDF).toBe(1);
         expect(unit.SPD).toBe(1);
-        expect(unit.Skill).toStrictEqual([0]);
+        expect(unit.SkillList).toStrictEqual([0]);
     });
 
     test("create a idol by idx", () => {
@@ -79,8 +79,8 @@ describe("action test", ()=> {
         SPD: 1,
         Skill: []
     });
-    unit.Skill.push(skill_idx.getBaseByIdx(0));
-    unit.Skill.push(skill_idx.getBaseByIdx(1));
+    unit.SkillList.push(skill_idx.getBaseByIdx(0));
+    unit.SkillList.push(skill_idx.getBaseByIdx(1));
 
     test("choose a skill", ()=> {
         var skill = Idol.getAvailableSkill(unit);
@@ -89,7 +89,7 @@ describe("action test", ()=> {
     });
 
     test("cannot choose skill because all skill pp is 0", ()=> {
-        unit.Skill.forEach((skill)=>{
+        unit.SkillList.forEach((skill)=>{
             skill.PP = 0;
         });
 
