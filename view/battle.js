@@ -4,11 +4,11 @@ BattleDiv.create = function() {
 
 };
 
-BattleDiv.updatePlayer = function() {
+BattleDiv.createPlayer = function() {
 
 }
 
-BattleDiv.updateEnemy = function() {
+BattleDiv.createEnemy = function() {
 
 }
 
