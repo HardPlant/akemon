@@ -17,6 +17,20 @@ describe("created with ally", function() {
         
         expect($("#ally_doll")[0]).toBe(doll_div.dom);
     });
+
+    test("faint", function() {
+        var doll_div = new Doll_Div.Ally(mock_idol);
+
+        doll_div.dom.style.top = "0%";
+
+        Doll_Div.faint(doll_div);
+
+        setTimeout(function(){
+            expect(doll_div.style.top).toBe("100%");
+
+            done();
+        }, 500);
+    });
 });
 
 describe("created with enemy", function() {

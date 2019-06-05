@@ -15,12 +15,18 @@ Doll_Div.Enemy = function(idol) {
 };
 
 Doll_Div.faint = function(doll_div) {
-    this.whiteArea = document.createElement("div");
-    this.whiteArea.style.zIndex = "10";
-    this.whiteArea.style.backgroundColor = "white";
-    this.whiteArea.style.top = addPercent(doll_div.style.top, "10%");
-    doll_div.css("top");
-    $(this.whiteArea).animate({top: "10%", left: "10%"});
+    // this.whiteArea = document.createElement("div");
+    // this.whiteArea.style.zIndex = "10";
+    // this.whiteArea.style.backgroundColor = "white";
+    // this.whiteArea.style.top = addPercent(doll_div.style.top, "10%");
+    // doll_div.css("top");
+    //$(this.whiteArea).animate({top: "10%", left: "10%"}, 500);
+    var $doll_div = $(doll_div.dom);
+    $doll_div.animate({top: "100%"}, 500);
+
+    $.when($doll_div).then(function() {
+        doll_div.dom.parentNode.removeElement(doll_div);
+    });
 };
 
 Doll_Div.withdraw = function(doll_div) {
@@ -47,4 +53,8 @@ function addPercent(from, to) {
     var result = "" + (a + b) + "%";
 
     return result;
+}
+
+function pixelPlusPercent(from, to) {
+    return "calc(" + from + " + " + to + ");";
 }
