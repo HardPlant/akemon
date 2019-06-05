@@ -30,7 +30,12 @@ Doll_Div.faint = function(doll_div) {
 };
 
 Doll_Div.withdraw = function(doll_div) {
+    var $doll_div = $(doll_div.dom);
+    $doll_div.animate({left: "0%"}, 500);
 
+    $.when($doll_div).then(function() {
+        doll_div.dom.parentNode.removeElement(doll_div);
+    });
 };
 
 Doll_Div.appear = function(doll_div) {

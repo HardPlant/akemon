@@ -31,6 +31,20 @@ describe("created with ally", function() {
             done();
         }, 500);
     });
+
+    test("withdraw", function() {
+        var doll_div = new Doll_Div.Ally(mock_idol);
+
+        doll_div.dom.style.left = "30%";
+
+        Doll_Div.faint(doll_div);
+
+        setTimeout(function(){
+            expect(doll_div.style.left).toBe("30%");
+
+            done();
+        }, 500);
+    });
 });
 
 describe("created with enemy", function() {
