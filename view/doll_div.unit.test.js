@@ -1,16 +1,28 @@
-var Doll_div = require("./doll_div");
+var $ = require("jquery");
+var fs = require("fs");
+eval(fs.readFileSync("/home/seongwon/repo/akemon/view/doll_div.js") + "");
 
 var mock_idol = {
     sprite_name : "unknown"
 }
 
-it("created with ally", function() {
+describe("created with ally", function() {
     test("create", function() {
-        var ally_div = new Doll_Div.Ally(idol);
-        expect(ally_div.tagName).toBe("div");
+        var doll_div = new Doll_Div.Ally(mock_idol);
+        
+        expect(doll_div.dom.tagName).toBe("DIV");
+        expect(doll_div.dom.style.backgroundImage).toBe("url(assets/sprite/unknown/back.png)");
+        expect($(doll_div.dom)[0]).toBe(doll_div.dom);
+        document.documentElement.appendChild(doll_div.dom);
+        
+        expect($("#ally_doll")[0]).toBe(doll_div.dom);
     });
 });
 
-it("created with enemy", function() {
+describe("created with enemy", function() {
+    var doll_div = new Doll_Div.Enemy(mock_idol);
+    
+    expect(doll_div.dom.tagName).toBe("DIV");
+    expect(doll_div.dom.style.backgroundImage).toBe("url(assets/sprite/unknown/front.png)");
 
 });
