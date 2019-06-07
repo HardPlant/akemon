@@ -5,19 +5,37 @@ const DamageType = {
     Pure: 4
 };
 
+const types = {
+    "Vocal": {
+        "Vocal" : 1,
+        "Visual" : 1.5,
+        "Dance" : 0.5
+    },
+    "Visual": {
+        "Vocal" : 0.5,
+        "Visual" : 1,
+        "Dance" : 1.5
+    },
+    "Dance": {
+        "Vocal" : 1,
+        "Visual" : 0.5,
+        "Dance" : 1
+    }
+};
+
 const DamageDealer = {
     pure : function(srcDoll, destDoll) {
         var modifiers = [1.0];
         var skill = this;
 
-        getSelfTypeModifer(modifiers, skill.attrType, srcDoll.attrType);
+        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
 
         var resultModifier = modifiers.reduce(
-            (total, item) =>{total + item}
+            (total, item) => total + item
             );
-
-        destDoll.HP -= this.amount(resultModifier);
+        console.log(resultModifier);
+        destDoll.HP -= this.amount * resultModifier;
     },
     physical : function(srcDoll, destDoll) {
         var modifier = 1;
@@ -68,26 +86,12 @@ function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     }
 }
 
-function getEnemyTypeModifer(modifiers, skillType, destDollType) {
-    var typeTable = {
-        "Vocal": {
-            "Vocal" : 1,
-            "Visual" : 1.5,
-            "Dance" : 0.5
-        },
-        "Visual": {
-            "Vocal" : 0.5,
-            "Visual" : 1,
-            "Dance" : 1.5
-        },
-        "Dance": {
-            "Vocal" : 1,
-            "Visual" : 0.5,
-            "Dance" : 1
-        }
-    };
+function getEnemyTypeModifier(modifiers, skillType, destDollType) {
+    if (typeof(skillType) === "undefined") return;
+    if (typeof(destDollType) === "undefined") return;
+    var modifier = types[skillType][destDollType];
 
-    modifiers.push((typeTable[skillType][destDollType] - 1));
+    modifiers.push(modifier - 1);
 }
 
 module.exports = Skill;
