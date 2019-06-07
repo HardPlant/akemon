@@ -94,7 +94,13 @@ describe("type test", ()=> {
     });
 
     test("not effective", ()=> {
+        damage.attrType = "NonEffective";
+        destIdol.attrType = "NonEffective";
 
+        expect(destIdol.attrType).not.toBe(undefined);
+        Skill.apply(skill, srcIdol, destIdol);
+
+        expect(destIdol.HP).toBe(7.5);
     });
 });
 
