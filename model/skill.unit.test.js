@@ -59,7 +59,8 @@ describe("type test", ()=> {
     var srcIdol;
     var destIdol;
     var skill;
-
+    var damage;
+    
     beforeEach(()=> {
         srcIdol = new Idol.Idol();
         srcIdol.HP = 10;
@@ -67,13 +68,14 @@ describe("type test", ()=> {
         destIdol = new Idol.Idol();
         destIdol.HP = 10;
 
+        damage = new Skill.effect.Damage(Skill.DamageType.Pure,5, undefined, skill);
+        
         skill = new Skill.Skill();
-        skill.effects.push(
-            new Skill.effect.Damage(Skill.DamageType.Pure,5));
+        skill.effects.push(damage);
     });
 
     test("normal", ()=> {
-        skill.attrType = "Normal";
+        damage.attrType = "Normal";
         destIdol.attrType = "Normal";
 
         Skill.apply(skill, srcIdol, destIdol);
@@ -82,10 +84,9 @@ describe("type test", ()=> {
     });
 
     test("effective", ()=> {
-        skill.attrType = "Effective";
+        damage.attrType = "Effective";
         destIdol.attrType = "Effective";
 
-        expect(destIdol.attrType).not.toBe(undefined);
         expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
 

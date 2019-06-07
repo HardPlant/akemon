@@ -43,8 +43,6 @@ const DamageDealer = {
         var modifiers = [1.0];
         var skill = this;
 
-        console.log(`Before : ${destDoll.attrType}`);
-
         getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
 
@@ -77,9 +75,12 @@ const Skill = {
         this.PP = 35;
     },
     effect: {
-        Damage: function(damageType, amount, dealer) {
+        Damage: function(damageType, amount, dealer, parentSkill) {
             this.damageType = damageType || Type.Pure; // Physical, Special, Alter
             this.amount = amount || 0;
+
+            var parentSkill = parentSkill || {};
+            this.attrType = parentSkill.attrType || "Normal";
             var defaultDealer = DamageDealer.selectAuto(this.type);
             this.apply = dealer || defaultDealer;
         },
@@ -99,6 +100,7 @@ const Skill = {
 function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     if (typeof(skillType) === "undefined") return;
     if (typeof(srcDollType) === "undefined") return;
+    if (skillType === "Normal") return;
 
     if (skillType === srcDollType) {
         modifiers.push(0.5);
