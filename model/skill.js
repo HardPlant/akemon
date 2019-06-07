@@ -98,8 +98,13 @@ const Skill = {
             var defaultDealer = DamageDealer.selectAuto(this.type);
             this.apply = dealer || defaultDealer;
         },
-        Weather: function() {
-            
+        Weather: function(idolBattle, args) {
+            this.apply = function() {
+                idolBattle.effects.push({
+                    type: args.type,
+                    turn: args.turn,
+                })
+            }
         },
         Status: function() {
             
@@ -119,12 +124,10 @@ function getSelfTypeModifier(modifiers, skillType, srcDollType) {
 }
 
 function getEnemyTypeModifier(modifiers, skillType, destDollType) {
-    console.log(`${skillType} : ${destDollType}`);
     if (typeof(skillType) === "undefined") return;
     if (typeof(destDollType) === "undefined") return;
     var modifier = AttrTypes[skillType][destDollType];
 
-    console.log(modifier);
     modifiers.push(modifier);
 }
 

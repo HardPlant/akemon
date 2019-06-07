@@ -143,13 +143,17 @@ describe("interact with battle", ()=> {
     });
 
     test("apply weather Effect", function() {
-        var skill = new Skill.skill();
-        var weatherEffect = new Skill.effect.Weather();
-        skill.effects.push();
+        var skill = new Skill.Skill();
+        var weatherEffect = new Skill.effect.Weather(idolBattle,
+            {
+                type: {},
+                turn: 5
+            });
+        skill.effects.push(weatherEffect);
 
-        Skill.apply(skill, undefined, undefined, idolBattle);
+        Skill.apply(skill);
 
-        expect(idolBattle.effects.indexOf(weatherEffect)).not.toBe(-1);
+        expect(idolBattle.effects.length).not.toBe(0);
     });
 });
 
