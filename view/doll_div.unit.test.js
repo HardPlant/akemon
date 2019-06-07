@@ -45,6 +45,12 @@ describe("created with ally", function() {
             done();
         }, 500);
     });
+
+    test("appear, scales 0 to 1", function() {
+        var doll_div = new Doll_Div.Ally(mock_idol);
+
+        
+    });
 });
 
 describe("created with enemy", function() {

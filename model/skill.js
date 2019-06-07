@@ -81,6 +81,9 @@ const Skill = {
 };
 
 function getSelfTypeModifier(modifiers, skillType, srcDollType) {
+    if (typeof(skillType) === "undefined") return;
+    if (typeof(destDollType) === "undefined") return;
+    
     if (skillType === srcDollType) {
         modifiers.push(0.5);
     }

@@ -12,7 +12,7 @@ describe("creation test", ()=>{
             DEF: 1,
             SDF: 1,
             SPD: 1,
-            Skill: [0, 1, 2, 3]
+            SkillList: [0, 1, 2, 3]
         });
 
         expect(unit.nickname).toBe("mirai");
@@ -56,7 +56,7 @@ describe("status test", ()=>{
             DEF: 1,
             SDF: 1,
             SPD: 1,
-            Skill: [0, 1, 2, 3]
+            SkillList: [0, 1, 2, 3]
         });
 
         expect(Idol.isFaint(unit)).toBe(false);
@@ -77,7 +77,7 @@ describe("action test", ()=> {
         DEF: 1,
         SDF: 1,
         SPD: 1,
-        Skill: []
+        SkillList: []
     });
     unit.SkillList.push(skill_idx.getBaseByIdx(0));
     unit.SkillList.push(skill_idx.getBaseByIdx(1));

@@ -16,12 +16,12 @@ describe("init flow", ()=> {
     var playerIdol1 = new Idol.Idol();
     playerIdol1.HP = 30;
     playerIdol1.SPD = 1;
-    playerIdol1.Skill = [skill_idx.getBaseByIdx(0)];
+    playerIdol1.SkillList = [skill_idx.getBaseByIdx(0)];
 
     var enemyIdol1 = new Idol.Idol();
     enemyIdol1.HP = 30;
     enemyIdol1.SPD = 2;
-    enemyIdol1.Skill = [skill_idx.getBaseByIdx(1)];
+    enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
 
     test("Init", () => {
         var playerSet = [playerIdol1];

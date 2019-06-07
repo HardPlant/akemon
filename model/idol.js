@@ -9,7 +9,7 @@ NullIdol.prototype = {
     DEF: 1,
     SDF: 1,
     SPD: 1,
-    Skill: [0]
+    SkillList: [0]
 }
 
 module.exports = {
@@ -24,10 +24,10 @@ module.exports = {
         this.DEF = param.DEF || 1,
         this.SDF = param.SDF || 1,
         this.SPD = param.SPD || 1,
-        this.SkillList = param.Skill || [];
+        this.SkillList = param.SkillList || [];
     },
     getAvailableSkill: function(doll) {
-        var availableSkill = doll.Skill.filter((skill)=>(skill.PP !== 0));
+        var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));
         if (availableSkill.length === 0)
             return null;
         else
