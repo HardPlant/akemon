@@ -77,7 +77,12 @@ describe("type test", ()=> {
     });
 
     test("effective", ()=> {
+        skill.attrType = "Vocal";
+        destIdol.attrType = "Visual";
 
+        Skill.apply(skill, srcIdol, destIdol);
+
+        expect(destIdol.HP).toBe(5);
     });
 
     test("not effective", ()=> {

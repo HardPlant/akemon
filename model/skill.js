@@ -6,20 +6,35 @@ const DamageType = {
 };
 
 const types = {
+    "Effective": {
+        "Effective" : 1.5,
+        "Normal" : 1,
+        "NonEffective" : 0.5,
+    },
+    "Normal": {
+        "Effective" : 1,
+        "Normal" : 1,
+        "NonEffective" : 1,
+    },
+    "NonEffective": {
+        "Effective" : 1.5,
+        "Normal" : 1,
+        "NonEffective" : 0.5,
+    },
     "Vocal": {
         "Vocal" : 1,
-        "Visual" : 1.5,
-        "Dance" : 0.5
-    },
-    "Visual": {
-        "Vocal" : 0.5,
-        "Visual" : 1,
-        "Dance" : 1.5
+        "Dance" : 1.5,
+        "Visual" : 0.5
     },
     "Dance": {
-        "Vocal" : 1,
-        "Visual" : 0.5,
-        "Dance" : 1
+        "Vocal" : 0.5,
+        "Dance" : 1,
+        "Visual" : 1.5
+    },
+    "Visual": {
+        "Vocal" : 1.5,
+        "Dance" : 0.5,
+        "Visual" : 1
     }
 };
 
@@ -83,7 +98,7 @@ const Skill = {
 function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     if (typeof(skillType) === "undefined") return;
     if (typeof(destDollType) === "undefined") return;
-    
+
     if (skillType === srcDollType) {
         modifiers.push(0.5);
     }
