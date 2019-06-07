@@ -9,6 +9,7 @@ NullIdol.prototype = {
     DEF: 1,
     SDF: 1,
     SPD: 1,
+    attrType: "Normal",
     SkillList: [0]
 }
 
@@ -24,6 +25,7 @@ module.exports = {
         this.DEF = param.DEF || 1,
         this.SDF = param.SDF || 1,
         this.SPD = param.SPD || 1,
+        this.attrType = param.attrType || "Normal",
         this.SkillList = param.SkillList || [];
     },
     getAvailableSkill: function(doll) {

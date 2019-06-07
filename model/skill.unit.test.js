@@ -56,20 +56,25 @@ describe("interact with other idol", ()=> {
 });
 
 describe("type test", ()=> {
-    var srcIdol = new Idol.Idol();
-    srcIdol.HP = 10;
-    srcIdol.attrType = "Vocal";
+    var srcIdol;
+    var destIdol;
+    var skill;
 
-    var destIdol = Idol.Idol();
-    destIdol.HP = 10;
+    beforeEach(()=> {
+        srcIdol = new Idol.Idol();
+        srcIdol.HP = 10;
+    
+        destIdol = new Idol.Idol();
+        destIdol.HP = 10;
 
-    var skill = new Skill.Skill();
-    skill.effects.push(
-        new Skill.effect.Damage(Skill.DamageType.Pure,5));
-        
+        skill = new Skill.Skill();
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.DamageType.Pure,5));
+    });
+
     test("normal", ()=> {
-        skill.attrType = "Vocal";
-        destIdol.attrType = "Vocal";
+        skill.attrType = "Normal";
+        destIdol.attrType = "Normal";
 
         Skill.apply(skill, srcIdol, destIdol);
 
@@ -77,12 +82,14 @@ describe("type test", ()=> {
     });
 
     test("effective", ()=> {
-        skill.attrType = "Vocal";
-        destIdol.attrType = "Visual";
+        skill.attrType = "Effective";
+        destIdol.attrType = "Effective";
 
+        expect(destIdol.attrType).not.toBe(undefined);
+        expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
 
-        expect(destIdol.HP).toBe(5);
+        expect(destIdol.HP).toBe(2.5);
     });
 
     test("not effective", ()=> {

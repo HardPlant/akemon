@@ -5,7 +5,7 @@ const DamageType = {
     Pure: 4
 };
 
-const types = {
+const AttrTypes = {
     "Effective": {
         "Effective" : 1.5,
         "Normal" : 1,
@@ -43,13 +43,14 @@ const DamageDealer = {
         var modifiers = [1.0];
         var skill = this;
 
+        console.log(`Before : ${destDoll.attrType}`);
+
         getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
 
         var resultModifier = modifiers.reduce(
             (total, item) => total + item
             );
-        console.log(resultModifier);
         destDoll.HP -= this.amount * resultModifier;
     },
     physical : function(srcDoll, destDoll) {
@@ -97,7 +98,7 @@ const Skill = {
 
 function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     if (typeof(skillType) === "undefined") return;
-    if (typeof(destDollType) === "undefined") return;
+    if (typeof(srcDollType) === "undefined") return;
 
     if (skillType === srcDollType) {
         modifiers.push(0.5);
@@ -105,10 +106,12 @@ function getSelfTypeModifier(modifiers, skillType, srcDollType) {
 }
 
 function getEnemyTypeModifier(modifiers, skillType, destDollType) {
+    console.log(`${skillType} : ${destDollType}`);
     if (typeof(skillType) === "undefined") return;
     if (typeof(destDollType) === "undefined") return;
-    var modifier = types[skillType][destDollType];
+    var modifier = AttrTypes[skillType][destDollType];
 
+    console.log(modifier);
     modifiers.push(modifier - 1);
 }
 
