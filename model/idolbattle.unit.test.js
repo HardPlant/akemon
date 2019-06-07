@@ -42,16 +42,32 @@ describe("init flow", ()=> {
         expect(priority[1]).toBe(playerIdol1);
     });
 
-    test("turn progress", ()=> {
-        IdolBattle.progress(battle);
+    test("turn progress with plan", ()=> {
+        IdolBattle.progress(battle, {
+            0: {
+                srcDoll: 0,
+                skillIdx: 0
+            },
+            1: {
+                srcDoll: 0,
+                skillIdx: 0
+            }
+        }, {
+            0: {
+                srcDoll: 1,
+                skillIdx: 0
+            },
+            1: {
+                srcDoll: 1,
+                skillIdx: 0
+            }
+        });
 
         expect(IdolBattle.isGameEnded(battle)).toBe(false);
         expect(IdolBattle.isPlayerWon(battle)).toBe(false);
 
-        IdolBattle.progress(battle);
-
-        expect(IdolBattle.isGameEnded(battle)).toBe(true);
-        expect(IdolBattle.isPlayerWon(battle)).toBe(false);
+        expect(Idol.isFaint(enemyIdol1)).toBe(true);
+        expect(Idol.isFaint(playerIdol2)).toBe(true);
     });
     
     test("apply status on turn start", ()=> {
@@ -70,9 +86,9 @@ describe("tab battle", ()=> {
     playerIdol1.SkillList = [skill_idx.getBaseByIdx(0)];
 
     var playerIdol2 = new Idol.Idol();
-    playerIdol1.HP = 30;
-    playerIdol1.SPD = 3;
-    playerIdol1.SkillList = [skill_idx.getBaseByIdx(0)];
+    playerIdol2.HP = 30;
+    playerIdol2.SPD = 3;
+    playerIdol2.SkillList = [skill_idx.getBaseByIdx(0)];
 
     var enemyIdol1 = new Idol.Idol();
     enemyIdol1.HP = 30;
@@ -80,9 +96,9 @@ describe("tab battle", ()=> {
     enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
 
     var enemyIdol2 = new Idol.Idol();
-    enemyIdol1.HP = 30;
-    enemyIdol1.SPD = 4;
-    enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
+    enemyIdol2.HP = 30;
+    enemyIdol2.SPD = 4;
+    enemyIdol2.SkillList = [skill_idx.getBaseByIdx(1)];
 
     const battle = new IdolBattle.IdolBattle();
     var priority = [];
