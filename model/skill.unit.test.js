@@ -7,7 +7,7 @@ jest.mock("skill_idx");
 describe("creation test", ()=> {
     test("init", ()=> {
         var skill = new Skill.Skill();
-        skill.effects.push(new Skill.effect.Damage(Skill.Type.Pure, 120));
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure, 120));
     });
     test("init from idx", ()=> {
         var skill = skill_idx.getBaseByIdx(0);
@@ -25,7 +25,7 @@ describe("interact with self", ()=> {
     test("deal damage to self", ()=> {
         var skill = new Skill.Skill();
 
-        skill.effects.push(new Skill.effect.Damage(Skill.Type.Pure,120));
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,120));
 
         Skill.apply(skill, destIdol, destIdol);
         expect(destIdol.HP).not.toBe(10);
@@ -43,7 +43,7 @@ describe("interact with other idol", ()=> {
         var skill = new Skill.Skill();
 
         skill.effects.push(
-            new Skill.effect.Damage(Skill.Type.Pure,120));
+            new Skill.effect.Damage(Skill.DamageType.Pure,120));
         expect(skill.effects[0].apply).toBe(Skill.DamageDealer.pure);
         Skill.apply(skill, srcIdol, destIdol);
         expect(destIdol.HP).not.toBe(10);
@@ -52,6 +52,36 @@ describe("interact with other idol", ()=> {
     
     test("dealing status test", ()=> {
         //plan = Idol.selectSkillAndTarget(battle, currentDoll);
+    });
+});
+
+describe("type test", ()=> {
+    var srcIdol = new Idol.Idol();
+    srcIdol.HP = 10;
+    srcIdol.attrType = "Vocal";
+
+    var destIdol = Idol.Idol();
+    destIdol.HP = 10;
+
+    var skill = new Skill.Skill();
+    skill.effects.push(
+        new Skill.effect.Damage(Skill.DamageType.Pure,5));
+        
+    test("normal", ()=> {
+        skill.attrType = "Vocal";
+        destIdol.attrType = "Vocal";
+
+        Skill.apply(skill, srcIdol, destIdol);
+
+        expect(destIdol.HP).toBe(5);
+    });
+
+    test("effective", ()=> {
+
+    });
+
+    test("not effective", ()=> {
+
     });
 });
 
