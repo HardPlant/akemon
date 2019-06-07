@@ -115,6 +115,8 @@ describe("tab battle", ()=> {
     });
     
     test("turn progress with plan", ()=> {
+        // it will be enemy2 -> player 2->
+        // enemy1 (player2 faint) -> player1 (enemy1 faint)
         IdolBattle.progress(battle, {
             0: {
                 srcDoll: 0,
@@ -138,7 +140,7 @@ describe("tab battle", ()=> {
         expect(IdolBattle.isGameEnded(battle)).toBe(false);
         expect(IdolBattle.isPlayerWon(battle)).toBe(false);
 
-        expect(Idol.isFaint(enemyIdol1)).toBe(true);
         expect(Idol.isFaint(playerIdol2)).toBe(true);
+        expect(Idol.isFaint(enemyIdol1)).toBe(true);
     });
 });
