@@ -144,7 +144,7 @@ describe("interact with battle", ()=> {
 
     test("apply weather Effect", function() {
         var skill = new Skill.skill();
-        var weatherEffect = new Skill.effect.weather();
+        var weatherEffect = new Skill.effect.Weather();
         skill.effects.push();
 
         Skill.apply(skill, undefined, undefined, idolBattle);

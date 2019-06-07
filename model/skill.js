@@ -1,3 +1,5 @@
+const IdolBattle = require("./idolbattle");
+
 const DamageType = {
     Physical: 1,
     Special: 2,
@@ -39,23 +41,27 @@ const AttrTypes = {
 };
 
 const DamageDealer = {
-    pure : function(srcDoll, destDoll) {
+    pure : function(srcDoll, destDoll, idolBattle) {
         var modifiers = [1.0];
         var skill = this;
 
         getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
+        
+        if (typeof(idolBattle) !== "undefined") {
+            IdolBattle.applyEffect(idolBattle, modifiers);
+        }
 
         var resultModifier = modifiers.reduce(
             (total, item) => total * item
             );
         destDoll.HP -= this.amount * resultModifier;
     },
-    physical : function(srcDoll, destDoll) {
+    physical : function(srcDoll, destDoll, idolBattle) {
         var modifier = 1;
         destDoll.HP -= this.amount * modifier;
     },
-    special : function(srcDoll, destDoll) {
+    special : function(srcDoll, destDoll, idolBattle) {
         var modifier = 1;
         destDoll.HP -= this.amount * modifier;
     },
@@ -74,6 +80,13 @@ const Skill = {
         this.attrType = param.attrType;
         this.PP = 35;
     },
+    
+    apply: function(skill, srcDoll, destDoll, idolBattle) {
+        skill.effects.forEach(effect => {
+            effect.apply(srcDoll, destDoll, idolBattle);
+        });
+    },
+
     effect: {
         Damage: function(damageType, amount, dealer, parentSkill) {
             this.damageType = damageType || Type.Pure; // Physical, Special, Alter
@@ -81,18 +94,16 @@ const Skill = {
 
             var parentSkill = parentSkill || {};
             this.attrType = parentSkill.attrType || "Normal";
+
             var defaultDealer = DamageDealer.selectAuto(this.type);
             this.apply = dealer || defaultDealer;
+        },
+        Weather: function() {
+            
         },
         Status: function() {
             
         },
-    },
-    
-    apply: function(skill, srcDoll, destDoll, idolBattle) {
-        skill.effects.forEach(effect => {
-            effect.apply(srcDoll, destDoll, idolBattle);
-        });
     },
     
 };

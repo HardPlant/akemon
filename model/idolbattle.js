@@ -7,6 +7,7 @@ const IdolBattle = {
         this.playerSet = [];
         this.enemySet = [];
         this.dolls = [];
+        this.effects = [];
 
         function setPlayer(dollSet) {
             this.playerSet = dollSet;
@@ -77,6 +78,11 @@ const IdolBattle = {
         return battle.enemySet.filter(
             (doll) => { return Idol.isFaint(doll) }
         ).length === 0;
+    },
+    applyEffect(idolbattle, modifier) {
+        idolbattle.effects.forEach(effect => {
+            effect.apply(modifier);
+        });
     }
 }
 
