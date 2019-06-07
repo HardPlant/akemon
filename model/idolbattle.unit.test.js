@@ -42,32 +42,16 @@ describe("init flow", ()=> {
         expect(priority[1]).toBe(playerIdol1);
     });
 
-    test("turn progress with plan", ()=> {
-        IdolBattle.progress(battle, {
-            0: {
-                srcDoll: 0,
-                skillIdx: 0
-            },
-            1: {
-                srcDoll: 0,
-                skillIdx: 0
-            }
-        }, {
-            0: {
-                srcDoll: 1,
-                skillIdx: 0
-            },
-            1: {
-                srcDoll: 1,
-                skillIdx: 0
-            }
-        });
+    test("turn progress", ()=> {
+        IdolBattle.progress(battle);
 
         expect(IdolBattle.isGameEnded(battle)).toBe(false);
         expect(IdolBattle.isPlayerWon(battle)).toBe(false);
 
-        expect(Idol.isFaint(enemyIdol1)).toBe(true);
-        expect(Idol.isFaint(playerIdol2)).toBe(true);
+        IdolBattle.progress(battle);
+
+        expect(IdolBattle.isGameEnded(battle)).toBe(true);
+        expect(IdolBattle.isPlayerWon(battle)).toBe(false);
     });
     
     test("apply status on turn start", ()=> {
@@ -129,5 +113,32 @@ describe("tab battle", ()=> {
         expect(priority[2]).toBe(enemyIdol1);
         expect(priority[3]).toBe(playerIdol1);
     });
+    
+    test("turn progress with plan", ()=> {
+        IdolBattle.progress(battle, {
+            0: {
+                srcDoll: 0,
+                skillIdx: 0
+            },
+            1: {
+                srcDoll: 0,
+                skillIdx: 0
+            }
+        }, {
+            0: {
+                srcDoll: 1,
+                skillIdx: 0
+            },
+            1: {
+                srcDoll: 1,
+                skillIdx: 0
+            }
+        });
 
+        expect(IdolBattle.isGameEnded(battle)).toBe(false);
+        expect(IdolBattle.isPlayerWon(battle)).toBe(false);
+
+        expect(Idol.isFaint(enemyIdol1)).toBe(true);
+        expect(Idol.isFaint(playerIdol2)).toBe(true);
+    });
 });
