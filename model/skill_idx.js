@@ -7,7 +7,7 @@ const idxTable = {
             effects: []
         });
         skill.effects.push(
-            new Skill.effect.Damage(Skill.Type.Pure, 20));
+            new Skill.effect.Damage(Skill.DamageType.Pure, 20));
 
         return skill;
     },
@@ -17,7 +17,7 @@ const idxTable = {
             effects: []
         });
         skill.effects.push(
-            new Skill.effect.Damage(Skill.Type.Pure, 20));
+            new Skill.effect.Damage(Skill.DamageType.Pure, 20));
         
         return skill;
     }
