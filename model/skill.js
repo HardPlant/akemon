@@ -47,7 +47,7 @@ const DamageDealer = {
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
 
         var resultModifier = modifiers.reduce(
-            (total, item) => total + item
+            (total, item) => total * item
             );
         destDoll.HP -= this.amount * resultModifier;
     },
@@ -103,7 +103,7 @@ function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     if (skillType === "Normal") return;
 
     if (skillType === srcDollType) {
-        modifiers.push(0.5);
+        modifiers.push(1.5);
     }
 }
 
@@ -114,7 +114,7 @@ function getEnemyTypeModifier(modifiers, skillType, destDollType) {
     var modifier = AttrTypes[skillType][destDollType];
 
     console.log(modifier);
-    modifiers.push(modifier - 1);
+    modifiers.push(modifier);
 }
 
 module.exports = Skill;
