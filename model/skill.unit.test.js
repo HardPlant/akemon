@@ -82,24 +82,34 @@ describe("type test", ()=> {
 
         expect(destIdol.HP).toBe(5);
     });
-
+    
     test("effective", ()=> {
         damage.attrType = "Effective";
         destIdol.attrType = "Effective";
-
+        
         expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
-
+        
         expect(destIdol.HP).toBe(2.5);
+    });
+
+    test("selftyped effective", ()=> {
+        srcIdol.attrType = "Effective"
+        damage.attrType = "Effective";
+        destIdol.attrType = "Normal";
+
+        Skill.apply(skill, srcIdol, destIdol);
+
+        expect(destIdol.HP).toBe(10 - (5 * (1 + 0.5)));
     });
 
     test("not effective", ()=> {
         damage.attrType = "NonEffective";
         destIdol.attrType = "NonEffective";
-
+        
         expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
-
+        
         expect(destIdol.HP).toBe(7.5);
     });
 });
