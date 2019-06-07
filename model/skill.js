@@ -89,9 +89,9 @@ const Skill = {
         },
     },
     
-    apply: function(skill, srcDoll, destDoll) {
+    apply: function(skill, srcDoll, destDoll, idolBattle) {
         skill.effects.forEach(effect => {
-            effect.apply(srcDoll, destDoll);
+            effect.apply(srcDoll, destDoll, idolBattle);
         });
     },
     

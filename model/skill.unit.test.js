@@ -1,6 +1,7 @@
 const Idol = require('./idol');
 const Skill = require("./skill");
 const skill_idx = require("./skill_idx");
+const IdolBattle = require("./idolbattle");
 
 jest.mock("skill_idx");
 
@@ -135,7 +136,21 @@ describe("type test", ()=> {
 });
 
 describe("interact with battle", ()=> {
+    var idolBattle;
 
+    beforeEach(()=>{
+        idolBattle = new IdolBattle.IdolBattle();
+    });
+
+    test("apply weather Effect", function() {
+        var skill = new Skill.skill();
+        var weatherEffect = new Skill.effect.weather();
+        skill.effects.push();
+
+        Skill.apply(skill, undefined, undefined, idolBattle);
+
+        expect(idolBattle.effects.indexOf(weatherEffect)).not.toBe(-1);
+    });
 });
 
 describe("interact with special condition", ()=> {
