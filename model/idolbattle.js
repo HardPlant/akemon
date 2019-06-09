@@ -23,23 +23,55 @@ const IdolBattle = {
             });
         }
 
+        this.applyEffect = function(modifier) {
+            this.effects.forEach(effect => {
+                effect.apply(modifier);
+            });
+
+            return modifier;
+        }
+
         this.setPlayer = setPlayer;
         this.setEnemy = setEnemy;
     },
 
-    progress: function (battle) {
-        battle.priority.forEach((doll) => {
-            if (Idol.isFaint(doll)) {
-                return;
-            }
+    progress: function (battle, playerPlan, enemyPlan) {
+        if (typeof(playerPlan) === "undefined") {
+            battle.priority.forEach((doll) => {
+                if (Idol.isFaint(doll)) {
+                    return;
+                }
 
-            var skillList = Idol.getAvailableSkill(doll);
+                var skillList = Idol.getAvailableSkill(doll);
 
-            var skill = IdolBattle.selectAvailableSkill(battle, skillList);
-            var target = IdolBattle.selectTargetForDoll(battle, doll);
+                var skill = IdolBattle.selectAvailableSkill(battle, skillList);
+                var target = IdolBattle.selectTargetForDoll(battle, doll);
 
-            Skill.apply(skill, doll, target);
-        });
+                Skill.apply(skill, doll, target, battle);
+            });
+        } else {
+            battle.priority.forEach((doll) => {
+                if (battle.playerSet.indexOf(doll) > -1) {
+                    var index = battle.playerSet.indexOf(doll);
+                    console.log(index);
+
+                    Skill.apply(
+                        doll.SkillList[playerPlan[index].skillIdx],
+                        doll,
+                        battle.enemySet[playerPlan[index].targetDoll],
+                        battle);
+                } else {
+                    var index = battle.enemySet.indexOf(doll);
+                    console.log(index);
+
+                    Skill.apply(doll.SkillList[enemyPlan[index].skillIdx],
+                         doll,
+                         battle.playerSet[enemyPlan[index].targetDoll],
+                         battle);
+                }
+            });
+        }
+        
     },
 
     getDollPriorityBySpeed(battle) {
@@ -61,12 +93,12 @@ const IdolBattle = {
 
     isGameEnded(battle) {
         if (battle.playerSet.filter(
-            (doll) => { return Idol.isFaint(doll) }
-        ).length === 0
+            (doll) => { return !Idol.isFaint(doll) }
+        ).length !== 0
             ||
         battle.enemySet.filter(
-            (doll) => { return Idol.isFaint(doll) }
-        ).length === 0) {
+            (doll) => { return !Idol.isFaint(doll) }
+        ).length !== 0) {
             return false;
         }
         else
@@ -79,11 +111,6 @@ const IdolBattle = {
             (doll) => { return Idol.isFaint(doll) }
         ).length === 0;
     },
-    applyEffect(idolbattle, modifier) {
-        idolbattle.effects.forEach(effect => {
-            effect.apply(modifier);
-        });
-    }
 }
 
 module.exports = IdolBattle;

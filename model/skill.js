@@ -1,5 +1,3 @@
-const IdolBattle = require("./idolbattle");
-
 const DamageType = {
     Physical: 1,
     Special: 2,
@@ -41,15 +39,16 @@ const AttrTypes = {
 };
 
 const DamageDealer = {
-    pure : function(srcDoll, destDoll, idolBattle) {
+    pure : function(srcDoll, destDoll, battle) {
         var modifiers = [1.0];
         var skill = this;
 
         getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
         
-        if (typeof(idolBattle) !== "undefined") {
-            IdolBattle.applyEffect(idolBattle, modifiers);
+        if (typeof(battle) !== "undefined") {
+            
+            modifiers = battle.applyEffect(modifiers);
         }
 
         var resultModifier = modifiers.reduce(

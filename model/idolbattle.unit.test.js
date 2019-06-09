@@ -1,6 +1,5 @@
-const IdolBattle = require("./idolbattle");
 const Idol = require("./idol");
-const Skill = require("./skill");
+const IdolBattle = require("./idolbattle");
 const skill_idx = require("./skill_idx");
 
 describe("init flow", ()=> {
@@ -117,22 +116,24 @@ describe("tab battle", ()=> {
     test("turn progress with plan", ()=> {
         // it will be enemy2 -> player 2->
         // enemy1 (player2 faint) -> player1 (enemy1 faint)
+        expect(battle.priority.length).toBe(4);
+        
         IdolBattle.progress(battle, {
             0: {
-                srcDoll: 0,
+                targetDoll: 0,
                 skillIdx: 0
             },
             1: {
-                srcDoll: 0,
+                targetDoll: 0,
                 skillIdx: 0
             }
         }, {
             0: {
-                srcDoll: 1,
+                targetDoll: 1,
                 skillIdx: 0
             },
             1: {
-                srcDoll: 1,
+                targetDoll: 1,
                 skillIdx: 0
             }
         });
