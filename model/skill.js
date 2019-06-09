@@ -45,24 +45,38 @@ const DamageDealer = {
 
         getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
         getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
-        
-        if (typeof(battle) !== "undefined") {
-            
-            modifiers = battle.applyEffect(modifiers);
-        }
+        getBattleModifiers(modifiers, battle);
 
         var resultModifier = modifiers.reduce(
             (total, item) => total * item
             );
         destDoll.HP -= this.amount * resultModifier;
     },
-    physical : function(srcDoll, destDoll, idolBattle) {
-        var modifier = 1;
-        destDoll.HP -= this.amount * modifier;
+    physical : function(srcDoll, destDoll, battle) {
+        var modifiers = [1.0];
+        var skill = this;
+
+        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
+        getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
+        getBattleModifiers(modifiers, battle);
+
+        var resultModifier = modifiers.reduce(
+            (total, item) => total * item
+            );
+        destDoll.HP -= this.amount * resultModifier;
     },
-    special : function(srcDoll, destDoll, idolBattle) {
-        var modifier = 1;
-        destDoll.HP -= this.amount * modifier;
+    special : function(srcDoll, destDoll, battle) {
+        var modifiers = [1.0];
+        var skill = this;
+
+        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
+        getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
+        getBattleModifiers(modifiers, battle);
+
+        var resultModifier = modifiers.reduce(
+            (total, item) => total * item
+            );
+        destDoll.HP -= this.amount * resultModifier;
     },
     selectAuto: function(damageType) {
         if (damageType === DamageType.Physical) return DamageDealer.physical;
@@ -131,6 +145,12 @@ function getEnemyTypeModifier(modifiers, skillType, destDollTypes) {
     
         modifiers.push(modifier);
     });
+}
+
+function getBattleModifiers(battle, modifiers) {
+    if (typeof(battle) !== "undefined") {
+        modifiers = battle.applyEffect(modifiers);
+    }
 }
 
 module.exports = Skill;
