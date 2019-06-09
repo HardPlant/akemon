@@ -7,32 +7,32 @@ const DamageType = {
 
 const AttrTypes = {
     "Effective": {
-        "Effective" : 1.5,
+        "Effective" : 2,
         "Normal" : 1,
         "NonEffective" : 0.5,
     },
     "Normal": {
-        "Effective" : 1,
+        "Effective" : 2,
         "Normal" : 1,
-        "NonEffective" : 1,
+        "NonEffective" : 0.5,
     },
     "NonEffective": {
-        "Effective" : 1.5,
+        "Effective" : 2,
         "Normal" : 1,
         "NonEffective" : 0.5,
     },
     "Vocal": {
         "Vocal" : 1,
-        "Dance" : 1.5,
+        "Dance" : 2,
         "Visual" : 0.5
     },
     "Dance": {
         "Vocal" : 0.5,
         "Dance" : 1,
-        "Visual" : 1.5
+        "Visual" : 2
     },
     "Visual": {
-        "Vocal" : 1.5,
+        "Vocal" : 2,
         "Dance" : 0.5,
         "Visual" : 1
     }
@@ -122,12 +122,15 @@ function getSelfTypeModifier(modifiers, skillType, srcDollType) {
     }
 }
 
-function getEnemyTypeModifier(modifiers, skillType, destDollType) {
+function getEnemyTypeModifier(modifiers, skillType, destDollTypes) {
     if (typeof(skillType) === "undefined") return;
-    if (typeof(destDollType) === "undefined") return;
-    var modifier = AttrTypes[skillType][destDollType];
+    if (typeof(destDollTypes) === "undefined") return;
 
-    modifiers.push(modifier);
+    destDollTypes.forEach(function(attrType) {
+        var modifier = AttrTypes[skillType][attrType];
+    
+        modifiers.push(modifier);
+    });
 }
 
 module.exports = Skill;

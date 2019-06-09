@@ -9,7 +9,7 @@ NullIdol.prototype = {
     DEF: 1,
     SDF: 1,
     SPD: 1,
-    attrType: "Normal",
+    attrType: ["Normal"],
     SkillList: [0]
 }
 
