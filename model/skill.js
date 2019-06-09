@@ -39,23 +39,22 @@ const AttrTypes = {
 };
 
 const DamageDealer = {
-    pure : function(srcDoll, destDoll, battle) {
+    applyStats: function(amount, skillType, damageType) {
         var modifiers = [1.0];
-        var skill = this;
 
-        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
-        getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
-        getBattleModifiers(modifiers, battle);
+        return function(srcDoll, destDoll, battle) {
+            amount = getAmountModifier(amount, srcDoll, destDoll, damageType);
 
-        var resultModifier = modifiers.reduce(
-            (total, item) => total * item
-            );
-        destDoll.HP -= this.amount * resultModifier;
-    },
-    selectAuto: function(damageType) {
-        if (damageType === DamageType.Physical) return DamageDealer.physical;
-        if (damageType === DamageType.Special) return DamageDealer.special;
-        return DamageDealer.pure;
+            getSelfTypeModifier(modifiers, skillType, srcDoll.attrType);
+            getEnemyTypeModifier(modifiers, skillType, destDoll.attrType);
+            getBattleModifiers(modifiers, battle);
+    
+            var resultModifier = modifiers.reduce(
+                (total, item) => total * item
+                );
+            
+            destDoll.HP -= amount * resultModifier;
+        }
     }
 };
 
@@ -76,14 +75,12 @@ const Skill = {
 
     effect: {
         Damage: function(damageType, amount, parentSkill) {
-            this.damageType = damageType || Type.Pure; // Physical, Special, Alter
-            this.amount = amount || 0;
-
             var parentSkill = parentSkill || {};
+
+            this.damageType = damageType || DamageType.Pure;
             this.attrType = parentSkill.attrType || "Normal";
 
-            var defaultDealer = DamageDealer.selectAuto(this.damageType);
-            this.apply = defaultDealer;
+            this.apply = DamageDealer.applyStats(amount, this.attrType, this.damageType);
         },
         Weather: function(idolBattle, args) {
             this.apply = function() {
@@ -125,6 +122,19 @@ function getBattleModifiers(modifiers, battle) {
     if (typeof(battle) !== "undefined") {
         modifiers = battle.applyEffect(modifiers);
     }
+}
+
+function getAmountModifier(amount, srcDoll, destDoll, damageType) {
+    if (damageType === DamageType.Physical) {
+        amount += srcDoll.ATK - destDoll.DEF;
+    }
+    if (damageType === DamageType.Special) {
+        amount += srcDoll.SPE - destDoll.SPF;
+    }
+    if (damageType === DamageType.Pure) {
+        // deals pure damage
+    }
+    return amount;
 }
 
 module.exports = Skill;

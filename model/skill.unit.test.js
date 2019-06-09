@@ -45,7 +45,6 @@ describe("interact with other idol", ()=> {
 
         skill.effects.push(
             new Skill.effect.Damage(Skill.DamageType.Pure,120));
-        expect(skill.effects[0].apply).toBe(Skill.DamageDealer.pure);
         Skill.apply(skill, srcIdol, destIdol);
         expect(destIdol.HP).not.toBe(10);
         expect(destIdol.HP).toBe(-110);
