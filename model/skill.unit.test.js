@@ -69,7 +69,7 @@ describe("type test", ()=> {
         destIdol = new Idol.Idol();
         destIdol.HP = 10;
 
-        damage = new Skill.effect.Damage(Skill.DamageType.Pure,5, undefined, skill);
+        damage = new Skill.effect.Damage(Skill.DamageType.Pure,5, skill);
         
         skill = new Skill.Skill();
         skill.effects.push(damage);

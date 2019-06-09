@@ -52,10 +52,9 @@ const IdolBattle = {
         } else {
             battle.priority.forEach((doll) => {
                 if (Idol.isFaint(doll)) return;
-                
+
                 if (battle.playerSet.indexOf(doll) > -1) {
                     var index = battle.playerSet.indexOf(doll);
-                    console.log(index);
 
                     Skill.apply(
                         doll.SkillList[playerPlan[index].skillIdx],
@@ -64,7 +63,6 @@ const IdolBattle = {
                         battle);
                 } else {
                     var index = battle.enemySet.indexOf(doll);
-                    console.log(index);
 
                     Skill.apply(doll.SkillList[enemyPlan[index].skillIdx],
                          doll,

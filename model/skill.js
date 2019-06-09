@@ -52,32 +52,6 @@ const DamageDealer = {
             );
         destDoll.HP -= this.amount * resultModifier;
     },
-    physical : function(srcDoll, destDoll, battle) {
-        var modifiers = [1.0];
-        var skill = this;
-
-        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
-        getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
-        getBattleModifiers(modifiers, battle);
-
-        var resultModifier = modifiers.reduce(
-            (total, item) => total * item
-            );
-        destDoll.HP -= this.amount * resultModifier;
-    },
-    special : function(srcDoll, destDoll, battle) {
-        var modifiers = [1.0];
-        var skill = this;
-
-        getSelfTypeModifier(modifiers, skill.attrType, srcDoll.attrType);
-        getEnemyTypeModifier(modifiers, skill.attrType, destDoll.attrType);
-        getBattleModifiers(modifiers, battle);
-
-        var resultModifier = modifiers.reduce(
-            (total, item) => total * item
-            );
-        destDoll.HP -= this.amount * resultModifier;
-    },
     selectAuto: function(damageType) {
         if (damageType === DamageType.Physical) return DamageDealer.physical;
         if (damageType === DamageType.Special) return DamageDealer.special;
@@ -101,15 +75,15 @@ const Skill = {
     },
 
     effect: {
-        Damage: function(damageType, amount, dealer, parentSkill) {
+        Damage: function(damageType, amount, parentSkill) {
             this.damageType = damageType || Type.Pure; // Physical, Special, Alter
             this.amount = amount || 0;
 
             var parentSkill = parentSkill || {};
             this.attrType = parentSkill.attrType || "Normal";
 
-            var defaultDealer = DamageDealer.selectAuto(this.type);
-            this.apply = dealer || defaultDealer;
+            var defaultDealer = DamageDealer.selectAuto(this.damageType);
+            this.apply = defaultDealer;
         },
         Weather: function(idolBattle, args) {
             this.apply = function() {
@@ -147,7 +121,7 @@ function getEnemyTypeModifier(modifiers, skillType, destDollTypes) {
     });
 }
 
-function getBattleModifiers(battle, modifiers) {
+function getBattleModifiers(modifiers, battle) {
     if (typeof(battle) !== "undefined") {
         modifiers = battle.applyEffect(modifiers);
     }
