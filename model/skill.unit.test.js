@@ -67,15 +67,12 @@ describe("type test", ()=> {
     
         destIdol = new Idol.Idol();
         destIdol.HP = 10;
-
-        damage = new Skill.effect.Damage(Skill.DamageType.Pure,5, skill);
-        
-        skill = new Skill.Skill();
-        skill.effects.push(damage);
     });
 
     test("normal", ()=> {
-        damage.attrType = "Normal";
+        skill = new Skill.Skill();
+        skill.attrType = "Normal"
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
         destIdol.attrType = ["Normal"];
 
         Skill.apply(skill, srcIdol, destIdol);
@@ -84,7 +81,9 @@ describe("type test", ()=> {
     });
     
     test("effective", ()=> {
-        damage.attrType = "Effective";
+        skill = new Skill.Skill();
+        skill.attrType = "Effective";
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
         destIdol.attrType = ["Effective"];
         
         expect(destIdol.attrType).not.toBe(undefined);
@@ -94,7 +93,9 @@ describe("type test", ()=> {
     });
 
     test("double effective", ()=> {
-        damage.attrType = "Effective";
+        skill = new Skill.Skill();
+        skill.attrType = "Effective";
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
         destIdol.attrType = ["Effective", "Effective"];
         
         expect(destIdol.attrType).not.toBe(undefined);
@@ -104,8 +105,10 @@ describe("type test", ()=> {
     });
 
     test("selftyped", ()=> {
+        skill = new Skill.Skill();
+        skill.attrType = "Effective";
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
         srcIdol.attrType = "Effective"
-        damage.attrType = "Effective";
         destIdol.attrType = ["Normal"];
 
         Skill.apply(skill, srcIdol, destIdol);
@@ -114,8 +117,10 @@ describe("type test", ()=> {
     });
 
     test("selftyped effective", ()=> {
-        srcIdol.attrType = "Effective"
-        damage.attrType = "Effective";
+        skill = new Skill.Skill();
+        skill.attrType = "Effective";
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
+        srcIdol.attrType = "Effective";
         destIdol.attrType = ["Effective"];
 
         Skill.apply(skill, srcIdol, destIdol);
@@ -124,8 +129,10 @@ describe("type test", ()=> {
     });
 
     test("selftyped noneffective", ()=> {
-        srcIdol.attrType = "Effective"
-        damage.attrType = "Effective";
+        skill = new Skill.Skill();
+        skill.attrType = "Effective";
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
+        srcIdol.attrType = "Effective";
         destIdol.attrType = ["NonEffective"];
 
         Skill.apply(skill, srcIdol, destIdol);
@@ -134,7 +141,9 @@ describe("type test", ()=> {
     });
 
     test("not effective", ()=> {
-        damage.attrType = "NonEffective";
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Pure,5, skill));
+        skill.attrType = "NonEffective";
         destIdol.attrType = ["NonEffective"];
         
         expect(destIdol.attrType).not.toBe(undefined);

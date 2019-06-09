@@ -53,6 +53,7 @@ const DamageDealer = {
                 (total, item) => total * item
                 );
             
+
             destDoll.HP -= amount * resultModifier;
         }
     }
