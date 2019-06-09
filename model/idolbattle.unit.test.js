@@ -1,4 +1,5 @@
 const Idol = require("./idol");
+const Skill = require("./skill");
 const IdolBattle = require("./idolbattle");
 const skill_idx = require("./skill_idx");
 
@@ -62,7 +63,7 @@ describe("init flow", ()=> {
     });
 });
 
-describe("tab battle", ()=> {
+describe("tag battle", ()=> {
     var playerIdol1 = new Idol.Idol();
     playerIdol1.HP = 30;
     playerIdol1.SPD = 1;

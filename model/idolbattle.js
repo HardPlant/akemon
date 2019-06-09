@@ -51,6 +51,8 @@ const IdolBattle = {
             });
         } else {
             battle.priority.forEach((doll) => {
+                if (Idol.isFaint(doll)) return;
+                
                 if (battle.playerSet.indexOf(doll) > -1) {
                     var index = battle.playerSet.indexOf(doll);
                     console.log(index);
