@@ -27,6 +27,7 @@ module.exports = {
         this.SPD = param.SPD || 1,
         this.attrType = param.attrType || "Normal",
         this.SkillList = param.SkillList || [];
+        this.statusList = param.statusList || [];
     },
     getAvailableSkill: function(doll) {
         var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));
