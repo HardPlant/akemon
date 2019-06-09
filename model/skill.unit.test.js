@@ -77,7 +77,7 @@ describe("type test", ()=> {
 
     test("normal", ()=> {
         damage.attrType = "Normal";
-        destIdol.attrType = "Normal";
+        destIdol.attrType = ["Normal"];
 
         Skill.apply(skill, srcIdol, destIdol);
 
@@ -86,7 +86,7 @@ describe("type test", ()=> {
     
     test("effective", ()=> {
         damage.attrType = "Effective";
-        destIdol.attrType = "Effective";
+        destIdol.attrType = ["Effective"];
         
         expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
@@ -97,7 +97,7 @@ describe("type test", ()=> {
     test("selftyped", ()=> {
         srcIdol.attrType = "Effective"
         damage.attrType = "Effective";
-        destIdol.attrType = "Normal";
+        destIdol.attrType = ["Normal"];
 
         Skill.apply(skill, srcIdol, destIdol);
 
@@ -107,7 +107,7 @@ describe("type test", ()=> {
     test("selftyped effective", ()=> {
         srcIdol.attrType = "Effective"
         damage.attrType = "Effective";
-        destIdol.attrType = "Effective";
+        destIdol.attrType = ["Effective"];
 
         Skill.apply(skill, srcIdol, destIdol);
 
@@ -117,7 +117,7 @@ describe("type test", ()=> {
     test("selftyped noneffective", ()=> {
         srcIdol.attrType = "Effective"
         damage.attrType = "Effective";
-        destIdol.attrType = "NonEffective";
+        destIdol.attrType = ["NonEffective"];
 
         Skill.apply(skill, srcIdol, destIdol);
 
@@ -126,7 +126,7 @@ describe("type test", ()=> {
 
     test("not effective", ()=> {
         damage.attrType = "NonEffective";
-        destIdol.attrType = "NonEffective";
+        destIdol.attrType = ["NonEffective"];
         
         expect(destIdol.attrType).not.toBe(undefined);
         Skill.apply(skill, srcIdol, destIdol);
