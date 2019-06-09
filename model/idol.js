@@ -25,7 +25,7 @@ module.exports = {
         this.DEF = param.DEF || 1,
         this.SDF = param.SDF || 1,
         this.SPD = param.SPD || 1,
-        this.attrType = param.attrType || "Normal",
+        this.attrType = param.attrType || ["Normal"],
         this.SkillList = param.SkillList || [];
         this.statusList = param.statusList || [];
     },
