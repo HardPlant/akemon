@@ -82,7 +82,6 @@ describe("interactive 1:1, one on one battle", ()=> {
         var idolbattle = new IdolBattle.IdolBattle();
         var skill_0 = skill_idx.getBaseByIdx(0);
         createIdols(idols);
-
     });  
 
     test("idol team appears", ()=> {
@@ -118,8 +117,6 @@ describe("interactive 1:1, one on one battle", ()=> {
         
         expect(idolbattle.playerSet[0]).toBe(idols.mirai);
         expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
-
-
     });
 
 });

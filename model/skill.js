@@ -126,6 +126,8 @@ function getBattleModifiers(modifiers, battle) {
 }
 
 function getAmountModifier(amount, srcDoll, destDoll, damageType) {
+    amount *= 1 + (srcDoll.LV / 100);
+    
     if (damageType === DamageType.Physical) {
         amount += srcDoll.ATK - destDoll.DEF;
     }
