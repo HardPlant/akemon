@@ -34,19 +34,30 @@ module.exports = {
 
         this.stats = {
             general: function(stat) {
-                var multipleModifiers = [1.0] || currentdoll.statModifier.filter(
+                var multipleModifiers = currentdoll.statModifier.filter(
                     (mod)=>{return mod.stat === stat && mod.type === "mul"}
                 );
+                multipleModifiers.push({val:1.0});
+
                 var resultMultipleModifier = multipleModifiers.reduce(
-                    (total, item)=> total*item
+                    (total, item)=> total.val * item.val
                 );
 
-                var plusModifiers = [0.0] || currentdoll.statModifier.filter(
+                var plusModifiers =  currentdoll.statModifier.filter(
                     (mod)=>{return mod.stat === stat && mod.type === "plus"}
                 );
+                plusModifiers.push({val:0.0});
+                
                 var resultPlusModifier = plusModifiers.reduce(
-                    (total, item)=> total+item
+                    (total, item)=> total.val + item.val
                 );
+                if (typeof(resultMultipleModifier) === "object") {
+                    resultMultipleModifier = resultMultipleModifier.val;
+                }    
+
+                if (typeof(resultPlusModifier) === "object") {
+                    resultPlusModifier = resultPlusModifier.val;
+                }    
                 
                 return currentdoll[stat] * resultMultipleModifier + resultPlusModifier;
             },

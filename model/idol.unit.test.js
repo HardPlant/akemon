@@ -80,6 +80,9 @@ describe("status test", ()=>{
         expect(doll.stats.DEF()).toBe(10);
         expect(doll.stats.SDF()).toBe(10);
         expect(doll.stats.SPD()).toBe(10);
+
+        doll.statModifier.push({stat:"ATK", type:"mul", val:1.2});
+        expect(doll.stats.ATK()).toBe(12);
     });
 });
 
