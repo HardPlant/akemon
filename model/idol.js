@@ -29,6 +29,41 @@ module.exports = {
         this.attrType = param.attrType || ["Normal"],
         this.SkillList = param.SkillList || [];
         this.statusList = param.statusList || [];
+        this.statModifier = [];
+        
+        this.stats = {
+            general: function(stat) {
+                var multipleModifiers = this.statModifier.filter(
+                    (mod)=>{return mod.stat === stat && mod.type === "mul"}
+                );
+                var resultMultipleModifier = multipleModifiers.reduce(
+                    (total, item)=> total*item
+                );
+                var plusModifiers = this.statModifier.filter(
+                    (mod)=>{return mod.stat === stat && mod.type === "plus"}
+                );
+                var resultPlusModifier = plusModifiers.reduce(
+                    (total, item)=> total+item
+                );
+                
+                return this.stat * resultMultipleModifier + resultPlusModifier;
+            },
+            ATK: function() {
+                return this.general("ATK");
+            },
+            SPE: function() {
+                return this.general("SPE");
+            },
+            DEF: function() {
+                return this.general("DEF");
+            },
+            SDF: function() {
+                return this.general("SDF");
+            },
+            SPD: function() {
+                return this.general("SPD");
+            },
+        }
     },
     getAvailableSkill: function(doll) {
         var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));
@@ -40,6 +75,7 @@ module.exports = {
     isFaint: function(idol) {
         return idol.HP <= 0;
     },
+
     applyStatus: function() {
         throw Error("Not Implemented");
     }
