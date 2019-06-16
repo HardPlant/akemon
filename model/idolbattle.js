@@ -152,7 +152,6 @@ const IdolBattle = {
         
         battle.dolls.push(destIdol);
         battle.priority = this.getDollPriorityBySpeed(battle);
-        
     }
 }
 

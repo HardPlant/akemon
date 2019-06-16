@@ -77,6 +77,7 @@ describe("interactive 1:1, one on one battle", ()=> {
         idols.mirai.SkillList.push(skill_idx.getBaseByIdx(2));
         idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
         idols.megumi.SkillList.push(skill_idx.getBaseByIdx(3));
+        idols.tsubasa.SkillList.push(skill_idx.getBaseByIdx(3));
     }
 
     test("import test", ()=> {
@@ -185,6 +186,40 @@ describe("interactive 1:1, one on one battle", ()=> {
         console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
         
         expect(idolbattle.playerSet.length).toBe(1);
+
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        expect(idolbattle.priority[0]).toBe(idols.tsubasa);
+        expect(idolbattle.priority[1]).toBe(idols.megumi);
+
+        expect(idols.tsubasa.HP).not.toBe(idols.tsubasa.baseHP);
+        expect(idols.megumi.HP).not.toBe(idols.megumi.baseHP);
+        
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
+        console.log(`${idolbattle.priority[1].nickname}의 ${idolbattle.priority[1].SkillList[0].name}!`);
+
+        expect(idols.tsubasa.HP).toBe(14.1875);
+        expect(idols.megumi.HP).toBe(8.75);
+
+        expect(IdolBattle.isGameEnded(idolbattle)).toBe(false);
+        expect(IdolBattle.isPlayerWon(idolbattle)).toBe(false);
+
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        expect(idols.tsubasa.HP).toBe(14.1875);
+        expect(idols.megumi.HP).not.toBe(8.75);
+
+        expect(Idol.isFaint(idols.megumi)).toBe(true);
+
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
+        console.log(`${idolbattle.priority[1].nickname}은 쓰러졌다!`);
+
+        IdolBattle.exchange(idolbattle, idols.kotoha, idols.megumi);
+
+        expect(idolbattle.enemySet[0]).not.toBe(idols.kotoha);
+        expect(idolbattle.enemySet[0]).toBe(idols.megumi);
+
+        console.log(`상대는 ${idolbattle.enemySet[0].nickname}을 꺼냈다`);
 
     });
 
