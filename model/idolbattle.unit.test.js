@@ -85,9 +85,6 @@ describe("init flow", ()=> {
     enemyIdol1.SPD = 2;
     enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
 
-    playerIdol1.LV = 100;
-    enemyIdol1.LV = 100;
-
     test("Init", () => {
         var playerSet = [playerIdol1];
         var enemySet = [enemyIdol1];
@@ -109,6 +106,9 @@ describe("init flow", ()=> {
     test("get priority by plan", ()=> {
         priority = IdolBattle.getDollPriorityBySpeed(battle);
         battle.priority = priority;
+
+        expect(priority[0]).toBe(enemyIdol1);
+        expect(priority[1]).toBe(playerIdol1);
 
         var playerPlan = {
             0: {
