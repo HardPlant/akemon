@@ -11,6 +11,7 @@ const IdolBattle = {
         this.dolls = [];
         this.effects = [];
         this.dollsInBattle = 1;
+        this.randomness = true;
 
         function startBattle(player, enemy, dollsInBattle) {
             this.dollsInBattle = dollsInBattle || 1;

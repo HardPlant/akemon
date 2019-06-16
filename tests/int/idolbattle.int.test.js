@@ -46,9 +46,9 @@ describe("interactive 1:1, one on one battle", ()=> {
             LV: 5,
             HP: 20,
             ATK: 5,
-            SPE: 35,
-            DEF: 5,
-            SDF: 15,
+            SPE: 30,
+            DEF: 15,
+            SDF: 10,
             SPD: 15,
             SkillList: []
         });
@@ -113,12 +113,16 @@ describe("interactive 1:1, one on one battle", ()=> {
         console.log(`${enemy.name}가 승부를 걸어왔다!`);
         idolbattle = new IdolBattle.IdolBattle();
         idolbattle.startBattle(player, enemy, 1);
+        idolbattle.randomness = false;
 
         expect(idolbattle.playerSet.length).toBe(1);
         expect(idolbattle.enemySet.length).toBe(1);
         
-        expect(idolbattle.playerSet[0]).toBe(idols.mirai);
+        console.log(`코토리는 ${idolbattle.enemySet[0].nickname}를 꺼냈다`);
         expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
+
+        console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
+        expect(idolbattle.playerSet[0]).toBe(idols.mirai);
 
         var playerPlan = {
             0: {
@@ -138,13 +142,16 @@ describe("interactive 1:1, one on one battle", ()=> {
 
         IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
 
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
+        console.log(`${idolbattle.priority[1].nickname}의 ${idolbattle.priority[1].SkillList[0].name}!`);
+
         expect(idols.mirai.HP).not.toBe(30);
         expect(idols.kotoha.HP).not.toBe(20);
 
-        expect(idols.mirai.HP).toBe(8.75);
-        expect(idols.kotoha.HP).toBe(18.75);
+        expect(idols.mirai.HP).toBe(13.75);
+        expect(idols.kotoha.HP).toBe(13.75);
 
-        
+
     });
 
 });

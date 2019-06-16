@@ -63,6 +63,8 @@ const DamageDealer = {
         var modifiers = [1.0];
 
         return function(srcDoll, destDoll, battle) {
+            battle = battle || {randomness: false};
+
             amount = getSelfTypeModifier(amount, skillType, srcDoll.attrType);
             amount = getAmountModifier(amount, srcDoll, destDoll, damageType);
 
@@ -151,7 +153,7 @@ function getEnemyTypeModifier(modifiers, skillType, destDollTypes) {
 }
 
 function getBattleModifiers(modifiers, battle) {
-    if (typeof(battle) !== "undefined") {
+    if (typeof(battle.applyEffect) !== "undefined") {
         modifiers = battle.applyEffect(modifiers);
     }
 }
