@@ -78,6 +78,8 @@ describe("interactive 1:1, one on one battle", ()=> {
         idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
         idols.megumi.SkillList.push(skill_idx.getBaseByIdx(3));
         idols.tsubasa.SkillList.push(skill_idx.getBaseByIdx(3));
+        idols.elena.SkillList.push(skill_idx.getBaseByIdx(3));
+        idols.elena.SkillList.push(skill_idx.getBaseByIdx(4));
     }
 
     test("import test", ()=> {
@@ -214,12 +216,37 @@ describe("interactive 1:1, one on one battle", ()=> {
         console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
         console.log(`${idolbattle.priority[1].nickname}은 쓰러졌다!`);
 
-        IdolBattle.exchange(idolbattle, idols.kotoha, idols.megumi);
+        IdolBattle.exchange(idolbattle, idols.megumi, idols.elena);
 
-        expect(idolbattle.enemySet[0]).not.toBe(idols.kotoha);
-        expect(idolbattle.enemySet[0]).toBe(idols.megumi);
+        expect(idolbattle.enemySet[0]).not.toBe(idols.megumi);
+        expect(idolbattle.enemySet[0]).toBe(idols.elena);
 
         console.log(`상대는 ${idolbattle.enemySet[0].nickname}을 꺼냈다`);
+        
+        var playerPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: -10
+            }
+        };
+        var enemyPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: 1
+            }
+        };
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        expect(idolbattle.priority[0]).toBe(idols.elena);
+        expect(idolbattle.priority[1]).toBe(idols.tsubasa);
+
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[1].name}!`);
+        console.log(`${idolbattle.priority[1].nickname}의 ${idolbattle.priority[1].SkillList[0].name}!`);
+
+        expect(idols.elena.HP).toBe(34);
+        expect(idols.tsubasa.HP).toBe(13.1875);
+
+        IdolBattle.exchange(idolbattle, idols.megumi, idols.elena);
 
     });
 

@@ -86,6 +86,10 @@ const IdolBattle = {
                 if (battle.playerSet.indexOf(doll) > -1) {
                     var index = battle.playerSet.indexOf(doll);
 
+                    if (playerPlan[index].skillIdx === -10) {
+                        this.exchange(battle, playerPlan[index].srcIdol, playerPlan[index].destIdol);
+                    }
+
                     Skill.apply(
                         doll.SkillList[playerPlan[index].skillIdx],
                         doll,
@@ -93,6 +97,10 @@ const IdolBattle = {
                         battle);
                 } else {
                     var index = battle.enemySet.indexOf(doll);
+                    
+                    if (enemyPlan[index].skillIdx === -10) {
+                        this.exchange(battle, enemyPlan[index].srcIdol, enemyPlan[index].destIdol);
+                    }
 
                     Skill.apply(doll.SkillList[enemyPlan[index].skillIdx],
                          doll,
@@ -113,25 +121,31 @@ const IdolBattle = {
         var skill2;
 
         return battle.priority.sort(function(doll1, doll2) {
-            if (battle.playerSet.indexOf(doll1) > -1) {
-                var index = battle.playerSet.indexOf(doll1);
-                skill1 = doll1.SkillList[playerPlan[index].skillIdx];
-            } else {
-                var index = battle.enemySet.indexOf(doll1);
-                skill1 = doll1.SkillList[enemyPlan[index].skillIdx];
-            }
-            
-            if (battle.playerSet.indexOf(doll2) > -1) {
-                var index = battle.playerSet.indexOf(doll2);
-                skill2 = doll2.SkillList[playerPlan[index].skillIdx];
-            } else {
-                var index = battle.enemySet.indexOf(doll2);
-                skill2 = doll2.SkillList[enemyPlan[index].skillIdx];
-            }
+            skill1 = IdolBattle.getSkillByPlan(battle, doll1, playerPlan, enemyPlan);
+            skill2 = IdolBattle.getSkillByPlan(battle, doll2, playerPlan, enemyPlan);
+
             return skill1.priority < skill2.priority ? 1 : -1;
         });
     },
-
+    getSkillByPlan: function(battle, doll, playerPlan, enemyPlan) {
+        if (battle.playerSet.indexOf(doll) > -1) {
+            var index = battle.playerSet.indexOf(doll);
+            if (playerPlan[index].skillIdx === -10) {
+                skill = {priority: 6};
+            } else {
+                skill = doll.SkillList[playerPlan[index].skillIdx];
+            }
+        } else {
+            var index = battle.enemySet.indexOf(doll);
+            if (enemyPlan[index].skillIdx === -10) {
+                skill = {priority: 6};
+            } else {
+                skill = doll.SkillList[enemyPlan[index].skillIdx];
+            }
+        }
+        return skill;
+    },
+ 
     selectTargetForDoll(battle, doll) {
         if (battle.playerSet.indexOf(doll) !== 0) {
             return battle.enemySet[0];
