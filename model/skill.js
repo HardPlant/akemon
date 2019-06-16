@@ -75,6 +75,10 @@ const DamageDealer = {
             
 
             destDoll.HP -= amount * resultModifier;
+
+            return {
+                damage: amount * resultModifier
+            }
         }
     }
 };
@@ -86,11 +90,12 @@ const Skill = {
         this.effects = param.effects || [];
         this.attrType = param.attrType;
         this.PP = 35;
+        this.applyResult = {};
     },
     
     apply: function(skill, srcDoll, destDoll, idolBattle) {
         skill.effects.forEach(effect => {
-            effect.apply(srcDoll, destDoll, idolBattle);
+            skill.applyResult = effect.apply(srcDoll, destDoll, idolBattle);
         });
     },
 
@@ -156,7 +161,7 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
     if (damageType === DamageType.Special) {
         amount += srcDoll.SPE - destDoll.SPF;
     }
-    if (damageType !== DamageType.Pure) {
+    if (damageType === DamageType.Pure) {
         // deals pure damage
         amount = originalAmount;
     }

@@ -71,7 +71,7 @@ describe("type test", ()=> {
     
         destIdol = new Idol.Idol();
         destIdol.HP = 10;
-        
+
         srcIdol.LV = 100;
         destIdol.LV = 100;
     });
@@ -157,6 +157,55 @@ describe("type test", ()=> {
         Skill.apply(skill, srcIdol, destIdol);
         
         expect(destIdol.HP).toBe(7.5);
+    });
+
+    test("lv10", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Physical,5, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 10;
+        destIdol.ATK = 0;
+        destIdol.DEF = 0;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(destIdol.HP).toBe(9.5);
+    });
+    test("lv50", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Physical,5, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 50;
+        destIdol.ATK = 0;
+        destIdol.DEF = 0;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(destIdol.HP).toBe(7.5);
+    });
+    test("lv100", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Physical,5, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 100;
+        destIdol.ATK = 0;
+        destIdol.DEF = 0;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(skill.applyResult["damage"]).not.toBe(undefined);
+
+        expect(destIdol.HP).toBe(5);
+        
     });
 });
 
