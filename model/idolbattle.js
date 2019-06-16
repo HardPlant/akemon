@@ -4,10 +4,19 @@ const Skill = require("./skill");
 
 const IdolBattle = {
     IdolBattle: function () {
+        this.playerDolls = [];
+        this.enemyDolls = [];
         this.playerSet = [];
         this.enemySet = [];
         this.dolls = [];
         this.effects = [];
+        this.dollsInBattle = 1;
+
+        function startBattle(playerList, enemyList, dollsInBattle) {
+            this.dollsInBattle = dollsInBattle || 1;
+            this.playerList = playerList;
+            this.enemyList = enemyList;
+        }
 
         function setPlayer(dollSet) {
             this.playerSet = dollSet;

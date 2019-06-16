@@ -109,7 +109,12 @@ describe("interactive 1:1, one on one battle", ()=> {
         mockEnemyGrp[0].dolls.push(idols.megumi);
 
         console.log(`${mockEnemyGrp[0].name}가 승부를 걸어왔다!`);
-        
+        idolbattle = new IdolBattle.IdolBattle();
+        idolbattle.setPlayer(dolls);
+        idolbattle.setEnemy(mockEnemyGrp[0].dolls);
+
+        expect(idolbattle.playerSet.length).toBe(3);
+        expect(idolbattle.enemySet.length).toBe(3);
 
     });
 
