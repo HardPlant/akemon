@@ -181,6 +181,7 @@ describe("type test", ()=> {
 
         srcIdol.LV = 50;
         srcIdol.ATK = 0;
+        expect(srcIdol.stats).not.toBe(undefined);
         destIdol.DEF = 0;
 
         destIdol.attrType = ["Normal"];

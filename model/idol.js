@@ -1,22 +1,53 @@
-function NullIdol() {};
+function statObject(currentdoll) {
+    return {
+        general: function(stat) {
+            var multipleModifiers = currentdoll.statModifier.filter(
+                (mod)=>{return mod.stat === stat && mod.type === "mul"}
+            );
+            multipleModifiers.push({val:1.0});
 
-NullIdol.prototype = {
-    idx: 0,
-    nickname: "missingno",
-    HP: 1,
-    ATK: 1,
-    SPE: 1,
-    DEF: 1,
-    SDF: 1,
-    SPD: 1,
-    attrType: ["Normal"],
-    SkillList: [0]
+            var resultMultipleModifier = multipleModifiers.reduce(
+                (total, item)=> total.val * item.val
+            );
+
+            var plusModifiers =  currentdoll.statModifier.filter(
+                (mod)=>{return mod.stat === stat && mod.type === "plus"}
+            );
+            plusModifiers.push({val:0.0});
+            
+            var resultPlusModifier = plusModifiers.reduce(
+                (total, item)=> total.val + item.val
+            );
+            if (typeof(resultMultipleModifier) === "object") {
+                resultMultipleModifier = resultMultipleModifier.val;
+            }    
+
+            if (typeof(resultPlusModifier) === "object") {
+                resultPlusModifier = resultPlusModifier.val;
+            }    
+            
+            return currentdoll[stat] * resultMultipleModifier + resultPlusModifier;
+        },
+        ATK: function() {
+            return this.general("ATK");
+        },
+        SPE: function() {
+            return this.general("SPE");
+        },
+        DEF: function() {
+            return this.general("DEF");
+        },
+        SDF: function() {
+            return this.general("SDF");
+        },
+        SPD: function() {
+            return this.general("SPD");
+        },
+    }
 }
-
 module.exports = {
     Idol: function(param) {
-        if (typeof(param) === "undefined") return new NullIdol();
-    
+        param = param || {},
         this.idx= param.idx || 1,
         this.nickname = param.nickname || "mirai",
         this.LV = param.LV || 1,
@@ -30,53 +61,8 @@ module.exports = {
         this.SkillList = param.SkillList || [];
         this.statusList = param.statusList || [];
         this.statModifier = [1.0];
-        var currentdoll = this;
 
-        this.stats = {
-            general: function(stat) {
-                var multipleModifiers = currentdoll.statModifier.filter(
-                    (mod)=>{return mod.stat === stat && mod.type === "mul"}
-                );
-                multipleModifiers.push({val:1.0});
-
-                var resultMultipleModifier = multipleModifiers.reduce(
-                    (total, item)=> total.val * item.val
-                );
-
-                var plusModifiers =  currentdoll.statModifier.filter(
-                    (mod)=>{return mod.stat === stat && mod.type === "plus"}
-                );
-                plusModifiers.push({val:0.0});
-                
-                var resultPlusModifier = plusModifiers.reduce(
-                    (total, item)=> total.val + item.val
-                );
-                if (typeof(resultMultipleModifier) === "object") {
-                    resultMultipleModifier = resultMultipleModifier.val;
-                }    
-
-                if (typeof(resultPlusModifier) === "object") {
-                    resultPlusModifier = resultPlusModifier.val;
-                }    
-                
-                return currentdoll[stat] * resultMultipleModifier + resultPlusModifier;
-            },
-            ATK: function() {
-                return this.general("ATK");
-            },
-            SPE: function() {
-                return this.general("SPE");
-            },
-            DEF: function() {
-                return this.general("DEF");
-            },
-            SDF: function() {
-                return this.general("SDF");
-            },
-            SPD: function() {
-                return this.general("SPD");
-            },
-        }
+        this.stats = statObject(this);
     },
     getAvailableSkill: function(doll) {
         var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));

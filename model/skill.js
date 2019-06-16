@@ -161,10 +161,10 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
     amount *= (srcDoll.LV / 100);
 
     if (damageType === DamageType.Physical) {
-        amount += srcDoll.ATK - destDoll.DEF;
+        amount += srcDoll.stats.ATK() - destDoll.stats.DEF();
     }
     if (damageType === DamageType.Special) {
-        amount += srcDoll.SPE - destDoll.SDF;
+        amount += srcDoll.stats.SPE() - destDoll.stats.SDF();
     }
     if (damageType === DamageType.Pure) {
         // deals pure damage

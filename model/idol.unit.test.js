@@ -26,19 +26,6 @@ describe("creation test", ()=>{
         expect(unit.SkillList).toStrictEqual([0,1,2,3]);
     });
 
-    test("create a null idol", ()=> {
-        var unit = new Idol.Idol();
-
-        expect(unit.nickname).toBe("missingno");
-        expect(unit.idx).toBe(0);
-        expect(unit.HP).toBe(1);
-        expect(unit.ATK).toBe(1);
-        expect(unit.SPE).toBe(1);
-        expect(unit.DEF).toBe(1);
-        expect(unit.SDF).toBe(1);
-        expect(unit.SPD).toBe(1);
-        expect(unit.SkillList).toStrictEqual([0]);
-    });
 
     test("create a idol by idx", () => {
 
