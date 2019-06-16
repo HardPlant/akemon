@@ -42,6 +42,30 @@ const idxTable = {
             new Skill.effect.Damage(Skill.DamageType.Physical, 25));
         
         return skill;
+    },
+    4: function() {
+        var skill =  new Skill.Skill({
+            name: "삼바",
+            attrType: "Normal",
+            effects: []
+        });
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.DamageType.Physical, 25));
+        skill.effects.push(
+                new Skill.effect.Damage(Skill.DamageType.Physical, 25));    
+        
+        return skill;
+    },
+    5: function() {
+        var skill =  new Skill.Skill({
+            name: "비바체",
+            attrType: "Normal",
+            effects: []
+        });
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.DamageType.Special, 20));
+        
+        return skill;
     }
 }
 
