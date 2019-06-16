@@ -142,7 +142,7 @@ const IdolBattle = {
     exchange(battle, srcIdol, destIdol) {
         battle.dolls = battle.dolls.filter(elem => elem !== srcIdol);
         
-        if (battle.playerSet.indexOf(destIdol) !== -1) {
+        if (battle.playerSet.indexOf(srcIdol) !== -1) {
             battle.playerSet = battle.playerSet.filter(elem => elem !== srcIdol);
             battle.playerSet.push(destIdol);
         } else {
