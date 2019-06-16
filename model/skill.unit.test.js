@@ -247,7 +247,7 @@ describe("type test", ()=> {
     
         expect(destIdol.HP).toBe(-5);
     });
-    test("much bigger def", ()=> {
+    test("must deal 1 dmg", ()=> {
         skill = new Skill.Skill();
         skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Special,120, skill));
         skill.attrType = "Normal";
@@ -264,6 +264,7 @@ describe("type test", ()=> {
         Skill.apply(skill, srcIdol, destIdol);
         expect(skill.applyResult["finalDamage"]).not.toBe(undefined);
         expect(destIdol.HP).not.toBeGreaterThan(destIdol.baseHP);
+        expect(destIdol.HP).toBe(destIdol.baseHP - 1);
     });
 });
 
