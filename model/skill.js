@@ -96,7 +96,8 @@ const Skill = {
         this.name = param.name || "발버둥";
         this.effects = param.effects || [];
         this.attrType = param.attrType;
-        this.PP = 35;
+        this.PP = param.PP || 35;
+        this.priority = param.priority || 0;
         this.applyResult = {};
     },
     

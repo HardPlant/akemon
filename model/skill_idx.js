@@ -47,12 +47,11 @@ const idxTable = {
         var skill =  new Skill.Skill({
             name: "삼바",
             attrType: "Normal",
+            priority: 1,
             effects: []
         });
         skill.effects.push(
-            new Skill.effect.Damage(Skill.DamageType.Physical, 25));
-        skill.effects.push(
-                new Skill.effect.Damage(Skill.DamageType.Physical, 25));    
+            new Skill.effect.Damage(Skill.DamageType.Physical, 20)); 
         
         return skill;
     },
@@ -60,6 +59,7 @@ const idxTable = {
         var skill =  new Skill.Skill({
             name: "비바체",
             attrType: "Normal",
+            priority: 1,
             effects: []
         });
         skill.effects.push(

@@ -63,7 +63,7 @@ const IdolBattle = {
 
     progress: function (battle, playerPlan, enemyPlan) {
         battle.priority = this.getDollPriorityBySpeed(battle);
-        
+
         if (typeof(playerPlan) === "undefined") {
             battle.priority.forEach((doll) => {
                 if (Idol.isUnmoveable(doll)) {
@@ -78,6 +78,8 @@ const IdolBattle = {
                 Skill.apply(skill, doll, target, battle);
             });
         } else {
+            battle.priority = this.getPriorityBySkill(battle, playerPlan, enemyPlan);
+
             battle.priority.forEach((doll) => {
                 if (Idol.isUnmoveable(doll)) return;
 
@@ -105,6 +107,29 @@ const IdolBattle = {
     getDollPriorityBySpeed(battle) {
         return battle.dolls.sort(
             (doll1, doll2) => { return doll1.SPD < doll2.SPD ? 1 : -1 });
+    },
+    getPriorityBySkill(battle, playerPlan, enemyPlan) {
+        var skill1;
+        var skill2;
+
+        return battle.priority.sort(function(doll1, doll2) {
+            if (battle.playerSet.indexOf(doll1) > -1) {
+                var index = battle.playerSet.indexOf(doll1);
+                skill1 = doll1.SkillList[playerPlan[index].skillIdx];
+            } else {
+                var index = battle.enemySet.indexOf(doll1);
+                skill1 = doll1.SkillList[enemyPlan[index].skillIdx];
+            }
+            
+            if (battle.playerSet.indexOf(doll2) > -1) {
+                var index = battle.playerSet.indexOf(doll2);
+                skill2 = doll2.SkillList[playerPlan[index].skillIdx];
+            } else {
+                var index = battle.enemySet.indexOf(doll2);
+                skill2 = doll2.SkillList[enemyPlan[index].skillIdx];
+            }
+            return skill1.priority < skill2.priority ? 1 : -1;
+        });
     },
 
     selectTargetForDoll(battle, doll) {
