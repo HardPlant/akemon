@@ -65,6 +65,22 @@ describe("status test", ()=>{
 
         expect(Idol.isFaint(unit)).toBe(true);
     });
+    test("stat test", ()=> {
+        var doll = new Idol.Idol({
+            HP: 10,
+            ATK: 10,
+            SPE: 10,
+            DEF: 10,
+            SDF: 10,
+            SPD: 10,
+        });
+
+        expect(doll.stats.ATK()).toBe(10);
+        expect(doll.stats.SPE()).toBe(10);
+        expect(doll.stats.DEF()).toBe(10);
+        expect(doll.stats.SDF()).toBe(10);
+        expect(doll.stats.SPD()).toBe(10);
+    });
 });
 
 describe("action test", ()=> {

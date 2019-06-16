@@ -29,24 +29,26 @@ module.exports = {
         this.attrType = param.attrType || ["Normal"],
         this.SkillList = param.SkillList || [];
         this.statusList = param.statusList || [];
-        this.statModifier = [];
-        
+        this.statModifier = [1.0];
+        var currentdoll = this;
+
         this.stats = {
             general: function(stat) {
-                var multipleModifiers = this.statModifier.filter(
+                var multipleModifiers = [1.0] || currentdoll.statModifier.filter(
                     (mod)=>{return mod.stat === stat && mod.type === "mul"}
                 );
                 var resultMultipleModifier = multipleModifiers.reduce(
                     (total, item)=> total*item
                 );
-                var plusModifiers = this.statModifier.filter(
+
+                var plusModifiers = [0.0] || currentdoll.statModifier.filter(
                     (mod)=>{return mod.stat === stat && mod.type === "plus"}
                 );
                 var resultPlusModifier = plusModifiers.reduce(
                     (total, item)=> total+item
                 );
                 
-                return this.stat * resultMultipleModifier + resultPlusModifier;
+                return currentdoll[stat] * resultMultipleModifier + resultPlusModifier;
             },
             ATK: function() {
                 return this.general("ATK");
