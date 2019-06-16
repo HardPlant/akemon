@@ -5,7 +5,7 @@ const DamageType = {
     Pure: 4
 };
 
-const AttrTypes = {
+const AttrTypes = { // Attack -> Defense
     "Effective": {
         "Effective" : 2,
         "NonEffective" : 0.5,
@@ -33,7 +33,28 @@ const AttrTypes = {
         "Steel": 0.5,
     },
     "Fire": {
-
+        "Fire": 0.5,
+        "Water": 0.5,
+        "Grass": 2,
+        "Ice": 2,
+        "Bug": 2,
+        "Rock": 0.5,
+        "Dragon": 0.5,
+        "Steel": 2
+    },
+    "Water": {
+        "Fire": 2,
+        "Water": 0.5,
+        "Grass": 0.5
+    },
+    "Electric": {
+        "Water": 2,
+        "Grass": 0.5
+    },
+    "Grass": {
+        "Fire": 0.5,
+        "Water": 2,
+        "Grass": 0.5
     }
 };
 
