@@ -20,8 +20,9 @@ describe("creation test", ()=> {
 })
 
 describe("interact with self", ()=> {
-    var destIdol = Idol.Idol();
+    var destIdol = new Idol.Idol();
     destIdol.HP = 10;
+    destIdol.LV = 100;
 
     test("deal damage to self", ()=> {
         var skill = new Skill.Skill();
@@ -39,6 +40,9 @@ describe("interact with other idol", ()=> {
 
     var destIdol = new Idol.Idol();
     destIdol.HP = 10;
+
+    srcIdol.LV = 100;
+    destIdol.LV = 100;
 
     test("dealing damage test", ()=> {
         var skill = new Skill.Skill();
@@ -67,6 +71,9 @@ describe("type test", ()=> {
     
         destIdol = new Idol.Idol();
         destIdol.HP = 10;
+        
+        srcIdol.LV = 100;
+        destIdol.LV = 100;
     });
 
     test("normal", ()=> {
