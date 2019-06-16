@@ -13,8 +13,8 @@ describe("interactive 1:1, one on one battle", ()=> {
             LV: 5,
             HP: 30,
             ATK: 15,
-            SPE: 15,
-            DEF: 15,
+            SPE: 20,
+            DEF: 10,
             SDF: 15,
             SPD: 15,
             SkillList: []
@@ -149,8 +149,23 @@ describe("interactive 1:1, one on one battle", ()=> {
         expect(idols.kotoha.HP).not.toBe(20);
 
         expect(idols.mirai.HP).toBe(13.75);
-        expect(idols.kotoha.HP).toBe(13.75);
+        expect(idols.kotoha.HP).toBe(8.75);
 
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
+
+        expect(idols.mirai.HP).toBe(13.75);
+        expect(idols.kotoha.HP).toBeLessThan(0);
+
+        console.log(`${idolbattle.enemySet[0].nickname}은 쓰러졌다!`);
+
+        IdolBattle.exchange(idolbattle, idols.kotoha, idols.megumi);
+
+        expect(idolbattle.enemySet[0]).not.toBe(idols.kotoha);
+        expect(idolbattle.enemySet[0]).toBe(idols.megumi);
+
+        console.log(`상대는 ${idolbattle.enemySet[0].nickname}을 꺼냈다!`);
 
     });
 

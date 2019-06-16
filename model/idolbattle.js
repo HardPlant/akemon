@@ -137,6 +137,21 @@ const IdolBattle = {
             (doll) => { return Idol.isFaint(doll) }
         ).length === 0;
     },
+    exchange(battle, srcIdol, destIdol) {
+        battle.dolls = battle.dolls.filter(elem => elem !== srcIdol);
+        
+        if (battle.playerSet.indexOf(destIdol) !== -1) {
+            battle.playerSet = battle.playerSet.filter(elem => elem !== srcIdol);
+            battle.playerSet.push(destIdol);
+        } else {
+            battle.enemySet = battle.enemySet.filter(elem => elem !== srcIdol);
+            battle.enemySet.push(destIdol);
+        }
+        
+        battle.dolls.push(destIdol);
+        battle.priority = this.getDollPriorityBySpeed(battle);
+        
+    }
 }
 
 module.exports = IdolBattle;
