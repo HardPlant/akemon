@@ -113,8 +113,12 @@ describe("interactive 1:1, one on one battle", ()=> {
         idolbattle = new IdolBattle.IdolBattle();
         idolbattle.startBattle(player, enemy, 1);
 
-        expect(idolbattle.playerSet.length).toBe(3);
-        expect(idolbattle.enemySet.length).toBe(3);
+        expect(idolbattle.playerSet.length).toBe(1);
+        expect(idolbattle.enemySet.length).toBe(1);
+        
+        expect(idolbattle.playerSet[0]).toBe(idols.mirai);
+        expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
+
 
     });
 
