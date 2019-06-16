@@ -172,7 +172,7 @@ describe("type test", ()=> {
         expect(destIdol.attrType).not.toBe(undefined);
         
         Skill.apply(skill, srcIdol, destIdol);
-        expect(destIdol.HP).toBe(9.5);
+        expect(destIdol.HP).toBe(9);
     });
     test("lv50", ()=> {
         skill = new Skill.Skill();
@@ -246,6 +246,24 @@ describe("type test", ()=> {
         expect(skill.applyResult["amount"]).toBe(15);
     
         expect(destIdol.HP).toBe(-5);
+    });
+    test("much bigger def", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Special,120, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 10;
+        srcIdol.SPE = 0;
+        destIdol.baseHP = 10;
+        destIdol.HP = 10;
+        destIdol.SDF = 100;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(skill.applyResult["finalDamage"]).not.toBe(undefined);
+        expect(destIdol.HP).not.toBeGreaterThan(destIdol.baseHP);
     });
 });
 

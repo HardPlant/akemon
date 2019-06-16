@@ -170,7 +170,7 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
         // deals pure damage
         amount = originalAmount;
     }
-    return amount;
+    return Math.max(1,amount);
 }
 
 module.exports = Skill;
