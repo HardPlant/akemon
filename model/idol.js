@@ -19,6 +19,7 @@ module.exports = {
     
         this.idx= param.idx || 1,
         this.nickname = param.nickname || "mirai",
+        this.LV = param.LV || 1,
         this.HP = param.HP || 1,
         this.ATK = param.ATK || 1,
         this.SPE = param.SPE || 1,

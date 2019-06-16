@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "inttest": "jest int"
+    "unittest": "jest --testPathIgnorePatterns int",
+    "inttest": "jest --testPathIgnorePatterns unit"
   },
   "author": "",
   "license": "ISC",
