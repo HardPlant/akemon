@@ -137,7 +137,6 @@ describe("interactive 1:1, one on one battle", ()=> {
             }
         };
 
-        idolbattle.priority = IdolBattle.getDollPriorityBySpeed(idolbattle);
         expect(idolbattle.priority.length).toBe(2);
 
         IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
@@ -157,8 +156,12 @@ describe("interactive 1:1, one on one battle", ()=> {
 
         expect(idols.mirai.HP).toBe(13.75);
         expect(idols.kotoha.HP).toBeLessThan(0);
-
+        
+        expect(Idol.isFaint(idols.kotoha)).toBe(true);
         console.log(`${idolbattle.enemySet[0].nickname}은 쓰러졌다!`);
+
+        expect(IdolBattle.isGameEnded(idolbattle)).toBe(false);
+        expect(IdolBattle.isPlayerWon(idolbattle)).toBe(false);
 
         IdolBattle.exchange(idolbattle, idols.kotoha, idols.megumi);
 

@@ -62,6 +62,8 @@ const IdolBattle = {
     },
 
     progress: function (battle, playerPlan, enemyPlan) {
+        battle.priority = this.getDollPriorityBySpeed(battle);
+        
         if (typeof(playerPlan) === "undefined") {
             battle.priority.forEach((doll) => {
                 if (Idol.isUnmoveable(doll)) {
