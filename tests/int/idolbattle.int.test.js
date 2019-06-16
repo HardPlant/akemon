@@ -141,8 +141,10 @@ describe("interactive 1:1, one on one battle", ()=> {
         expect(idols.mirai.HP).not.toBe(30);
         expect(idols.kotoha.HP).not.toBe(20);
 
-        expect(idols.mirai.HP).toBe(0);
-        expect(idols.kotoha.HP).not.toBe(0);
+        expect(idols.mirai.HP).toBe(8.75);
+        expect(idols.kotoha.HP).toBe(18.75);
+
+        
     });
 
 });
