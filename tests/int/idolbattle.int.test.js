@@ -35,10 +35,10 @@ describe("interactive 1:1, one on one battle", ()=> {
             LV: 5,
             HP: 25,
             ATK: 25,
-            SPE: 5,
+            SPE: 4,
             DEF: 15,
             SDF: 10,
-            SPD: 20,
+            SPD: 21,
             SkillList: []
         });
         idols.kotoha = new Idol.Idol({
@@ -76,6 +76,7 @@ describe("interactive 1:1, one on one battle", ()=> {
         });
         idols.mirai.SkillList.push(skill_idx.getBaseByIdx(2));
         idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
+        idols.megumi.SkillList.push(skill_idx.getBaseByIdx(3));
     }
 
     test("import test", ()=> {
@@ -137,9 +138,8 @@ describe("interactive 1:1, one on one battle", ()=> {
             }
         };
 
-        expect(idolbattle.priority.length).toBe(2);
-
         IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+        expect(idolbattle.priority.length).toBe(2);
 
         console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
         console.log(`${idolbattle.priority[1].nickname}의 ${idolbattle.priority[1].SkillList[0].name}!`);
@@ -168,7 +168,23 @@ describe("interactive 1:1, one on one battle", ()=> {
         expect(idolbattle.enemySet[0]).not.toBe(idols.kotoha);
         expect(idolbattle.enemySet[0]).toBe(idols.megumi);
 
-        console.log(`상대는 ${idolbattle.enemySet[0].nickname}을 꺼냈다!`);
+        console.log(`상대는 ${idolbattle.enemySet[0].nickname}을 꺼냈다`);
+
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        expect(idolbattle.priority[0]).toBe(idols.megumi);
+        expect(idolbattle.priority[1]).toBe(idols.mirai);
+        
+        console.log(`${idolbattle.priority[0].nickname}의 ${idolbattle.priority[0].SkillList[0].name}!`);
+        console.log(`${idolbattle.priority[1].nickname}은 쓰러졌다!`);
+
+        expect(idols.megumi.HP).toBe(idols.megumi.baseHP);
+        expect(Idol.isFaint(idols.mirai)).toBe(true);
+
+        IdolBattle.exchange(idolbattle, idols.mirai, idols.tsubasa);
+        console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
+        
+        expect(idolbattle.playerSet.length).toBe(1);
 
     });
 
