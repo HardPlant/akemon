@@ -65,6 +65,69 @@ describe("init flow", ()=> {
 
     });
 });
+describe("init flow", ()=> {
+    const battle = new IdolBattle.IdolBattle();
+    var priority = [];
+    var currentDoll = {}; // Idol.Idol;
+    var plan = {
+        srcDoll: {},
+        destDoll: {},
+        skill: {}
+    };
+    
+    var playerIdol1 = new Idol.Idol();
+    playerIdol1.HP = 30;
+    playerIdol1.SPD = 1;
+    playerIdol1.SkillList = [skill_idx.getBaseByIdx(4)];
+
+    var enemyIdol1 = new Idol.Idol();
+    enemyIdol1.HP = 30;
+    enemyIdol1.SPD = 2;
+    enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
+
+    playerIdol1.LV = 100;
+    enemyIdol1.LV = 100;
+
+    test("Init", () => {
+        var playerSet = [playerIdol1];
+        var enemySet = [enemyIdol1];
+
+        battle.setPlayer(playerSet);
+        battle.setEnemy(enemySet);
+
+        expect(battle.dolls).toContain(playerIdol1);
+        expect(battle.dolls).toContain(enemyIdol1);
+    });
+    
+    test("get Doll priority", ()=> {
+        priority = IdolBattle.getDollPriorityBySpeed(battle);
+        battle.priority = priority;
+
+        expect(priority[0]).toBe(enemyIdol1);
+        expect(priority[1]).toBe(playerIdol1);
+    });
+    test("get priority by plan", ()=> {
+        priority = IdolBattle.getDollPriorityBySpeed(battle);
+        battle.priority = priority;
+
+        var playerPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: 0
+            }
+        };
+        var enemyPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: 0
+            }
+        };
+        battle.priority = IdolBattle.getPriorityBySkill(battle, playerPlan, enemyPlan);
+
+        expect(priority[0]).toBe(playerIdol1);
+        expect(priority[1]).toBe(enemyIdol1);
+    });
+});
 
 describe("tag battle", ()=> {
     var playerIdol1 = new Idol.Idol();
