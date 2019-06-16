@@ -24,7 +24,7 @@ const idxTable = {
     2: function() {
         var skill =  new Skill.Skill({
             name: "흥얼거리기",
-            attrType: Skill.AttrType[""],
+            attrType: "Normal",
             effects: []
         });
         skill.effects.push(
@@ -32,9 +32,10 @@ const idxTable = {
         
         return skill;
     },
-    2: function() {
+    3: function() {
         var skill =  new Skill.Skill({
             name: "하프스탭",
+            attrType: "Normal",
             effects: []
         });
         skill.effects.push(

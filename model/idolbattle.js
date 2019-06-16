@@ -25,6 +25,12 @@ const IdolBattle = {
                     this.enemySet.push(this.enemyDolls[i]);
                 }
             }
+            this.playerSet.forEach(doll => {
+                this.dolls.push(doll);
+            });
+            this.enemySet.forEach(doll => {
+                this.dolls.push(doll);
+            });
         }
 
         function setPlayer(dollSet) {

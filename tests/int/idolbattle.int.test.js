@@ -74,6 +74,8 @@ describe("interactive 1:1, one on one battle", ()=> {
             SPD: 20,
             SkillList: []
         });
+        idols.mirai.SkillList.push(skill_idx.getBaseByIdx(2));
+        idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
     }
 
     test("import test", ()=> {
@@ -117,6 +119,30 @@ describe("interactive 1:1, one on one battle", ()=> {
         
         expect(idolbattle.playerSet[0]).toBe(idols.mirai);
         expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
+
+        var playerPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: 0
+            }
+        };
+        var enemyPlan = {
+            0: {
+                targetDoll: 0,
+                skillIdx: 0
+            }
+        };
+
+        idolbattle.priority = IdolBattle.getDollPriorityBySpeed(idolbattle);
+        expect(idolbattle.priority.length).toBe(2);
+
+        IdolBattle.progress(idolbattle, playerPlan, enemyPlan);
+
+        expect(idols.mirai.HP).not.toBe(30);
+        expect(idols.kotoha.HP).not.toBe(20);
+
+        expect(idols.mirai.HP).toBe(0);
+        expect(idols.kotoha.HP).not.toBe(0);
     });
 
 });
