@@ -100,18 +100,18 @@ describe("interactive 1:1, one on one battle", ()=> {
                 dolls: []
             }
         ];
-        mockPlayerGrp[0].dolls.push(idols.mirai);
-        mockPlayerGrp[0].dolls.push(idols.sizuka);
-        mockPlayerGrp[0].dolls.push(idols.tsubasa);
+        var player = mockPlayerGrp[0];
+        player.dolls.push(idols.mirai);
+        player.dolls.push(idols.sizuka);
+        player.dolls.push(idols.tsubasa);
+        var enemy = mockEnemyGrp[0];
+        enemy.dolls.push(idols.kotoha);
+        enemy.dolls.push(idols.elena);
+        enemy.dolls.push(idols.megumi);
 
-        mockEnemyGrp[0].dolls.push(idols.kotoha);
-        mockEnemyGrp[0].dolls.push(idols.elena);
-        mockEnemyGrp[0].dolls.push(idols.megumi);
-
-        console.log(`${mockEnemyGrp[0].name}가 승부를 걸어왔다!`);
+        console.log(`${enemy.name}가 승부를 걸어왔다!`);
         idolbattle = new IdolBattle.IdolBattle();
-        idolbattle.setPlayer(dolls);
-        idolbattle.setEnemy(mockEnemyGrp[0].dolls);
+        idolbattle.startBattle(player, enemy, 1);
 
         expect(idolbattle.playerSet.length).toBe(3);
         expect(idolbattle.enemySet.length).toBe(3);

@@ -12,10 +12,19 @@ const IdolBattle = {
         this.effects = [];
         this.dollsInBattle = 1;
 
-        function startBattle(playerList, enemyList, dollsInBattle) {
+        function startBattle(player, enemy, dollsInBattle) {
             this.dollsInBattle = dollsInBattle || 1;
-            this.playerList = playerList;
-            this.enemyList = enemyList;
+            this.playerDolls = player.dolls;
+            this.enemyDolls = enemy.dolls;
+
+            for(var i=0; i<dollsInBattle; i++) {
+                if (i < this.playerDolls.length) {
+                    this.playerSet.push(this.playerDolls[i]);
+                }
+                if (i < this.enemyDolls.length) {
+                    this.enemySet.push(this.enemyDolls[i]);
+                }
+            }
         }
 
         function setPlayer(dollSet) {
@@ -42,6 +51,7 @@ const IdolBattle = {
 
         this.setPlayer = setPlayer;
         this.setEnemy = setEnemy;
+        this.startBattle = startBattle;
     },
 
     progress: function (battle, playerPlan, enemyPlan) {
