@@ -76,14 +76,17 @@ describe("init flow", ()=> {
     };
     
     var playerIdol1 = new Idol.Idol();
-    playerIdol1.HP = 30;
+    playerIdol1.HP = 1;
     playerIdol1.SPD = 1;
     playerIdol1.SkillList = [skill_idx.getBaseByIdx(4)];
 
     var enemyIdol1 = new Idol.Idol();
-    enemyIdol1.HP = 30;
+    enemyIdol1.HP = 1;
     enemyIdol1.SPD = 2;
     enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
+
+    playerIdol1.LV = 100;
+    enemyIdol1.LV = 100;
 
     test("Init", () => {
         var playerSet = [playerIdol1];
@@ -106,7 +109,6 @@ describe("init flow", ()=> {
     test("get priority by plan", ()=> {
         priority = IdolBattle.getDollPriorityBySpeed(battle);
         battle.priority = priority;
-
         expect(priority[0]).toBe(enemyIdol1);
         expect(priority[1]).toBe(playerIdol1);
 
@@ -126,6 +128,10 @@ describe("init flow", ()=> {
 
         expect(priority[0]).toBe(playerIdol1);
         expect(priority[1]).toBe(enemyIdol1);
+
+        IdolBattle.progress(battle, playerPlan, enemyPlan);
+        expect(Idol.isFaint(playerIdol1)).toBe(false);
+        expect(Idol.isFaint(enemyIdol1)).toBe(true);
     });
 });
 
