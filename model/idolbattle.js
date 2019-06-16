@@ -63,7 +63,7 @@ const IdolBattle = {
     progress: function (battle, playerPlan, enemyPlan) {
         if (typeof(playerPlan) === "undefined") {
             battle.priority.forEach((doll) => {
-                if (Idol.isFaint(doll)) {
+                if (Idol.isUnmoveable(doll)) {
                     return;
                 }
 
@@ -76,7 +76,7 @@ const IdolBattle = {
             });
         } else {
             battle.priority.forEach((doll) => {
-                if (Idol.isFaint(doll)) return;
+                if (Idol.isUnmoveable(doll)) return;
 
                 if (battle.playerSet.indexOf(doll) > -1) {
                     var index = battle.playerSet.indexOf(doll);

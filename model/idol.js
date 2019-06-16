@@ -74,6 +74,10 @@ module.exports = {
     isFaint: function(idol) {
         return idol.HP <= 0;
     },
+    isUnmoveable: function(idol) {
+        var isFaint = this.isFaint(idol);
+        return isFaint;
+    },
 
     applyStatus: function() {
         throw Error("Not Implemented");
