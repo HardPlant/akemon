@@ -165,7 +165,7 @@ describe("type test", ()=> {
         skill.attrType = "Normal";
 
         srcIdol.LV = 10;
-        destIdol.ATK = 0;
+        srcIdol.ATK = 0;
         destIdol.DEF = 0;
 
         destIdol.attrType = ["Normal"];
@@ -180,13 +180,15 @@ describe("type test", ()=> {
         skill.attrType = "Normal";
 
         srcIdol.LV = 50;
-        destIdol.ATK = 0;
+        srcIdol.ATK = 0;
         destIdol.DEF = 0;
 
         destIdol.attrType = ["Normal"];
         expect(destIdol.attrType).not.toBe(undefined);
         
         Skill.apply(skill, srcIdol, destIdol);
+
+        expect(skill.applyResult["amount"]).toBe(2.5);
         expect(destIdol.HP).toBe(7.5);
     });
     test("lv100", ()=> {
@@ -195,17 +197,54 @@ describe("type test", ()=> {
         skill.attrType = "Normal";
 
         srcIdol.LV = 100;
-        destIdol.ATK = 0;
+        srcIdol.ATK = 0;
         destIdol.DEF = 0;
 
         destIdol.attrType = ["Normal"];
         expect(destIdol.attrType).not.toBe(undefined);
         
         Skill.apply(skill, srcIdol, destIdol);
-        expect(skill.applyResult["damage"]).not.toBe(undefined);
-
+        expect(skill.applyResult["finalDamage"]).not.toBe(undefined);
+        expect(skill.applyResult["amount"]).toBe(5);
+    
         expect(destIdol.HP).toBe(5);
         
+    });
+    test("physical", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Physical,5, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 100;
+        srcIdol.ATK = 10;
+        destIdol.DEF = 0;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(skill.applyResult["finalDamage"]).not.toBe(undefined);
+        expect(skill.applyResult["amount"]).toBe(15);
+    
+        expect(destIdol.HP).toBe(-5);
+    });
+    test("special", ()=> {
+        skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Damage(Skill.DamageType.Special,5, skill));
+        skill.attrType = "Normal";
+
+        srcIdol.LV = 100;
+        srcIdol.SPE = 10;
+        destIdol.SDF = 0;
+
+        destIdol.attrType = ["Normal"];
+        expect(destIdol.attrType).not.toBe(undefined);
+        
+        Skill.apply(skill, srcIdol, destIdol);
+        expect(skill.applyResult["finalDamage"]).not.toBe(undefined);
+        expect(skill.applyResult["amount"]).toBe(15);
+    
+        expect(destIdol.HP).toBe(-5);
     });
 });
 

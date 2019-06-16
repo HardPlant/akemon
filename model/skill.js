@@ -77,7 +77,12 @@ const DamageDealer = {
             destDoll.HP -= amount * resultModifier;
 
             return {
-                damage: amount * resultModifier
+                srcDoll: srcDoll,
+                destDoll: destDoll,
+                battle: battle,
+                amount: amount,
+                modifiers: modifiers,
+                finalDamage: amount * resultModifier
             }
         }
     }
@@ -159,7 +164,7 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
         amount += srcDoll.ATK - destDoll.DEF;
     }
     if (damageType === DamageType.Special) {
-        amount += srcDoll.SPE - destDoll.SPF;
+        amount += srcDoll.SPE - destDoll.SDF;
     }
     if (damageType === DamageType.Pure) {
         // deals pure damage
