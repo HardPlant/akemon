@@ -8,33 +8,32 @@ const DamageType = {
 const AttrTypes = {
     "Effective": {
         "Effective" : 2,
-        "Normal" : 1,
-        "NonEffective" : 0.5,
-    },
-    "Normal": {
-        "Effective" : 2,
-        "Normal" : 1,
         "NonEffective" : 0.5,
     },
     "NonEffective": {
         "Effective" : 2,
-        "Normal" : 1,
         "NonEffective" : 0.5,
     },
     "Vocal": {
-        "Vocal" : 1,
         "Dance" : 2,
         "Visual" : 0.5
     },
     "Dance": {
         "Vocal" : 0.5,
-        "Dance" : 1,
         "Visual" : 2
     },
     "Visual": {
         "Vocal" : 2,
         "Dance" : 0.5,
-        "Visual" : 1
+    },
+    "Normal": {
+        "Effective" : 2,
+        "NonEffective" : 0.5,
+        "Ghost": 0,
+        "Steel": 0.5,
+    },
+    "Fire": {
+
     }
 };
 
@@ -114,7 +113,7 @@ function getEnemyTypeModifier(modifiers, skillType, destDollTypes) {
     if (typeof(destDollTypes) === "undefined") return;
 
     destDollTypes.forEach(function(attrType) {
-        var modifier = AttrTypes[skillType][attrType];
+        var modifier = AttrTypes[skillType][attrType] || 1;
     
         modifiers.push(modifier);
     });
@@ -146,3 +145,4 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
 module.exports = Skill;
 module.exports.DamageType = DamageType;
 module.exports.DamageDealer = DamageDealer;
+module.exports.AttrTypes = AttrTypes;

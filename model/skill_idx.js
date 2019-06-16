@@ -20,6 +20,27 @@ const idxTable = {
             new Skill.effect.Damage(Skill.DamageType.Pure, 20));
         
         return skill;
+    },
+    2: function() {
+        var skill =  new Skill.Skill({
+            name: "흥얼거리기",
+            attrType: Skill.AttrType[""],
+            effects: []
+        });
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.DamageType.Special, 25));
+        
+        return skill;
+    },
+    2: function() {
+        var skill =  new Skill.Skill({
+            name: "하프스탭",
+            effects: []
+        });
+        skill.effects.push(
+            new Skill.effect.Damage(Skill.DamageType.Physical, 25));
+        
+        return skill;
     }
 }
 

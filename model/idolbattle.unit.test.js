@@ -23,6 +23,9 @@ describe("init flow", ()=> {
     enemyIdol1.SPD = 2;
     enemyIdol1.SkillList = [skill_idx.getBaseByIdx(1)];
 
+    playerIdol1.LV = 100;
+    enemyIdol1.LV = 100;
+
     test("Init", () => {
         var playerSet = [playerIdol1];
         var enemySet = [enemyIdol1];
@@ -83,6 +86,11 @@ describe("tag battle", ()=> {
     enemyIdol2.HP = 30;
     enemyIdol2.SPD = 4;
     enemyIdol2.SkillList = [skill_idx.getBaseByIdx(1)];
+
+    playerIdol1.LV = 100;
+    enemyIdol1.LV = 100;
+    playerIdol2.LV = 100;
+    enemyIdol2.LV = 100;
 
     const battle = new IdolBattle.IdolBattle();
     var priority = [];
