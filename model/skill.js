@@ -126,6 +126,7 @@ function getBattleModifiers(modifiers, battle) {
 }
 
 function getAmountModifier(amount, srcDoll, destDoll, damageType) {
+    originalAmount = amount;
     amount *= (srcDoll.LV / 100);
 
     if (damageType === DamageType.Physical) {
@@ -134,8 +135,9 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
     if (damageType === DamageType.Special) {
         amount += srcDoll.SPE - destDoll.SPF;
     }
-    if (damageType === DamageType.Pure) {
+    if (damageType !== DamageType.Pure) {
         // deals pure damage
+        amount = originalAmount;
     }
     return amount;
 }
