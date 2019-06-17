@@ -88,24 +88,25 @@ const IdolBattle = {
 
                     if (playerPlan[index].skillIdx === -10) {
                         this.exchange(battle, playerPlan[index].srcIdol, playerPlan[index].destIdol);
+                    } else {
+                        Skill.apply(
+                            doll.SkillList[playerPlan[index].skillIdx],
+                            doll,
+                            battle.enemySet[playerPlan[index].targetDoll],
+                            battle);
                     }
 
-                    Skill.apply(
-                        doll.SkillList[playerPlan[index].skillIdx],
-                        doll,
-                        battle.enemySet[playerPlan[index].targetDoll],
-                        battle);
                 } else {
                     var index = battle.enemySet.indexOf(doll);
                     
                     if (enemyPlan[index].skillIdx === -10) {
                         this.exchange(battle, enemyPlan[index].srcIdol, enemyPlan[index].destIdol);
+                    } else {
+                        Skill.apply(doll.SkillList[enemyPlan[index].skillIdx],
+                             doll,
+                             battle.playerSet[enemyPlan[index].targetDoll],
+                             battle);
                     }
-
-                    Skill.apply(doll.SkillList[enemyPlan[index].skillIdx],
-                         doll,
-                         battle.playerSet[enemyPlan[index].targetDoll],
-                         battle);
                 }
             });
         }

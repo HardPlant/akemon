@@ -7,9 +7,18 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "UnitTest",
             "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
             "args": ["--runInBand", "--testPathIgnorePatterns", "int"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "IntTest",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "args": ["--runInBand", "--testPathIgnorePatterns", "unit"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
         }

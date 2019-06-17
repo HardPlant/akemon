@@ -66,7 +66,7 @@ const idxTable = {
             new Skill.effect.Damage(Skill.DamageType.Special, 20));
         
         return skill;
-    }
+    },
 }
 
 function skill_idx() {};
