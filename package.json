@@ -9,7 +9,8 @@
   "scripts": {
     "test": "jest",
     "unittest": "jest --testPathIgnorePatterns int",
-    "inttest": "jest --testPathIgnorePatterns unit"
+    "inttest": "jest --testPathIgnorePatterns unit",
+    "viewtest": "jasmine"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
     "phaser": "^3.17.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.4.0"
   }
 }
