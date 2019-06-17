@@ -14,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "canvas-prebuilt": "^2.0.0-alpha.14",
     "jest": "^24.8.0",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1",
+    "phaser": "^3.17.0"
   }
 }
