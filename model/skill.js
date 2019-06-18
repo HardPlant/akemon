@@ -116,11 +116,11 @@ const NullStatusLifecycle = {
 };
 
 const StatusDealer = {
-    applyStatus: function(srcDoll, statusType, randomness) {
+    applyStatus: function(statusType, randomness) {
 
         if (statusType === StatusType.Poison) {
             return function(srcDoll, destDoll, battle) {
-                if (battle.randomness && randomness < Math.random()) {
+                if ((battle || battle.randomness) && randomness < Math.random()) {
                     return;
                 }
                 destDoll.applyStatus(srcDoll, {
@@ -179,12 +179,11 @@ const Skill = {
                 })
             }
         },
-        Status: function(srcDoll, destDoll) {
-            this.srcDoll = srcDoll;
-            this.destDoll = destDoll;
+        Status: function(statusType, randomness) {
             this.statusType = statusType;
+            this.randomness = randomness;
 
-            this.apply = StatusDealer.applyStatus(srcDoll, statusType, randomness);
+            this.apply = StatusDealer.applyStatus(statusType, randomness);
         },
     },
     
@@ -237,5 +236,6 @@ function getAmountModifier(amount, srcDoll, destDoll, damageType) {
 
 module.exports = Skill;
 module.exports.DamageType = DamageType;
+module.exports.StatusType = StatusType;
 module.exports.DamageDealer = DamageDealer;
 module.exports.AttrTypes = AttrTypes;

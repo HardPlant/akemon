@@ -32,6 +32,14 @@ describe("interact with self", ()=> {
         Skill.apply(skill, destIdol, destIdol);
         expect(destIdol.HP).not.toBe(10);
     });
+
+    test("deal status", ()=> {
+        var skill = new Skill.Skill();
+        skill.effects.push(new Skill.effect.Status(Skill.StatusType.Poison));
+        
+        Skill.apply(skill, destIdol, destIdol);
+        expect(destIdol.statusList.length).not.toBe(0);
+    });
 });
 
 describe("interact with other idol", ()=> {
