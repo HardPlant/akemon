@@ -223,3 +223,9 @@ describe("tag battle", ()=> {
         expect(Idol.isFaint(enemyIdol1)).toBe(true);
     });
 });
+
+describe("after progress", ()=> {
+    it("poison deals 1/16 damage", ()=>{
+        fail();
+    });
+});

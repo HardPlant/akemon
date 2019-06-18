@@ -45,7 +45,7 @@ function statObject(currentdoll) {
         },
     }
 }
-module.exports = {
+const Idol = {
     Idol: function(param) {
         param = param || {},
         this.idx= param.idx || 1,
@@ -84,3 +84,4 @@ module.exports = {
         throw Error("Not Implemented");
     }
 };
+module.exports = Idol;

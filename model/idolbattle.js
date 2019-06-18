@@ -112,6 +112,12 @@ const IdolBattle = {
         }
         
     },
+    beforeProgress: function(battle) {
+
+    },
+    afterProgress: function(battle) {
+
+    },
 
     getDollPriorityBySpeed(battle) {
         return battle.dolls.sort(
