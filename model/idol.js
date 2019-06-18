@@ -64,6 +64,7 @@ const Idol = {
         this.statModifier = [1.0];
 
         this.stats = statObject(this);
+        this.applyStatus = this.applyStatus;
     },
     getAvailableSkill: function(doll) {
         var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));
@@ -80,8 +81,14 @@ const Idol = {
         return isFaint;
     },
 
-    applyStatus: function() {
-        throw Error("Not Implemented");
+    applyStatus: function(srcDoll, status) {
+        this.statusList.push(status);
+        status.attached(this);
+    },
+    
+    removeStatus: function(srcDoll, status) {
+        this.statusList = this.status.filter((item)=>item !== status);
+        status.detached(this);
     }
 };
 module.exports = Idol;

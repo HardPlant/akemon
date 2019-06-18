@@ -5,6 +5,24 @@ const DamageType = {
     Pure: 4
 };
 
+const StatusType = {
+    Poison: 1,
+    BadPoison: 2,
+    Paralyze: 3,
+    Burn: 4,
+    Disable: 5,
+    ATKp: 6,
+    ATKm: 7,
+    DEFp: 8,
+    DEFm: 9,
+    SPEp: 10,
+    SPEm: 11,
+    SDFp: 12,
+    SDFm: 13,
+    SPDp: 14,
+    SPDm: 15,
+}
+
 const AttrTypes = { // Attack -> Defense
     "Effective": {
         "Effective" : 2,
@@ -90,6 +108,43 @@ const DamageDealer = {
     }
 };
 
+const NullStatusLifecycle = {
+    attached: function(destDoll) {},
+    detached: function(destDoll) {},
+    beforeTurn: function(destDoll) {},
+    afterTurn: function(destDoll) {},
+};
+
+const StatusDealer = {
+    applyStatus: function(srcDoll, statusType, randomness) {
+
+        if (statusType === StatusType.Poison) {
+            return function(srcDoll, destDoll, battle) {
+                if (battle.randomness && randomness < Math.random()) {
+                    return;
+                }
+                destDoll.applyStatus(srcDoll, {
+                    type: statusType,
+                    turn : battle.randomness ? (2 + Math.floor(Math.random() * 3)) : 3,
+                                    
+                    attached: NullStatusLifecycle.attached,
+                    detached: NullStatusLifecycle.detached,
+                    beforeTurn: NullStatusLifecycle.beforeTurn,
+                    afterTurn : function() {
+                        destDoll.HP -= destDoll.baseHP / 16;
+                    }
+                });
+            }
+        }
+
+    },
+    apply: function(destDoll) {
+
+    },
+    remove: function(destDoll) {
+
+    }
+}
 const Skill = {
     Skill: function(param) {
         param = param || {};
@@ -124,8 +179,12 @@ const Skill = {
                 })
             }
         },
-        Status: function() {
-            
+        Status: function(srcDoll, destDoll) {
+            this.srcDoll = srcDoll;
+            this.destDoll = destDoll;
+            this.statusType = statusType;
+
+            this.apply = StatusDealer.applyStatus(srcDoll, statusType, randomness);
         },
     },
     
