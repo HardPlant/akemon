@@ -71,7 +71,7 @@ const Idol = {
         }
         
         this.removeStatus = function(srcDoll, status) {
-            this.statusList = this.status.filter((item)=>item !== status);
+            this.statusList = this.statusList.filter((item)=>item !== status);
             status.detached(this);
         }
     },
