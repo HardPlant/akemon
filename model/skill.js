@@ -120,12 +120,12 @@ const StatusDealer = {
 
         if (statusType === StatusType.Poison) {
             return function(srcDoll, destDoll, battle) {
-                if ((battle || battle.randomness) && randomness < Math.random()) {
+                if ((battle && battle.randomness) && randomness < Math.random()) {
                     return;
                 }
                 destDoll.applyStatus(srcDoll, {
                     type: statusType,
-                    turn : battle.randomness ? (2 + Math.floor(Math.random() * 3)) : 3,
+                    turn : battle && battle.randomness ? (2 + Math.floor(Math.random() * 3)) : 3,
                                     
                     attached: NullStatusLifecycle.attached,
                     detached: NullStatusLifecycle.detached,
