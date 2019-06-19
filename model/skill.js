@@ -136,7 +136,6 @@ const StatusDealer = {
                 });
             }
         }
-
     },
     apply: function(destDoll) {
 
