@@ -74,6 +74,33 @@ const Idol = {
             this.statusList = this.statusList.filter((item)=>item !== status);
             status.detached(this);
         }
+
+        this.toJson = function() {
+
+            var skills = [];
+            this.SkillList.forEach((item)=>{
+                skills.push({
+                    name: item.name
+                });
+            });
+
+            return {
+                nickname: this.nickname,
+                LV: this.LV,
+                HP: this.HP,
+                baseHP: this.baseHP,
+                ATK: this.ATK,
+                SPE: this.SPE,
+                DEF: this.DEF,
+                SDF: this.SDF,
+                SPD: this.SPD,
+                SkillList: skills,
+                attrType: this.attrType,
+                statusList: this.statusList,
+                statModifier: this.statModifier,
+                stats: this.stats
+            };
+        }
     },
     getAvailableSkill: function(doll) {
         var availableSkill = doll.SkillList.filter((skill)=>(skill.PP !== 0));
