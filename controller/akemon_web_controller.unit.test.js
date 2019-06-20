@@ -29,13 +29,39 @@ describe("start", ()=> {
     });
 
     it("starts", (done)=> {
+        
+        var mockPlayerGrp = [
+            {
+                name: "미사키",
+                sprite: "",
+                dolls: []
+            }
+        ];
+        var mockEnemyGrp = [
+            {
+                name: "코토리",
+                sprite: "",
+                dolls: []
+            }
+        ];
+        
+        var player = mockPlayerGrp[0];
+        player.dolls.push(idols.mirai);
+        player.dolls.push(idols.sizuka);
+        player.dolls.push(idols.tsubasa);
+        var enemy = mockEnemyGrp[0];
+        enemy.dolls.push(idols.kotoha);
+        enemy.dolls.push(idols.elena);
+        enemy.dolls.push(idols.megumi);
 
         startCommand.body = {};
+        startCommand.body.player = player;
+        startCommand.body.enemy = enemy;
 
         request.post(startCommand, (err, response, body)=>{
 
             var idolbattle = response.body.result;
-            
+
             expect(idolbattle.playerSet.length).toBe(1);
             expect(idolbattle.enemySet.length).toBe(1);
             
