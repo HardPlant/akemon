@@ -1,4 +1,8 @@
 const express = require("express");
+
+const Idol = require("../model/idol");
+const IdolBattle = require("../model/idolbattle");
+
 function akemonBattleController(app) {
     
     /*
@@ -9,6 +13,7 @@ function akemonBattleController(app) {
 
     app.post("/", start);
     function start(req, res) {
+
         return res.json({
             result: "hello world"
         });
