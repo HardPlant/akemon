@@ -29,7 +29,7 @@ describe("start", ()=> {
     });
 
     it("starts", (done)=> {
-        
+
         var mockPlayerGrp = [
             {
                 name: "미사키",
@@ -66,10 +66,10 @@ describe("start", ()=> {
             expect(idolbattle.enemySet.length).toBe(1);
             
             console.log(`코토리는 ${idolbattle.enemySet[0].nickname}를 꺼냈다`);
-            expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
+            expect(idolbattle.enemySet[0].nickname).toBe(idols.kotoha.nickname);
     
             console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
-            expect(idolbattle.playerSet[0]).toBe(idols.mirai);    
+            expect(idolbattle.playerSet[0].nickname).toBe(idols.mirai.nickname);    
 
             done();
         });
