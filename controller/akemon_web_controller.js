@@ -10,12 +10,17 @@ function akemonBattleController(app) {
     * ========
     *
     */
+    var idolbattle;
 
     app.post("/", start);
     function start(req, res) {
 
+        idolbattle = new IdolBattle.IdolBattle();
+        idolbattle.startBattle(player, enemy, 1);
+        idolbattle.randomness = false;
+
         return res.json({
-            result: "hello world"
+            result: idolbattle
         });
     };
 
@@ -32,6 +37,9 @@ function akemonBattleController(app) {
     };
 }
 
+
+module.exports.akemonBattleController = akemonBattleController;
+
 function standalone() {
     var app = express();
     
@@ -41,7 +49,5 @@ function standalone() {
         console.log("Express server has started on port 3000")
     });
 }
-
-module.exports.akemonBattleController = akemonBattleController;
 
 standalone();

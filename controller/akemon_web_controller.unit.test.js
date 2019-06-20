@@ -14,6 +14,11 @@ var startCommand = {
     }
 };
 
+/*
+* 이 테스트는 서버가 started되었다고 가정한다.
+* 
+*/
+
 describe("start", ()=> {
     var idols = {};
     var playerPlan;
@@ -25,9 +30,21 @@ describe("start", ()=> {
 
     it("starts", (done)=> {
 
+        startCommand.body = {};
+
         request.post(startCommand, (err, response, body)=>{
 
-            expect(response.body.result).toBe("hello world");
+            var idolbattle = response.body.result;
+            
+            expect(idolbattle.playerSet.length).toBe(1);
+            expect(idolbattle.enemySet.length).toBe(1);
+            
+            console.log(`코토리는 ${idolbattle.enemySet[0].nickname}를 꺼냈다`);
+            expect(idolbattle.enemySet[0]).toBe(idols.kotoha);
+    
+            console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
+            expect(idolbattle.playerSet[0]).toBe(idols.mirai);    
+
             done();
         });
     });
