@@ -16,6 +16,10 @@ function akemonBattleController(app) {
     function start(req, res) {
 
         idolbattle = new IdolBattle.IdolBattle();
+
+        var player = req.body.player;
+        var enemy = req.body.enemy;
+
         idolbattle.startBattle(player, enemy, 1);
         idolbattle.randomness = false;
 
@@ -42,6 +46,7 @@ module.exports.akemonBattleController = akemonBattleController;
 
 function standalone() {
     var app = express();
+    app.use(express.json());
     
     akemonBattleController(app);
 
