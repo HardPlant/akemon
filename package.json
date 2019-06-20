@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas-prebuilt": "^2.0.0-alpha.14",
+    "express": "^4.17.1",
     "jest": "^24.8.0",
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
