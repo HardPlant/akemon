@@ -1,9 +1,7 @@
 const express = require("express");
 
-const Idol = require("../model/idol");
-const Skill = require("../model/skill");
 const IdolBattle = require("../model/idolbattle");
-const skill_idx = require("../model/skill_idx");
+const idol_idx = require("../model/idol_idx");
 
 function akemonBattleController(app) {
     
@@ -17,11 +15,8 @@ function akemonBattleController(app) {
     var isPlayerActed;
     var isEnemyActed;
 
-    app.post("/", start);
+    app.post("/start", start);
     function start(req, res) {
-        var playerIndexList = req.body.player;
-        var enemyIndexList = req.bdy.enemy;
-        
         idolbattle = new IdolBattle.IdolBattle();
 
         var idols = {};
@@ -41,19 +36,15 @@ function akemonBattleController(app) {
                 dolls: []
             }
         ];
-        
-        var player = mockPlayerGrp[0];
-        player.dolls.push(idols.mirai);
-        player.dolls.push(idols.sizuka);
-        player.dolls.push(idols.tsubasa);
-        var enemy = mockEnemyGrp[0];
-        enemy.dolls.push(idols.kotoha);
-        enemy.dolls.push(idols.elena);
-        enemy.dolls.push(idols.megumi);
-    
+        req.body.player.forEach((item)=>{
+            mockPlayerGrp[0].dolls.push(idol_idx.getBaseByIdx(item));
+        });
+        req.body.enemy.forEach((item)=>{
+            mockEnemyGrp[0].dolls.push(idol_idx.getBaseByIdx(item));
+        });
 
-        // var player = req.body.player;
-        // var enemy = req.body.enemy;
+        var player = mockPlayerGrp[0];
+        var enemy = mockEnemyGrp[0];
 
         idolbattle.startBattle(player, enemy, 1);
         idolbattle.randomness = false;
@@ -173,83 +164,23 @@ function akemonBattleController(app) {
             enemySet: enemySet
         });
     });
+
+
+    app.get("/idol/:id", getIdol);
+    function getIdol(req, res) {
+        var idol = idol_idx.getBaseByIdx(req.params.id);
+
+        return res.json(idol);
+    }
 }
 
 function createIdols(idols) {
-    idols.mirai = new Idol.Idol({
-        nickname: "Mirai",
-        LV: 5,
-        HP: 30,
-        ATK: 15,
-        SPE: 20,
-        DEF: 10,
-        SDF: 15,
-        SPD: 15,
-        SkillList: []
-    });
-    idols.sizuka = new Idol.Idol({
-        nickname: "sizuka",
-        LV: 5,
-        HP: 20,
-        ATK: 10,
-        SPE: 35,
-        DEF: 15,
-        SDF: 20,
-        SPD: 10,
-        SkillList: []
-    });
-    idols.tsubasa = new Idol.Idol({
-        nickname: "tsubasa",
-        LV: 5,
-        HP: 25,
-        ATK: 25,
-        SPE: 4,
-        DEF: 15,
-        SDF: 10,
-        SPD: 21,
-        SkillList: []
-    });
-    idols.kotoha = new Idol.Idol({
-        nickname: "kotoha",
-        LV: 5,
-        HP: 20,
-        ATK: 5,
-        SPE: 30,
-        DEF: 15,
-        SDF: 10,
-        SPD: 15,
-        SkillList: []
-    });
-    idols.megumi = new Idol.Idol({
-        nickname: "megumi",
-        LV: 5,
-        HP: 20,
-        ATK: 25,
-        SPE: 25,
-        DEF: 15,
-        SDF: 15,
-        SPD: 20,
-        SkillList: []
-    });
-    idols.elena = new Idol.Idol({
-        nickname: "elena",
-        LV: 5,
-        HP: 35,
-        ATK: 10,
-        SPE: 5,
-        DEF: 25,
-        SDF: 35,
-        SPD: 20,
-        SkillList: []
-    });
-    idols.mirai.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.megumi.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.tsubasa.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.elena.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.elena.SkillList.push(skill_idx.getBaseByIdx(4));
-    idols.sizuka.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.sizuka.SkillList.push(skill_idx.getBaseByIdx(5));
+        idols.mirai = idol_idx.getBaseByIdx(10000);
+        idols.sizuka = idol_idx.getBaseByIdx(10001);
+        idols.tsubasa = idol_idx.getBaseByIdx(10002);
+        idols.kotoha = idol_idx.getBaseByIdx(10003);
+        idols.megumi = idol_idx.getBaseByIdx(10004);
+        idols.elena = idol_idx.getBaseByIdx(10005);
 }
 
 module.exports.akemonBattleController = akemonBattleController;

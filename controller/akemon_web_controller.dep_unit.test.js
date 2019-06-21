@@ -67,10 +67,6 @@ describe("start", ()=> {
     var playerPlan;
     var enemyPlan;
 
-    beforeEach(()=>{
-        createIdols(idols);
-    });
-
     it("starts", (done)=> {
         start_phase(idols, done);
         for(var i=0; i<1000000; i++);
@@ -176,18 +172,9 @@ function start_phase(idols, done) {
         }
     ];
     
-    var player = mockPlayerGrp[0];
-    player.dolls.push(idols.mirai);
-    player.dolls.push(idols.sizuka);
-    player.dolls.push(idols.tsubasa);
-    var enemy = mockEnemyGrp[0];
-    enemy.dolls.push(idols.kotoha);
-    enemy.dolls.push(idols.elena);
-    enemy.dolls.push(idols.megumi);
-
     startCommand.body = {};
-    startCommand.body.player = player;
-    startCommand.body.enemy = enemy;
+    startCommand.body.player = [10000, 10001, 10002];
+    startCommand.body.enemy = [10003, 10004, 10005];
 
     request.post(startCommand, (err, response, body)=>{
 
@@ -197,10 +184,10 @@ function start_phase(idols, done) {
         expect(idolbattle.enemySet.length).toBe(1);
         
         console.log(`코토리는 ${idolbattle.enemySet[0].nickname}를 꺼냈다`);
-        expect(idolbattle.enemySet[0].nickname).toBe(idols.kotoha.nickname);
+        expect(idolbattle.enemySet[0].nickname).toBe("kotoha");
 
         console.log(`가랏, ${idolbattle.playerSet[0].nickname}!`);
-        expect(idolbattle.playerSet[0].nickname).toBe(idols.mirai.nickname);    
+        expect(idolbattle.playerSet[0].nickname).toBe("mirai");    
         
         done();
     });
@@ -257,81 +244,4 @@ function first_phase(idols, done) {
 
         done();
     });
-}
-
-function createIdols(idols) {
-    idols.mirai = new Idol.Idol({
-        nickname: "Mirai",
-        LV: 5,
-        HP: 30,
-        ATK: 15,
-        SPE: 20,
-        DEF: 10,
-        SDF: 15,
-        SPD: 15,
-        SkillList: []
-    });
-    idols.sizuka = new Idol.Idol({
-        nickname: "sizuka",
-        LV: 5,
-        HP: 20,
-        ATK: 10,
-        SPE: 35,
-        DEF: 15,
-        SDF: 20,
-        SPD: 10,
-        SkillList: []
-    });
-    idols.tsubasa = new Idol.Idol({
-        nickname: "tsubasa",
-        LV: 5,
-        HP: 25,
-        ATK: 25,
-        SPE: 4,
-        DEF: 15,
-        SDF: 10,
-        SPD: 21,
-        SkillList: []
-    });
-    idols.kotoha = new Idol.Idol({
-        nickname: "kotoha",
-        LV: 5,
-        HP: 20,
-        ATK: 5,
-        SPE: 30,
-        DEF: 15,
-        SDF: 10,
-        SPD: 15,
-        SkillList: []
-    });
-    idols.megumi = new Idol.Idol({
-        nickname: "megumi",
-        LV: 5,
-        HP: 20,
-        ATK: 25,
-        SPE: 25,
-        DEF: 15,
-        SDF: 15,
-        SPD: 20,
-        SkillList: []
-    });
-    idols.elena = new Idol.Idol({
-        nickname: "elena",
-        LV: 5,
-        HP: 35,
-        ATK: 10,
-        SPE: 5,
-        DEF: 25,
-        SDF: 35,
-        SPD: 20,
-        SkillList: []
-    });
-    idols.mirai.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.kotoha.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.megumi.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.tsubasa.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.elena.SkillList.push(skill_idx.getBaseByIdx(3));
-    idols.elena.SkillList.push(skill_idx.getBaseByIdx(4));
-    idols.sizuka.SkillList.push(skill_idx.getBaseByIdx(2));
-    idols.sizuka.SkillList.push(skill_idx.getBaseByIdx(5));
 }
