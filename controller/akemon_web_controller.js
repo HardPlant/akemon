@@ -19,7 +19,9 @@ function akemonBattleController(app) {
 
     app.post("/", start);
     function start(req, res) {
-
+        var playerIndexList = req.body.player;
+        var enemyIndexList = req.bdy.enemy;
+        
         idolbattle = new IdolBattle.IdolBattle();
 
         var idols = {};
