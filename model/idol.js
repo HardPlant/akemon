@@ -49,6 +49,7 @@ const Idol = {
     Idol: function(param) {
         param = param || {},
         this.idx= param.idx || 1,
+        this.tag= param.tag || "error in tag",
         this.nickname = param.nickname || "mirai",
         this.LV = param.LV || 1,
         this.HP = param.HP || 1,
@@ -85,6 +86,7 @@ const Idol = {
             });
 
             return {
+                tag: this.tag,
                 nickname: this.nickname,
                 LV: this.LV,
                 HP: this.HP,
