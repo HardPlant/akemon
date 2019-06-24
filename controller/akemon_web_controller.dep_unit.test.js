@@ -6,7 +6,7 @@ const request = require("request");
 var baseUrl = 'http://localhost:3000';
 
 var startCommand = {
-    uri: baseUrl + '/',
+    uri: baseUrl + '/start',
     method: 'POST',
     json: true,
     body: {
