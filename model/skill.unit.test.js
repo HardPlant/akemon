@@ -54,6 +54,21 @@ it("criticals", function() {
     var modifier = calculateModifier(skill, critBattle, srcDoll, destDoll);
     expect(modifier[1]).toBe(1.5);
 });
+it("bonuses self-type", function() { 
+    var critBattle = Object.create(battle);
+    critBattle.getDefaultCritical = function() {
+        return 1;
+    };
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    srcDoll.type = ["Ice"];
+
+    var modifier = calculateModifier(skill, critBattle, srcDoll, destDoll);
+    expect(modifier[2]).toBe(1.5);
+});
 it("halves again weak type", function() {
     srcDoll = getBalancedDoll();
     destDoll = getBalancedDoll();
