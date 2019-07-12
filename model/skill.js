@@ -29,8 +29,8 @@ function getCriticalModifier(criticalness) {
     return 1;
 }
 function getSelfTypeModifier(skill, srcDoll) {
-    if (!srcDoll.types) return 1;
-    if (srcDoll.types.indexOf(skill.Type) > -1) 
+    if (!srcDoll.type) return 1;
+    if (srcDoll.type.indexOf(skill.type) > -1) 
         return 1.5;
     return 1;
 }
