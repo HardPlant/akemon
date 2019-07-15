@@ -51,21 +51,71 @@ it("criticals", function() {
     destDoll = getBalancedDoll();
     skill = getSkillBase();
 
-    modifier = calculateModifier(skill, critBattle, srcDoll, destDoll);
+    var modifier = calculateModifier(skill, critBattle, srcDoll, destDoll);
     expect(modifier[1]).toBe(1.5);
-    console.log(modifier);
+});
+it("bonuses self-type", function() { 
+    var critBattle = Object.create(battle);
+    critBattle.getDefaultCritical = function() {
+        return 1;
+    };
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    srcDoll.type = ["Ice"];
+
+    var modifier = calculateModifier(skill, critBattle, srcDoll, destDoll);
+    expect(modifier[2]).toBe(1.5);
 });
 it("halves again weak type", function() {
     srcDoll = getBalancedDoll();
     destDoll = getBalancedDoll();
     skill = getSkillBase();
 
+    skill.type = "Ice";
+    destDoll.type = ["Water"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(0.5);
 });
 it("doubles again strong type", function() {
     srcDoll = getBalancedDoll();
     destDoll = getBalancedDoll();
     skill = getSkillBase();
 
+    skill.type = "Ice";
+    destDoll.type = ["Dragon"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(2);
+});
+it("quads again strong type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Dragon", "Flying"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(4);
+});
+it("1/4 again weak type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Water", "Ice"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(0.25);
 });
 function getBalancedDoll() {
     var stat = new BaseStat({
