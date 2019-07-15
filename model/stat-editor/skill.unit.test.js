@@ -1,4 +1,5 @@
 eval(require("fs").readFileSync("model/stat-editor/stat-editor.js")+"");
+eval(require("fs").readFileSync("model/typemods.js")+"");
 eval(require("fs").readFileSync("model/stat-editor/skill.js")+"");
 
 var battle;
