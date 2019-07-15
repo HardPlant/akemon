@@ -1,4 +1,5 @@
 eval(require("fs").readFileSync("model/stat-editor/stat-editor.js")+"");
+eval(require("fs").readFileSync("model/typemods.js")+"");
 eval(require("fs").readFileSync("model/stat-editor/skill.js")+"");
 
 var battle;
@@ -92,6 +93,30 @@ it("doubles again strong type", function() {
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
     console.log(modifier);
     expect(modifier[3]).toBe(2);
+});
+it("quads again strong type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Dragon", "Flying"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(4);
+});
+it("1/4 again weak type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Water", "Ice"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    console.log(modifier);
+    expect(modifier[3]).toBe(0.25);
 });
 function getBalancedDoll() {
     var stat = new BaseStat({
