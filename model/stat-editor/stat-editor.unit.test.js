@@ -162,4 +162,5 @@ it("calculates status", function() {
 
     expect(doll.stat).not.toBe(undefined);
     expect(doll.stat["ATK"]).toBeLessThan(305);
+    console.log(doll.stat);
 });
