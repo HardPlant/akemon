@@ -31,6 +31,12 @@ function realStat(doll, battle) {
     if (doll.nature) {
         statObj = calculateNature(doll, statObj);
     }
+    if (doll.ranks) {
+        statObj = calculateRank(doll, statObj);
+    }
+    if (doll.status) {
+        statObj = calculateStatus(doll, statObj);
+    }
     return statObj;
 }
 
@@ -41,4 +47,28 @@ function calculateHP(base, lv){
 function calculateStat(base, lv){
     return Math.floor(
         ((base) * 2 ) * lv / 100) + 5;
+}
+function calculateRank(doll, statObj) {
+    if (!doll.ranks) return;
+    
+    for (stat in doll.ranks) {
+        if (stat === "Accuracy") {
+
+        }
+        else if (doll.ranks[stat] > 0) {
+            statObj[stat] *= (2+doll.ranks[stat])/2;
+        } else {
+            statObj[stat] *= 2.0/(2-doll.ranks[stat]);
+        }
+    }
+
+    return statObj;
+}
+function calculateStatus(doll, statObj) {
+    if (!doll.status) return;
+    if (doll.status.name === "Burn") {
+        statObj["ATK"] *= 0.5;
+    }
+
+    return statObj;
 }
