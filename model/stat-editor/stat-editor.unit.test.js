@@ -1,5 +1,6 @@
 var fs = require("fs");
 eval(fs.readFileSync("model/stat-editor/nature.js") + "");
+eval(fs.readFileSync("model/stat-editor/status.js") + "");
 eval(fs.readFileSync("model/stat-editor/stat-editor.js") + "");
 
 it("inits stat", function() {
@@ -74,7 +75,8 @@ it("takes a nature", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
+    expect(doll.stat["ATK"]).toBeLessThan(305);
+    expect(doll.stat["SAT"]).toBeGreaterThan(365);
 });
 
 it("calculates up-rank", function() {
@@ -104,7 +106,8 @@ it("calculates up-rank", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
+    expect(doll.stat["SAT"]).toBe(730);
+    expect(doll.stat["SPD"]).toBe(512.5);
 });
 
 it("calculates down-rank", function() {
@@ -134,5 +137,29 @@ it("calculates down-rank", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
+    expect(doll.stat["SAT"]).toBe(182.5);
+    expect(doll.stat["SPD"]).toBe(51.25);
+});
+it("calculates status", function() {
+    var stat = new BaseStat({
+        LV: 100,
+        HP: 255,
+        ATK: 150,
+        DEF: 100,
+        SAT: 180,
+        SDF: 100,
+        SPD: 100        
+    });
+    var doll = {};
+    doll.baseStat = stat;
+    doll.ability = {};
+    doll.statModifiers = {};
+    doll.status = new Status("Burn");
+    var battle = {};
+    battle.weather = {};
+
+    doll.stat = realStat(doll, battle);
+
+    expect(doll.stat).not.toBe(undefined);
+    expect(doll.stat["ATK"]).toBeLessThan(305);
 });
