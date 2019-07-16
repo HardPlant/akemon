@@ -34,6 +34,9 @@ function realStat(doll, battle) {
     if (doll.ranks) {
         statObj = calculateRank(doll, statObj);
     }
+    if (doll.status) {
+        statObj = calculateStatus(doll, statObj);
+    }
     return statObj;
 }
 
@@ -57,6 +60,14 @@ function calculateRank(doll, statObj) {
         } else {
             statObj[stat] *= 2.0/(2-doll.ranks[stat]);
         }
+    }
+
+    return statObj;
+}
+function calculateStatus(doll, statObj) {
+    if (!doll.status) return;
+    if (doll.status.name === "Burn") {
+        statObj["ATK"] *= 0.5;
     }
 
     return statObj;
