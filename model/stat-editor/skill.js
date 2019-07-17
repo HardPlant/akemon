@@ -20,7 +20,8 @@ function calculateModifier(skill, battle, srcDoll, destDoll) {
     totalModifier.push(getCriticalModifier(criticalness));
     totalModifier.push(getSelfTypeModifier(skill, srcDoll));
     totalModifier.push(getTypeModifier(skill, battle, srcDoll, destDoll));
-
+    totalModifier.push(getWeatherModifier(skill, battle));
+    
     return totalModifier;
 }
 
@@ -71,4 +72,27 @@ function getTypeModifier(skill, battle, srcDoll, destDoll) {
     });
 
     return modifiers.reduce(multipleReduce);
+}
+function getWeatherModifier(skill, battle) {
+    if (!battle.weather) return 1;
+
+    if (battle.weather.name === "Rainy") {
+        if (skill.type === "Water") {
+            return 1.5; 
+        }
+        if (skill.type === "Fire") {
+            return 0.5; 
+        }
+    }
+
+    if (battle.weather.name === "Sunny") {
+        if (skill.type === "Fire") {
+            return 1.5; 
+        }
+        if (skill.type === "Water") {
+            return 0.5; 
+        }
+    }
+
+    return 1;
 }

@@ -31,6 +31,9 @@ function realStat(doll, battle) {
     if (doll.nature) {
         statObj = calculateNature(doll, statObj);
     }
+    if (battle.weather) {
+        statObj = calculateWeather(battle.weather, doll, statObj);
+    }
     if (doll.ranks) {
         statObj = calculateRank(doll, statObj);
     }
@@ -70,5 +73,20 @@ function calculateStatus(doll, statObj) {
         statObj["ATK"] *= 0.5;
     }
 
+    return statObj;
+}
+
+function calculateWeather(weather, doll, statObj) {
+    if (!doll.type) return statObj;
+
+    if (weather.name === "Sandstorm" && 
+    (doll.type.indexOf("Rock") > -1))
+    {
+        statObj["SDF"] *= 1.5;
+    }
+    if (weather.name === "Fog" && doll.ranks) {
+        doll.ranks["Accuracy"]
+         = doll.ranks["Accuracy"] > -6? doll.ranks["Accuracy"] - 1: -6;
+    }
     return statObj;
 }

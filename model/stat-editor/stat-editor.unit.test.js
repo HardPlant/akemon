@@ -1,6 +1,7 @@
 var fs = require("fs");
 eval(fs.readFileSync("model/stat-editor/nature.js") + "");
 eval(fs.readFileSync("model/stat-editor/status.js") + "");
+eval(fs.readFileSync("model/stat-editor/weather.js") + "");
 eval(fs.readFileSync("model/stat-editor/stat-editor.js") + "");
 
 it("inits stat", function() {
@@ -162,5 +163,30 @@ it("calculates status", function() {
 
     expect(doll.stat).not.toBe(undefined);
     expect(doll.stat["ATK"]).toBeLessThan(305);
-    console.log(doll.stat);
 });
+
+it("causes weather", function() {
+
+    var stat = new BaseStat({
+        LV: 100,
+        HP: 255,
+        ATK: 150,
+        DEF: 100,
+        SAT: 180,
+        SDF: 100,
+        SPD: 100        
+    });
+    var doll = {};
+    doll.baseStat = stat;
+    doll.ability = {};
+    doll.statModifiers = {};
+    doll.type = ["Rock"];
+    var battle = {};
+    battle.weather = new Weather("Sandstorm");
+
+    doll.stat = realStat(doll, battle);
+
+    expect(doll.stat).not.toBe(undefined);
+    console.log(doll.stat);
+    expect(doll.stat["SDF"]).toBeLessThan(307.5);
+});  
