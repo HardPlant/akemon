@@ -1,3 +1,7 @@
+eval(fs.readFileSync("model/stat-editor/nature.js") + "");
+eval(fs.readFileSync("model/stat-editor/status.js") + "");
+eval(fs.readFileSync("model/stat-editor/weather.js") + "");
+eval(fs.readFileSync("model/stat-editor/stat-editor.js") + "");
 
 
 beforeAll(function() {
