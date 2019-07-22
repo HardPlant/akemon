@@ -1,5 +1,3 @@
-import { exportAllDeclaration } from "@babel/types";
-
 eval(fs.readFileSync("model/stat-editor/effect.js") + "");
 
 beforeAll(function() {
