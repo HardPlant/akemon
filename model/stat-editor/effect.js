@@ -56,8 +56,22 @@ function FixedDamageEffect(amount) {
     return effect;
 }
 
+function ChainEffect(battle) {
+    var effect = new Effect();
 
+    return effect;
+}
 
+function ChangeWeatherEffect(battle) {
+    var effect = new Effect();
+
+    return effect;
+}
+function HitsMultipleTimeEffect(skill, min, max) {
+    var effect = new Effect();
+
+    return effect;
+}
 function NothingHappenedEvent() {
     var effect = new Effect();
 
