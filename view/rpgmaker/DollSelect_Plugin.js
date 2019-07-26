@@ -106,8 +106,12 @@
     Scene_EmployActor.prototype.employ = function() {
 
     };
+    Scene_EmployActor.prototype.money = function() {
+        return this._goldWindow.value();
+    }
 
     Scene_EmployActor.prototype.activateIndexWindow = function() {
+        this._indexWindow.setMoney(this.money());
         this._indexWindow.activate();
         this._indexWindow.refresh();
     }
@@ -159,6 +163,10 @@
             }
         }
     };
+
+    Window_EmployActorIndex.prototype.setMoney = function(money) {
+        this._money = money;
+    }
 
     Window_EmployActorIndex.prototype.maxCols = function() {
         return 1;
