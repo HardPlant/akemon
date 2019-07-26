@@ -143,6 +143,58 @@
         this.initialize.apply(this, arguments);
     }
 
+    Window_EmployActorIndex.prototype.refresh = function() {
+        this.createContents();
+        this.makeActorList();
+        this.drawAllItems();
+    }
+    Window_EmployActorIndex.prototype.makeActorList = function() {
+        this._list = [];
+
+        for (var i = 1; i < $dataActors.length; i++) {
+            var actor = $dataActors[i];
+
+            if (hasTag(actor.meta, 'EASalary') && !isJoinedParty(actor)) {
+                this._list.push(actor);
+            }
+        }
+    };
+
+    Window_EmployActorIndex.prototype.maxCols = function() {
+        return 1;
+    };
+
+    Window_EmployActorIndex.prototype.maxItems = function() {
+        return this._list? this._list.length : 0;
+    };
+
+    Window_EmployActorIndex.prototype.drawItem = function(index) {
+        var actor = this._list[index];
+        var salary = actor.meta["EASalary"] + TextManager.currencyUnit;
+        var rect = this.itemRect(index);;
+
+        this.drawText(actor.name, rect.x, rect.y, 100);
+        this.drawText(salary, rext.x + 130, rext.y, 100, "right");
+    };
+
+    function hasTag(obj, tagName) {
+        for (var propertyName in obj) {
+            if (propertyName === tagName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function isJoinedParty(actor) {
+        for (var i = 0; i < $gameParty._actors.length; i++) {
+            if ($gameParty._actors[i] === actor.id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     Window_EmployCommand.prototype = Object.create(Window_Command.prototype);
     Window_EmployCommand.prototype = Window_EmployCommand;
 
