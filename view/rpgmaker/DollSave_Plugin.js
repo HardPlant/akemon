@@ -37,4 +37,21 @@ $gamePlayer（Game_Playerオブジェクト）
             }
         }
     };
+    var _Game_System_initialize = Game_System.prototype.initialize;
+    Game_System.prototype.initialize = function() {
+        _Game_System_initialize.call(this);
+        this._myCount = 0;
+    };
+
+    Game_System.prototype.addMyCount = function(val) {
+        val = Number(val || 0);
+        if (!Number.isNaN(val)) {
+            this._myCount += val;
+        }
+    };
+
+    Game_System.prototype.showMyCount = function() {
+        $gameMessage.add("현재 카운트는" + this._myCount);
+    };
+
 })();
