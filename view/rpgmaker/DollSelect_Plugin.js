@@ -11,7 +11,9 @@
     'use strict';
     var pluginName = "DollSelect";
     var _Game_Interpreter_pluginCommand = _Game_Interpreter.prototype.pluginCommand;
-    
+
+    var tagName = tagName;
+
     var parameters = PluginManager.parameters(pluginName);
     var maxParty = String(parameters["maxParty"] || 4);
 
@@ -159,7 +161,7 @@
         for (var i = 1; i < $dataActors.length; i++) {
             var actor = $dataActors[i];
 
-            if (hasTag(actor.meta, 'EASalary') && !isJoinedParty(actor)) {
+            if (hasTag(actor.meta, tagName) && !isJoinedParty(actor)) {
                 this._list.push(actor);
             }
         }
@@ -179,8 +181,10 @@
 
     Window_EmployActorIndex.prototype.drawItem = function(index) {
         var actor = this._list[index];
-        var salary = actor.meta["EASalary"] + TextManager.currencyUnit;
-        var rect = this.itemRect(index);;
+        var salary = actor.meta[tagName] + TextManager.currencyUnit;
+        var rect = this.itemRect(index);
+
+        this.changePaintOpacity(this.isEnabled(actor));
 
         this.drawText(actor.name, rect.x, rect.y, 100);
         this.drawText(salary, rext.x + 130, rext.y, 100, "right");
@@ -213,7 +217,7 @@
     Window_EmployActorIndex.prototype.isEnabled = function(actor) {
         if (actor) {
             var hasPartyCapacity = $gameParty._actors.length < maxParty;
-            var hasMoney = actor.meta["EASalary"] <= this.money;
+            var hasMoney = actor.meta[tagName] <= this.money;
         }
         return hasPartyCapacity && hasMoney;
     }
