@@ -13,6 +13,7 @@
     var _Game_Interpreter_pluginCommand = _Game_Interpreter.prototype.pluginCommand;
     
     var parameters = PluginManager.parameters(pluginName);
+    var maxParty = String(parameters["maxParty"] || 4);
 
     Game_Interpreter_pluginCommand = function(command, args) {
         _Game_Interpreter_pluginCommand.call(this, command, args);
@@ -201,6 +202,20 @@
             }
         }
         return false;
+    }
+    Window_EmployActorIndex.prototype.selectedItem = function() {
+        return this._list[this.index()];
+    };
+
+    Window_EmployActorIndex.prototype.isCurrentItemEnabled = function() {
+        return this.isCurrentItemEnabled(this.selectedItem());
+    };
+    Window_EmployActorIndex.prototype.isEnabled = function(actor) {
+        if (actor) {
+            var hasPartyCapacity = $gameParty._actors.length < maxParty;
+            var hasMoney = actor.meta["EASalary"] <= this.money;
+        }
+        return hasPartyCapacity && hasMoney;
     }
 
     Window_EmployCommand.prototype = Object.create(Window_Command.prototype);
