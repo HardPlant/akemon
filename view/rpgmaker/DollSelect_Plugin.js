@@ -107,7 +107,13 @@
     }
 
     Scene_EmployActor.prototype.employ = function() {
+        var actor = this._indexWindow.selectedItem();
+        if (actor) {
+            var salary = Number(actor.meta[tagName]);
 
+            $gameParty.loseGold(salary);
+            $gameParty.addActor(actor.id);
+        }
     };
     Scene_EmployActor.prototype.money = function() {
         return this._goldWindow.value();
@@ -154,6 +160,10 @@
         this.createContents();
         this.makeActorList();
         this.drawAllItems();
+
+        if (this.lastIndex > this._list.length - 1) {
+            this.select(this._list.length - 1);
+        }
     }
     Window_EmployActorIndex.prototype.makeActorList = function() {
         this._list = [];
