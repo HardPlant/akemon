@@ -1,6 +1,6 @@
 const fs = require("fs");
 eval(fs.readFileSync('model/doll.js' + ""));
-const skill_idx = require("./skill_idx");
+const skill_idx = require("../skill_idx");
 
 describe("creation test", ()=>{
     test("create a idol", ()=> {
