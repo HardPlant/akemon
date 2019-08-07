@@ -1,65 +1,62 @@
+if (typeof(Doll) !== "funtion") console.error("[Battle]", "Init Error", "doll", "undefined");
+if (typeof(Skill) !== "funtion") console.error("[Battle]", "Init Error", "skill", "undefined");
 
-const Idol = require("./idol");
-const Skill = require("./skill");
+function Battle() {
+    this.playerDolls = [];
+    this.enemyDolls = [];
+    this.playerSet = [];
+    this.enemySet = [];
+    this.dolls = [];
+    this.effects = [];
+    this.dollsInBattle = 1;
+    this.randomness = true;
+}
 
-const IdolBattle = {
-    IdolBattle: function () {
-        this.playerDolls = [];
-        this.enemyDolls = [];
-        this.playerSet = [];
-        this.enemySet = [];
-        this.dolls = [];
-        this.effects = [];
-        this.dollsInBattle = 1;
-        this.randomness = true;
+(function($) {
+    function startBattle(player, enemy, dollsInBattle) {
+        this.dollsInBattle = dollsInBattle || 1;
+        this.playerDolls = player.dolls;
+        this.enemyDolls = enemy.dolls;
 
-        function startBattle(player, enemy, dollsInBattle) {
-            this.dollsInBattle = dollsInBattle || 1;
-            this.playerDolls = player.dolls;
-            this.enemyDolls = enemy.dolls;
-
-            for(var i=0; i<dollsInBattle; i++) {
-                if (i < this.playerDolls.length) {
-                    this.playerSet.push(this.playerDolls[i]);
-                }
-                if (i < this.enemyDolls.length) {
-                    this.enemySet.push(this.enemyDolls[i]);
-                }
+        for(var i=0; i<dollsInBattle; i++) {
+            if (i < this.playerDolls.length) {
+                this.playerSet.push(this.playerDolls[i]);
             }
-            this.playerSet.forEach(doll => {
-                this.dolls.push(doll);
-            });
-            this.enemySet.forEach(doll => {
-                this.dolls.push(doll);
-            });
+            if (i < this.enemyDolls.length) {
+                this.enemySet.push(this.enemyDolls[i]);
+            }
         }
+        this.playerSet.forEach(doll => {
+            this.dolls.push(doll);
+        });
+        this.enemySet.forEach(doll => {
+            this.dolls.push(doll);
+        });
+    }
 
-        function setPlayer(dollSet) {
-            this.playerSet = dollSet;
-            dollSet.forEach(doll => {
-                this.dolls.push(doll);
-            });
-        }
+    function setPlayer(dollSet) {
+        this.playerSet = dollSet;
+        dollSet.forEach(doll => {
+            this.dolls.push(doll);
+        });
+    }
 
-        function setEnemy(dollSet) {
-            this.enemySet = dollSet;
-            dollSet.forEach(doll => {
-                this.dolls.push(doll);
-            });
-        }
+    function setEnemy(dollSet) {
+        this.enemySet = dollSet;
+        dollSet.forEach(doll => {
+            this.dolls.push(doll);
+        });
+    }
 
-        this.applyEffect = function(modifier) {
-            this.effects.forEach(effect => {
-                effect.apply(modifier);
-            });
+    this.applyEffect = function(modifier) {
+        this.effects.forEach(effect => {
+            effect.apply(modifier);
+        });
 
-            return modifier;
-        }
+        return modifier;
+    }
+})(Battle);
 
-        this.setPlayer = setPlayer;
-        this.setEnemy = setEnemy;
-        this.startBattle = startBattle;
-    },
 
     progress: function (battle, playerPlan, enemyPlan) {
         battle.priority = this.getDollPriorityBySpeed(battle);
@@ -72,8 +69,8 @@ const IdolBattle = {
 
                 var skillList = Idol.getAvailableSkill(doll);
 
-                var skill = IdolBattle.selectAvailableSkill(battle, skillList);
-                var target = IdolBattle.selectTargetForDoll(battle, doll);
+                var skill = Battle.selectAvailableSkill(battle, skillList);
+                var target = Battle.selectTargetForDoll(battle, doll);
 
                 Skill.apply(skill, doll, target, battle);
             });
@@ -128,8 +125,8 @@ const IdolBattle = {
         var skill2;
 
         return battle.priority.sort(function(doll1, doll2) {
-            skill1 = IdolBattle.getSkillByPlan(battle, doll1, playerPlan, enemyPlan);
-            skill2 = IdolBattle.getSkillByPlan(battle, doll2, playerPlan, enemyPlan);
+            skill1 = Battle.getSkillByPlan(battle, doll1, playerPlan, enemyPlan);
+            skill2 = Battle.getSkillByPlan(battle, doll2, playerPlan, enemyPlan);
 
             return skill1.priority < skill2.priority ? 1 : -1;
         });
@@ -179,7 +176,7 @@ const IdolBattle = {
             return true;
     },
     isPlayerWon(battle) {
-        if (!IdolBattle.isGameEnded(battle)) return false;
+        if (!Battle.isGameEnded(battle)) return false;
         
         return battle.enemySet.filter(
             (doll) => { return Idol.isFaint(doll) }
@@ -200,5 +197,3 @@ const IdolBattle = {
         battle.priority = this.getDollPriorityBySpeed(battle);
     }
 }
-
-module.exports = IdolBattle;

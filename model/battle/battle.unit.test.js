@@ -6,7 +6,8 @@ eval(fs.readFileSync("model/battle/battle.js") + "");
 
 describe("Init", function() {
     it("1:1", function() {
-
+        battle = new Battle();
+        expect(battle).not.toBe(undefined);
     });
 
     it("2:2", function() {
