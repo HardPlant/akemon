@@ -3,7 +3,7 @@ function Doll(param) {
     param = param || {};
 
     this.idx = param.idx || 1;
-    this.tag = param.tag || "error in tag";
+    this.tag = param.tag || "doll";
     this.nickname = param.nickname || "mirai";
     this.baseStat = param.baseStat;
     this.attrType = param.attrType || ["Normal"];
