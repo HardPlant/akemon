@@ -139,7 +139,7 @@ it("calculates down-rank", function() {
 
     expect(doll.stat).not.toBe(undefined);
     expect(doll.stat["SAT"]).toBe(182.5);
-    expect(doll.stat["SPD"]).toBe(51.25
+    expect(doll.stat["SPD"]).toBe(51.25);
 });
 it("calculates status", function() {
     var stat = new BaseStat({
