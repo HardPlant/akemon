@@ -182,11 +182,11 @@ it("causes weather", function() {
     doll.statModifiers = {};
     doll.type = ["Rock"];
     var battle = {};
+    var beforeStat = realStat(doll, battle)["SDF"] * 1.5;
     battle.weather = new Weather("Sandstorm");
 
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
-    expect(doll.stat["SDF"]).toBeLessThan(307.5);
+    expect(doll.stat["SDF"]).toBe(beforeStat);
 });  
