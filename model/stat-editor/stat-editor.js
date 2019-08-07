@@ -75,7 +75,6 @@ function calculateStatus(doll, statObj) {
 
     return statObj;
 }
-
 function calculateWeather(weather, doll, statObj) {
     if (!doll.type) return statObj;
 
