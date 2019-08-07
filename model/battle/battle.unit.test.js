@@ -1,6 +1,6 @@
 const Idol = require("./idol");
 const Skill = require("./skill");
-const IdolBattle = require("./idolbattle");
+const IdolBattle = require("./battle");
 const skill_idx = require("./skill_idx");
 
 describe("init flow", ()=> {
