@@ -1,7 +1,7 @@
 var fs = require("fs");
-eval(fs.readFileSync("model/stat-editor/stat-editor.js")+"");
+eval(fs.readFileSync("model/stat/stat.js")+"");
 eval(fs.readFileSync("model/typemods.js")+"");
-eval(fs.readFileSync("model/stat-editor/skill.js")+"");
+eval(fs.readFileSync("model/skill/skill.js")+"");
 eval(fs.readFileSync("model/stat-editor/weather.js") + "");
 
 var battle;
