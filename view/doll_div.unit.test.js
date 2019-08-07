@@ -60,4 +60,4 @@
 //     expect(doll_div.dom.style.backgroundImage).toBe("url(assets/sprite/unknown/front.png)");
 
 // });
-describe("",function(){});
+it("",function(){});
