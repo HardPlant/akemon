@@ -1,7 +1,10 @@
-const Idol = require("./idol");
-const Skill = require("./skill");
-const IdolBattle = require("./battle");
-const skill_idx = require("./skill_idx");
+it("fight", function() {
+
+});
+// const Idol = require("./idol");
+// const Skill = require("./skill");
+// const IdolBattle = require("./battle");
+// const skill_idx = require("./skill_idx");
 
 // describe("init flow", ()=> {
 //     const battle = new IdolBattle.IdolBattle();
