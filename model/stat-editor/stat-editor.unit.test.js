@@ -182,6 +182,8 @@ it("causes weather", function() {
     doll.statModifiers = {};
     doll.type = ["Rock"];
     var battle = {};
+    battle.weather = {};
+    
     var beforeStat = realStat(doll, battle)["SDF"] * 1.5;
     battle.weather = new Weather("Sandstorm");
 
