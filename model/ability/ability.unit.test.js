@@ -4,9 +4,9 @@ it("위협", function() {
     intimate.onBattleEngage = function(battle) {
         //console.log("");
         //Show Effect
-        battle.enemySet.forEach() {
+        battle.enemySet.forEach(function(){
 
-        };
+        });
     };
 });
 
