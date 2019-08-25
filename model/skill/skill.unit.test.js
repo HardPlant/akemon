@@ -1,5 +1,8 @@
-eval(require("fs").readFileSync("model/stat-editor/stat-editor.js")+"");
-eval(require("fs").readFileSync("model/stat-editor/skill.js")+"");
+var fs = require("fs");
+eval(fs.readFileSync("model/stat/stat.js")+"");
+eval(fs.readFileSync("model/typemods.js")+"");
+eval(fs.readFileSync("model/skill/skill.js")+"");
+eval(fs.readFileSync("model/stat-editor/weather.js") + "");
 
 var battle;
 
@@ -21,7 +24,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 
 it("deals damage", function() {
@@ -31,7 +33,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 it("deals damage", function() {
     var srcDoll = getAttackDoll();
@@ -40,7 +41,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 it("criticals", function() { 
     var critBattle = Object.create(battle);
@@ -78,7 +78,6 @@ it("halves again weak type", function() {
     destDoll.type = ["Water"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(0.5);
 });
 it("doubles again strong type", function() {
@@ -90,8 +89,62 @@ it("doubles again strong type", function() {
     destDoll.type = ["Dragon"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(2);
+});
+it("quads again strong type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Dragon", "Flying"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    expect(modifier[3]).toBe(4);
+});
+it("1/4 again weak type", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    skill.type = "Ice";
+    destDoll.type = ["Water", "Ice"];
+
+    var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
+    expect(modifier[3]).toBe(0.25);
+});
+it("affected with rainy weather", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    var rainyBattle = Object.create(battle);
+    rainyBattle.weather = new Weather("Rainy");
+
+    skill.type = "Water";
+    var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
+    expect(modifier[4]).toBe(1.5);
+
+    skill.type = "Fire";
+    var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
+    expect(modifier[4]).toBe(0.5);
+
+});
+it("affected with sunny weather", function() {
+    srcDoll = getBalancedDoll();
+    destDoll = getBalancedDoll();
+    skill = getSkillBase();
+
+    var rainyBattle = Object.create(battle);
+    rainyBattle.weather = new Weather("Sunny");
+
+    skill.type = "Fire";
+    var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
+    expect(modifier[4]).toBe(1.5);
+
+    skill.type = "Water";
+    var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
+    expect(modifier[4]).toBe(0.5);
 });
 function getBalancedDoll() {
     var stat = new BaseStat({

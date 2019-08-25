@@ -16,7 +16,8 @@ function realStat(doll, battle) {
             && doll.statModifiers
             && battle.weather)) {
         console.error("[realStat] Unexpected Param");
-        console.error(this);
+        console.error(doll);
+        console.error(battle);
     }
     var lv = doll.baseStat.LV;
     var statObj = {
@@ -75,7 +76,6 @@ function calculateStatus(doll, statObj) {
 
     return statObj;
 }
-
 function calculateWeather(weather, doll, statObj) {
     if (!doll.type) return statObj;
 

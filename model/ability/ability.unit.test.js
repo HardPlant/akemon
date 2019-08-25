@@ -1,12 +1,14 @@
+const fs = require("fs");
+eval(fs.readFileSync("model/ability/ability.js") + "");
 
 it("위협", function() {
     var intimate = new Ability();
     intimate.onBattleEngage = function(battle) {
         //console.log("");
         //Show Effect
-        battle.enemySet.forEach() {
+        battle.enemySet.forEach(function(){
 
-        };
+        });
     };
 });
 

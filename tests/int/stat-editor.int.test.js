@@ -1,23 +1,27 @@
-const webdriver = require("selenium-webdriver");
-const baseURL = "http://127.0.0.1:8080/view/"
-const httpServerCmd = "http-server";
-const exec = require("child_process").exec;
+// const webdriver = require("selenium-webdriver");
+// const baseURL = "http://127.0.0.1:8080/view/"
+// const httpServerCmd = "http-server";
+// const exec = require("child_process").exec;
 
 
-var child;
-beforeAll(function() {
-    child = exec(httpServerCmd);
-});
+// var child;
+// beforeAll(function() {
+//     child = exec(httpServerCmd);
+// });
 
-afterAll(function() {
-    child.kill();
-})
+// afterAll(function() {
+//     child.kill();
+// })
 
-it("opens page", async function() {
-    const driver = await new webdriver.Builder()
-        .forBrowser("chrome")
-        .build();
-    await driver.get(baseURL + "stat-editor.html");
+// it("opens page", async function() {
+//     const driver = await new webdriver.Builder()
+//         .forBrowser("chrome")
+//         .build();
+//     await driver.get(baseURL + "stat-editor.html");
 
-    await driver.quit();
+//     await driver.quit();
+// });
+
+it("run independent int tests", function() {
+
 });
