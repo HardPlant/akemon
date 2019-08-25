@@ -15,11 +15,6 @@ describe("creation test", ()=>{
         
         expect(doll).not.toBeUndefined();
     });
-    test("create a doll by idx", ()=> {
-        var doll = getDollByIdx(10000);
-        expect(doll).not.toBeUndefined();
-        expect(doll.baseStat).not.toBeUndefined();
-    });
 });
 
 function mockStatIndex(index) {
