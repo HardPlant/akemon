@@ -1,6 +1,6 @@
 var fs = require("fs");
 eval(fs.readFileSync("model/stat/nature.js") + "");
-eval(fs.readFileSync("model/stat-editor/status.js") + "");
+eval(fs.readFileSync("model/status/status.js") + "");
 eval(fs.readFileSync("model/stat-editor/weather.js") + "");
 eval(fs.readFileSync("model/stat/stat.js") + "");
 

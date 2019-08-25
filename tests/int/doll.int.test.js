@@ -1,6 +1,7 @@
 const fs = require("fs");
 eval(fs.readFileSync("model/doll/doll.js") + "");
 eval(fs.readFileSync("model/stat/stat.js") + "");
+eval(fs.readFileSync("model/skill/skill.js") + "");
 
 describe("Doll + Stat", ()=> {
     it("has a stat on Battle", ()=> {
@@ -38,10 +39,6 @@ describe("Doll + Skill", ()=> {
 });
 
 describe("Doll + ability", function() {
-
-});
-
-describe("ability + battle", function() {
 
 });
 

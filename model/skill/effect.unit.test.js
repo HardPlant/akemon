@@ -1,6 +1,6 @@
 const fs = require("fs");
-eval(fs.readFileSync("model/stat-editor/status.js") + "");
-eval(fs.readFileSync("model/stat-editor/effect.js") + "");
+eval(fs.readFileSync("model/status/status.js") + "");
+eval(fs.readFileSync("model/skill/effect.js") + "");
 
 beforeAll(function() {
 

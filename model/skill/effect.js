@@ -40,7 +40,7 @@ function OneHitKOEffect(amount) {
 function StatusEffect(status, prob) {
     var effect = new Effect();
     effect.onHit = function(destDoll) {
-        destDoll.status = new Status(status, -1);
+        destDoll.status = new Status(status, prob);
     };
     
     return effect;
@@ -56,23 +56,36 @@ function FixedDamageEffect(amount) {
     return effect;
 }
 
-function ChainEffect(battle) {
+function ChainEffect() {
     var effect = new Effect();
 
     return effect;
 }
 
-function ChangeWeatherEffect(battle) {
+function ChangeWeatherEffect() {
     var effect = new Effect();
 
     return effect;
 }
-function HitsMultipleTimeEffect(skill, min, max) {
+function MultipleAttackEffect(min, max) {
     var effect = new Effect();
 
     return effect;
 }
-function NothingHappenedEvent() {
+
+function NoEffect() {
+    var effect = new Effect();
+
+    return effect;
+}
+
+function BonusCriticalEffect() {
+    var effect = new Effect();
+
+    return effect;
+}
+
+function MoneyMakingEffect() {
     var effect = new Effect();
 
     return effect;

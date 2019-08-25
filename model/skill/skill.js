@@ -1,13 +1,15 @@
-function skill() {
-    this.idx = 0;
-    this.name = "";
-    this.power = Number();
-    this.type = "Normal";
-    this.srcStat = "";
-    this.destStart =  "";
+function Skill(idx, name, type, power, accuracy, pp, effect, srcStat, destStat) {
+    this.idx = idx;
+    this.name = name;
+    this.type = type;
+    this.power = power;
+    this.pp = pp;
+    this.srcStat = srcStat;
+    this.destStat =  destStat;
+    this.accuracy = accuracy;
     this.bonusCritical = 0;
-    this.beforeHit = undefined;
-    this.afterHit = undefined;
+    // effect
+    this.effect = effect;
 }
 
 function skillDamage(skill, battle, srcDoll, destDoll) {
