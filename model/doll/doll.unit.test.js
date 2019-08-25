@@ -1,17 +1,24 @@
 const fs = require("fs");
 eval(fs.readFileSync("model/doll/doll.js") + "");
+eval(fs.readFileSync("model/ability/ability.js") + "");
+eval(fs.readFileSync("model/doll/doll_idx.js") + "");
 eval(fs.readFileSync("model/stat/stat.js") + "");
 
 describe("creation test", ()=>{
     test("create a idol", ()=> {
-        var unit = new Doll({
-            idx: 1,
+        var doll = new Doll({
+            idx: 10000,
             nickname: "mirai"
         });
         
-        unit.baseStat = mockStatIndex(unit.idx);
+        doll.baseStat = mockStatIndex(doll.idx);
         
-        expect(unit).not.toBeUndefined();
+        expect(doll).not.toBeUndefined();
+    });
+    test("create a doll by idx", ()=> {
+        var doll = getDollByIdx(10000);
+        expect(doll).not.toBeUndefined();
+        expect(doll.baseStat).not.toBeUndefined();
     });
 });
 
