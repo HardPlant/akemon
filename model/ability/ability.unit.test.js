@@ -1,3 +1,5 @@
+const fs = require("fs");
+eval(fs.readFileSync("model/ability/ability.js") + "");
 
 it("위협", function() {
     var intimate = new Ability();

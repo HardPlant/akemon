@@ -29,7 +29,6 @@ it("calculates 1Lv stat", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
 });
 
 it("calculates 100Lv stat", function() {
@@ -52,7 +51,6 @@ it("calculates 100Lv stat", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
 });
 
 it("takes a nature", function() {

@@ -1,23 +1,17 @@
 const fs = require("fs");
-eval(fs.readFileSync('model/doll.js' + ""));
-const skill_idx = require("../skill_idx");
+eval(fs.readFileSync("model/doll/doll.js") + "");
+eval(fs.readFileSync("model/stat/stat.js") + "");
 
 describe("creation test", ()=>{
     test("create a idol", ()=> {
-        var unit = new Doll.Doll({
+        var unit = new Doll({
             idx: 1,
-            nickname: "mirai",
-            HP: 1,
-            ATK: 1,
-            SPE: 1,
-            DEF: 1,
-            SDF: 1,
-            SPD: 1,
-            SkillList: [0, 1, 2, 3]
+            nickname: "mirai"
         });
-
-        expect(unit.nickname).toBe("mirai");
-        expect(unit.SkillList).toStrictEqual([0,1,2,3]);
+        
+        unit.stat = mockStatIndex(unit.idx);
+        
+        expect(unit).not.toBeUndefined();
     });
 
 
@@ -25,6 +19,20 @@ describe("creation test", ()=>{
 
     });
 });
+
+function mockStatIndex(index) {
+    var db = {
+        1: new BaseStat({
+            LV: 50,
+            ATK: 100,
+            DEF: 100,
+            SAT: 100,
+            SDF: 100,
+            SPD: 100
+        }),
+    }
+    return db[index];
+}
 
 // describe("status test", ()=>{
 //     test("faint test", ()=> {

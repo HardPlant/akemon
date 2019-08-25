@@ -24,7 +24,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 
 it("deals damage", function() {
@@ -34,7 +33,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 it("deals damage", function() {
     var srcDoll = getAttackDoll();
@@ -43,7 +41,6 @@ it("deals damage", function() {
 
     var resultDamage = skillDamage(skill, battle, srcDoll, destDoll);
     expect(typeof(resultDamage)).toBe("number");
-    console.log(resultDamage);
 });
 it("criticals", function() { 
     var critBattle = Object.create(battle);
@@ -81,7 +78,6 @@ it("halves again weak type", function() {
     destDoll.type = ["Water"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(0.5);
 });
 it("doubles again strong type", function() {
@@ -93,7 +89,6 @@ it("doubles again strong type", function() {
     destDoll.type = ["Dragon"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(2);
 });
 it("quads again strong type", function() {
@@ -105,7 +100,6 @@ it("quads again strong type", function() {
     destDoll.type = ["Dragon", "Flying"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(4);
 });
 it("1/4 again weak type", function() {
@@ -117,7 +111,6 @@ it("1/4 again weak type", function() {
     destDoll.type = ["Water", "Ice"];
 
     var modifier = calculateModifier(skill, battle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[3]).toBe(0.25);
 });
 it("affected with rainy weather", function() {
@@ -130,12 +123,10 @@ it("affected with rainy weather", function() {
 
     skill.type = "Water";
     var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[4]).toBe(1.5);
 
     skill.type = "Fire";
     var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[4]).toBe(0.5);
 
 });
@@ -149,12 +140,10 @@ it("affected with sunny weather", function() {
 
     skill.type = "Fire";
     var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[4]).toBe(1.5);
 
     skill.type = "Water";
     var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
-    console.log(modifier);
     expect(modifier[4]).toBe(0.5);
 });
 function getBalancedDoll() {
