@@ -9,13 +9,12 @@ describe("creation test", ()=>{
             nickname: "mirai"
         });
         
-        unit.stat = mockStatIndex(unit.idx);
+        unit.baseStat = mockStatIndex(unit.idx);
         
         expect(unit).not.toBeUndefined();
     });
 
-
-    test("create a idol by idx", () => {
+    test("check idol is unmovable", ()=> {
 
     });
 });

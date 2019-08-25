@@ -3,7 +3,7 @@ function Doll(param) {
     param = param || {};
 
     this.idx = param.idx || 0;
-    this.tag = param.tag || "MissingNp";
+    this.tag = param.tag || "MissingNo";
     this.nickname = param.nickname || "kako";
     this.baseStat = param.baseStat;
     this.attrType = param.attrType || ["Normal"];
@@ -19,11 +19,14 @@ function Doll(param) {
         else
             return availableSkill;
     };
-    $.isFaint = function (idol) {
-        return idol.HP <= 0;
+    $.isFaint = function (doll) {
+        return doll.HP <= 0;
     };
-    $.isUnmoveable = function (idol) {
-        var isFaint = this.isFaint(idol);
+    $.isUnmoveable = function (doll) {
+        var isFaint = this.isFaint(doll);
         return isFaint;
+    };
+    $.getRealStat = function (doll) {
+
     }
 })(Doll);
