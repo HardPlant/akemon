@@ -50,7 +50,7 @@ describe("Doll + Skill", ()=> {
         var resultDamage = skillDamage(skill, battle, playerDoll, enemyDoll);
 
         // Battle이 대상이 아니므로, 직접 빼기
-        enemyDoll.stat -= resultDamage;
+        enemyDoll.stat.HP -= resultDamage;
 
         expect(enemyDoll.stat.HP).toBe(90);
     });
