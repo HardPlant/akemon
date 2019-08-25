@@ -1,8 +1,8 @@
 var fs = require("fs");
-eval(fs.readFileSync("model/stat-editor/nature.js") + "");
+eval(fs.readFileSync("model/stat/nature.js") + "");
 eval(fs.readFileSync("model/stat-editor/status.js") + "");
 eval(fs.readFileSync("model/stat-editor/weather.js") + "");
-eval(fs.readFileSync("model/stat-editor/stat-editor.js") + "");
+eval(fs.readFileSync("model/stat/stat.js") + "");
 
 it("inits stat", function() {
     var stat = new BaseStat({});
@@ -29,7 +29,6 @@ it("calculates 1Lv stat", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
 });
 
 it("calculates 100Lv stat", function() {
@@ -52,7 +51,6 @@ it("calculates 100Lv stat", function() {
     doll.stat = realStat(doll, battle);
 
     expect(doll.stat).not.toBe(undefined);
-    console.log(doll.stat);
 });
 
 it("takes a nature", function() {
