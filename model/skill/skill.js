@@ -1,3 +1,15 @@
+function skill() {
+    this.idx = 0;
+    this.name = "";
+    this.power = Number();
+    this.type = "Normal";
+    this.srcStat = "";
+    this.destStart =  "";
+    this.bonusCritical = 0;
+    this.beforeHit = undefined;
+    this.afterHit = undefined;
+}
+
 function skillDamage(skill, battle, srcDoll, destDoll) {
     var randomness = battle.getSkillRandom();
     var statDiff = srcDoll.stat[skill.srcStat] / destDoll.stat[skill.destStat];
@@ -29,43 +41,16 @@ function getCriticalModifier(criticalness) {
     if (Math.random() < criticalness) return 1.5;
     return 1;
 }
+
 function getSelfTypeModifier(skill, srcDoll) {
     if (!srcDoll.type) return 1;
     if (srcDoll.type.indexOf(skill.type) > -1)
         return 1.5;
     return 1;
 }
+
 function getTypeModifier(skill, battle, srcDoll, destDoll) {
     if (!(destDoll.type && skill.type)) return 1;
-    // Attack => Defense, on Test Table
-    // if (typeof (typeTable) === "undefined") {
-    //     var typeTable = {
-    //         "Water": {
-    //             "Water": 0.5,
-    //             "Ice": 1,
-    //             "Dragon": 0.5,
-    //             "Flying": 1,
-    //         },
-    //         "Ice": {
-    //             "Water": 0.5,
-    //             "Ice": 0.5,
-    //             "Dragon": 2,
-    //             "Flying": 2,
-    //         },
-    //         "Dragon": {
-    //             "Water": 1,
-    //             "Ice": 1,
-    //             "Dragon": 2,
-    //             "Flying": 1,
-    //         },
-    //         "Flying": {
-    //             "Water": 1,
-    //             "Ice": 1,
-    //             "Dragon": 1,
-    //             "Flying": 1,
-    //         },
-    //     };
-    // }
     var modifiers = [1];
     destDoll.type.forEach(function (defenseType) {
         modifiers.push(typeTable[skill.type][defenseType])
@@ -73,6 +58,7 @@ function getTypeModifier(skill, battle, srcDoll, destDoll) {
 
     return modifiers.reduce(multipleReduce);
 }
+
 function getWeatherModifier(skill, battle) {
     if (!battle.weather) return 1;
 

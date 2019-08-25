@@ -6,9 +6,14 @@ function Doll(param) {
     this.tag = param.tag || "MissingNo";
     this.nickname = param.nickname || "kako";
     this.baseStat = param.baseStat;
-    this.attrType = param.attrType || ["Normal"];
-    this.SkillList = param.SkillList || [];
-    this.statusList = param.statusList || [];
+    this.type = param.attrType || ["Normal"];
+    this.ability = param.ability || undefined;
+
+    // on Battle
+    this.stat = null; // bind with stat later
+    this.statModifiers = {}; // on Battle
+    this.skill = param.SkillList || [];
+    this.status = param.statusList || [];
 }
 
 (function ($) {
@@ -19,14 +24,4 @@ function Doll(param) {
         else
             return availableSkill;
     };
-    $.isFaint = function (doll) {
-        return doll.HP <= 0;
-    };
-    $.isUnmoveable = function (doll) {
-        var isFaint = this.isFaint(doll);
-        return isFaint;
-    };
-    $.getRealStat = function (doll) {
-
-    }
-})(Doll);
+})(Doll.prototype);

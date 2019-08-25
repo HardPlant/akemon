@@ -146,6 +146,7 @@ it("affected with sunny weather", function() {
     var modifier = calculateModifier(skill, rainyBattle, srcDoll, destDoll);
     expect(modifier[4]).toBe(0.5);
 });
+
 function getBalancedDoll() {
     var stat = new BaseStat({
         LV: 50,

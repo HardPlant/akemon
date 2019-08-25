@@ -13,10 +13,6 @@ describe("creation test", ()=>{
         
         expect(unit).not.toBeUndefined();
     });
-
-    test("check idol is unmovable", ()=> {
-
-    });
 });
 
 function mockStatIndex(index) {
