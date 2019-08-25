@@ -9,7 +9,14 @@ function Battle() {
     this.dolls = [];
     this.effects = [];
     this.dollsInBattle = 1;
-    this.randomness = true;
+
+    this.getSkillRandom = function() {
+        return 1;
+    };
+    this.getDefaultCritical = function() {
+        return 0;
+    };
+    this.weather = {};
 }
 
 (function($) {

@@ -8,6 +8,7 @@ const dollTable = {
         });
         doll.baseStat = new BaseStat({
             LV: 50,
+            HP: 100,
             ATK: 100,
             DEF: 100,
             SAT: 100,
@@ -35,12 +36,21 @@ const dollTable = {
 
         doll.baseStat = new BaseStat({
             LV: 50,
+            HP: 100,
             ATK: 100,
             DEF: 100,
             SAT: 100,
             SDF: 100,
             SPD: 100
         });
+
+        doll.ability = new Ability("");
+
+        doll.skillTable = {
+            10: "",
+            15: "",
+            50: "",
+        };
 
         return doll;
     },

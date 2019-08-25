@@ -1,7 +1,7 @@
 const fs = require("fs");
+eval(fs.readFileSync("model/typemods.js")+"");
 eval(fs.readFileSync("model/doll/doll.js") + "");
 eval(fs.readFileSync("model/stat/stat.js") + "");
-eval(fs.readFileSync("model/skill/skill.js") + "");
 eval(fs.readFileSync("model/ability/ability.js") + "");
 eval(fs.readFileSync("model/doll/doll_idx.js") + "");
 eval(fs.readFileSync("model/skill/skill.js")+"");
@@ -33,7 +33,29 @@ describe("Doll and Stat DB", ()=> {
 });
 
 describe("Doll + Skill", ()=> {
-    it("has a skill", ()=> {
+    it("deals damage", ()=> {
+        var playerDoll = getDollByIdx(10000);
+        var enemyDoll = getDollByIdx(10001);
+        var skill = getSkillData(0);
+        var battle = new Battle();
+        
+        expect(playerDoll).not.toBeUndefined();
+        expect(enemyDoll).not.toBeUndefined();
+
+        learnSkill(playerDoll, skill);
+
+        playerDoll.stat = realStat(playerDoll, battle);
+        enemyDoll.stat = realStat(enemyDoll, battle);
+
+        var resultDamage = skillDamage(skill, battle, playerDoll, enemyDoll);
+
+        // Battle이 대상이 아니므로, 직접 빼기
+        enemyDoll.stat -= resultDamage;
+
+        expect(enemyDoll.stat.HP).toBe(90);
+    });
+    
+    it("deals status", ()=> {
 
     });
 });

@@ -17,5 +17,5 @@ function Doll(param) {
 }
 
 function learnSkill(doll, skill) {
-    doll.skillList.add(skill);
+    doll.skillList.push(skill);
 }
