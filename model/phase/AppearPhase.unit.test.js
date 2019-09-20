@@ -19,7 +19,11 @@ it("inits", function() {
 
 it ("place left player", function() {
     var leftPlayer = trainers.filter(trainer=>trainer.idx === mockBattle.idx);
-    expect(phase.placeLeftPlayer().sort()).toEqual(leftPlayer.sort());
+    
+    var expectIdx = leftPlayer.map(player=>player.idx);
+    var leftPlayerIdx = phase.LeftPlayer().map(player=>player.idx);
+    
+    expect(expectIdx.sort()).toEqual(leftPlayerIdx.sort());
 });
 
 it ("place right player", function() {
